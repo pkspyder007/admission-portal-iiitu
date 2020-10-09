@@ -1,0 +1,23 @@
+{
+  "name": "admission-portal-iiitu",
+  "version": "1.0.0",
+  "description": "New addmission portal for IIITU to collect student information and documents",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "server": "nodemon app.js"
+  },
+  "author": "Praveen Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "googleapis": "^61.0.0",
+    "mongoose": "^5.10.8",
+    "nodemailer": "^6.4.13"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
