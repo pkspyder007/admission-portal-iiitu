@@ -145,7 +145,10 @@ const RegistrationForm = () => {
   //     message.error(`${info.file.name} file upload failed.`);
   //   }
   // }
-  
+
+  const handleFieldValue = (field,  value) => {
+    form.setFieldsValue({[field]: value});
+  }
   return (
     <div className="form__container">
       
@@ -162,8 +165,8 @@ const RegistrationForm = () => {
         name="register"
         onFinish={onFinish}
         initialValues={{
-          residence: ["zhejiang", "hangzhou", "xihu"],
-          prefix: "86",
+          // residence: ["zhejiang", "hangzhou", "xihu"],
+          prefix: "+91",
         }}
         scrollToFirstError
       >
@@ -184,13 +187,13 @@ const RegistrationForm = () => {
         >
           {/* <Input /> */}
           <Space direction="vertical">
-            <DatePicker onChange={onChange} format="DD/MM/YYYY" />
+            <DatePicker onChange={(date, dateStr) => handleFieldValue("date", dateStr)} format="DD/MM/YYYY" />
           </Space>
         </Form.Item>
 
         <Form.Item
           className="form__item"
-          name="registration"
+          name="regNo"
           label="Registration Number"
           rules={[
             {
@@ -234,7 +237,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="date"
+          name="dob"
           label="Date of Birth (DD/MM/YYYY)"
           rules={[
             {
@@ -243,13 +246,13 @@ const RegistrationForm = () => {
             },
             {
               required: true,
-              message: "Please enter date",
+              message: "Please enter ypur DOB",
             },
           ]}
         >
           {/* <Input /> */}
           <Space direction="vertical">
-            <DatePicker onChange={onChange} format="DD/MM/YYYY" />
+            <DatePicker onChange={(date, dateStr) => handleFieldValue("dob", dateStr)} format="DD/MM/YYYY" />
           </Space>
         </Form.Item>
 
@@ -278,15 +281,16 @@ const RegistrationForm = () => {
             },
           ]}
         >
-          <Select defaultValue="Male" style={{ width: 120 }}>
-            <Option value="Female">Female</Option>
-            <Option value="Others">Others</Option>
+          <Select onChange={(gender) => handleFieldValue("gender", gender)} style={{ width: 120 }}>
+            <Option value="male">Male</Option>
+            <Option value="female">Female</Option>
+            <Option value="others">Others</Option>
           </Select>
         </Form.Item>
 
         <Form.Item
           className="form__item"
-          name="category"
+          name="mainCategory"
           label="Main Category"
           rules={[
             {
@@ -296,7 +300,7 @@ const RegistrationForm = () => {
           ]}
         >
           {/* <Input /> */}
-          <Select defaultValue="Select a Category" style={{ width: 200 }}>
+          <Select onChange={(cat) => handleFieldValue("mainCategory", cat)} style={{ width: 200 }}>
             <Option value="OP">OP</Option>
             <Option value="OPPwD">OPPwD</Option>
             <Option value="EWSSC">EWSSC</Option>
@@ -311,7 +315,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="phone"
+          name="studentMobile"
           label="Student's Mobile Number"
           rules={[
             {
@@ -330,7 +334,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="students-aadhar"
+          name="studentAadharNo"
           label="Student's Aadhar Number"
           rules={[
             {
@@ -344,7 +348,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="your-locality"
+          name="areaType"
           label="Do you belong to"
           rules={[
             {
@@ -352,11 +356,11 @@ const RegistrationForm = () => {
             },
           ]}
         >
-        <Radio.Group>
-         <Radio value={1}>Urban Area</Radio>
-         <Radio value={2}>Rural Area</Radio>
-        </Radio.Group>
-        </Form.Item>
+        <Select onChange={(val) => handleFieldValue("areaType", val)} style={{ width: 200 }}>
+            <Option value="RURAL">RURAL</Option>
+            <Option value="URBAN">URBAN</Option>
+          </Select>
+         </Form.Item> 
 
         <Form.Item
           className="form__item"
@@ -388,7 +392,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="correspondence-add"
+          name="correspondingAddress"
           label="Correspondence Address"
           rules={[
             {
@@ -402,7 +406,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="correspondence-pin"
+          name="correspondingPin"
           label="Correspondence Address PIN"
           rules={[
             {
@@ -416,7 +420,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="permanent-add"
+          name="permanentAddress"
           label="Permanent Address"
           rules={[
             {
@@ -430,7 +434,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="permanent-pin"
+          name="permanentPin"
           label="Permanent Address PIN"
           rules={[
             {
@@ -444,7 +448,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="railway-station"
+          name="nearestRailwayStation"
           label="Nearest Railway Station"
           rules={[
             {
@@ -458,7 +462,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="jee-main-roll"
+          name="jeeMainRoll"
           label="JEE(Main) Roll No"
           rules={[
             {
@@ -485,7 +489,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="jee-main-air"
+          name="jeeMainScore"
           label="JEE(Main) AIR-CRL"
           rules={[
             {
@@ -499,7 +503,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="jee-main-air-category"
+          name="jeeMainAirCrl"
           label="JEE(Main) AIR-Category"
           rules={[
             {
@@ -513,7 +517,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="admitted-category"
+          name="admittedCategory"
           label="Admitted Category"
           rules={[
             {
@@ -523,7 +527,7 @@ const RegistrationForm = () => {
           ]}
         >
           {/* <Input /> */}
-          <Select defaultValue="Select a Category" style={{ width: 200 }}>
+          <Select onChange={val => handleFieldValue("admittedCategory", val)}  style={{ width: 200 }}>
             <Option value="OP">OP</Option>
             <Option value="OPPwD">OPPwD</Option>
             <Option value="EWSSC">EWSSC</Option>
@@ -538,7 +542,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="country-12-passed"
+          name="countryFrom12"
           label="Country from where 10+2 passed"
           rules={[
             {
@@ -552,7 +556,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="state-12-passed"
+          name="stateFrom12"
           label="State from where 10+2 passed"
           rules={[
             {
@@ -566,7 +570,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="12-percentage"
+          name="percentage12"
           label="10+2 Percentage"
           rules={[
             {
@@ -580,7 +584,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="12-year-of-passing"
+          name="yearPassing12"
           label="10+2 Year of Passing"
           rules={[
             {
@@ -594,7 +598,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="school-type"
+          name="typeOfSchool"
           label="Type of School"
           rules={[
             {
@@ -602,15 +606,15 @@ const RegistrationForm = () => {
             },
           ]}
         >
-        <Radio.Group>
-         <Radio value={1}>Govt</Radio>
-         <Radio value={2}>Private</Radio>
-        </Radio.Group>
+        <Select onChange={(val) => handleFieldValue("typeOfSchool", val)} style={{ width: 200 }}>
+            <Option value="GOVT">GOVT</Option>
+            <Option value="PRIVATE">PRIVATE</Option>
+          </Select>
         </Form.Item>
 
         <Form.Item
           className="form__item"
-          name="school-location"
+          name="areaOfSchool"
           label="School in"
           rules={[
             {
@@ -618,15 +622,15 @@ const RegistrationForm = () => {
             },
           ]}
         >
-        <Radio.Group>
-         <Radio value={1}>Urban Area</Radio>
-         <Radio value={2}>Rural Area</Radio>
-        </Radio.Group>
+        <Select onChange={(val) => handleFieldValue("areaOfSchool", val)} style={{ width: 200 }}>
+            <Option value="URBAN">URBAN</Option>
+            <Option value="PRIAVTE">PRIAVTE</Option>
+          </Select>
         </Form.Item>
 
         <Form.Item
           className="form__item"
-          name="12-school"
+          name="schoolName12"
           label="Name of 10+2 School"
           rules={[
             {
@@ -640,7 +644,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="12-board"
+          name="board12"
           label="Name of 10+2 Board"
           rules={[
             {
@@ -654,7 +658,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="ug-program"
+          name="ugProgram"
           label="UG Program"
           rules={[
             {
@@ -662,8 +666,9 @@ const RegistrationForm = () => {
               message: "Please enter program!",
             },
           ]}
+          initialValue="B.TECH"
         >
-          <Input placeholder="Enter B.tech" />
+          <Input placeholder="Enter B.tech"  disabled />
         </Form.Item>
 
         <Form.Item
@@ -676,32 +681,33 @@ const RegistrationForm = () => {
             },
           ]}
         >
-        <Radio.Group>
-         <Radio value={1}>Computer Science and Engineering</Radio>
-         <Radio value={2}>Electronics and Communication Engineering</Radio>
-         <Radio value={3}>Information Technology</Radio>
-        </Radio.Group>
+        <Select onChange={val => handleFieldValue("branch", val)}>
+         <Option value="CSE">Computer Science and Engineering</Option>
+         <Option value="IT">Electronics and Communication Engineering</Option>
+         <Option value="ECE">Information Technology</Option>
+        </Select>
         </Form.Item>
 
         <Form.Item
           className="form__item"
-          name="is-hosteller"
+          name="hosteller"
           label="Hosteller"
           rules={[
             {
               required: true,
             },
           ]}
+          initialValues="Yes"
         >
-        <Radio.Group>
-         <Radio value={1}>Yes</Radio>
-         <Radio value={2}>No</Radio>
-        </Radio.Group>
+        <Select onChange={(val) => handleFieldValue("hosteller", val)} style={{ width: 200 }}>
+            <Option value="Yes">Yes</Option>
+            <Option value="No" disabled>No</Option>
+          </Select>
         </Form.Item>
 
         <Form.Item
           className="form__item"
-          name="hostel-name"
+          name="hostelName"
           label="Hostel Name"
           rules={[
             {
@@ -709,17 +715,17 @@ const RegistrationForm = () => {
             },
           ]}
         >
-        <Radio.Group>
-         <Radio value={1}>BOYS</Radio>
-         <Radio value={2}>GIRLS</Radio>
-        </Radio.Group>
+        <Select onChange={(val) => handleFieldValue("hostelName", val)} style={{ width: 200 }}>
+            <Option value="BOYS">Boys</Option>
+            <Option value="GIRLS">Girls</Option>
+          </Select>
         </Form.Item>
 
 
 
         <Form.Item
           className="form__item"
-          name="father-name"
+          name="fatherName"
           label="Father's Name"
           rules={[
             {
@@ -733,7 +739,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="father-mobile"
+          name="fatherMobile"
           label="Father's Mobile"
           rules={[
             {
@@ -747,7 +753,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="father-email"
+          name="fatherEmail"
           label="Father's Email"
           rules={[
             {
@@ -761,7 +767,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="mother-name"
+          name="motherName"
           label="Mother's Name"
           rules={[
             {
@@ -775,7 +781,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="mother-mobile"
+          name="motherMobile"
           label="Mother's Mobile"
           rules={[
             {
@@ -789,7 +795,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="mother-email"
+          name="motherEmail"
           label="Mother's Email"
           rules={[
             {
@@ -803,7 +809,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="guardian-name"
+          name="guardianName"
           label="Guardian's Name"
           rules={[
             {
@@ -817,7 +823,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="guardian-mobile"
+          name="guardianMobile"
           label="Guardian's Mobile"
           rules={[
             {
@@ -831,7 +837,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="guardian-email"
+          name="guardianEmail"
           label="Guardian's Email"
           rules={[
             {
@@ -847,7 +853,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="family-income"
+          name="annualFamilyIncome"
           label="Annual Family's Income (Rs.)"
           rules={[
             {
@@ -861,7 +867,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="josaa-2020-amount"
+          name="josaaFeeAmount"
           label="JoSSA 2020 Amount(Rs.)"
           rules={[
             {
@@ -875,7 +881,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="josaa-date"
+          name="josaaFeeDate"
           label="JoSAA Payment Date"
           rules={[
             {
@@ -890,13 +896,13 @@ const RegistrationForm = () => {
         >
           {/* <Input /> */}
           <Space direction="vertical">
-            <DatePicker onChange={onChange} format="DD/MM/YYYY" />
+            <DatePicker onChange={(date, dateStr) => handleFieldValue("josaaFeeDate", dateStr)} format="DD/MM/YYYY" />
           </Space>
         </Form.Item>
 
         <Form.Item
           className="form__item"
-          name="institute-amount"
+          name="instituteFeeAmount"
           label="IIIT Una Institute Fee(Rs.)"
           rules={[
             {
@@ -910,7 +916,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="institute-payment-date"
+          name="instituteFeeDate"
           label="Institute Fee Payment Date"
           rules={[
             {
@@ -924,13 +930,13 @@ const RegistrationForm = () => {
           ]}
         >
           <Space direction="vertical">
-            <DatePicker onChange={onChange} format="DD/MM/YYYY" />
+            <DatePicker onChange={(date, dateStr) => handleFieldValue("instituteFeeDate", dateStr)}format="DD/MM/YYYY" />
           </Space>
         </Form.Item>
 
         <Form.Item
           className="form__item"
-          name="institute-payment-receipt"
+          name="instituteFeeReceiptNo"
           label="Institute Fee Payment Receipt No."
           rules={[
             {
@@ -944,7 +950,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="total-amount"
+          name="totalFee"
           label="Total(JoSAA+Institute)"
           rules={[
             {
@@ -958,7 +964,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="institute-amount"
+          name="hostelFeeAmount"
           label="Hostel Fee(Rs.)"
           rules={[
             {
@@ -972,7 +978,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="hostel-payment-date"
+          name="hostelFeeDate"
           label="Hostel Fee Payment Date"
           rules={[
             {
@@ -984,15 +990,16 @@ const RegistrationForm = () => {
               message: "Please enter date",
             },
           ]}
+          // setFieldValue={}
         >
           <Space direction="vertical">
-            <DatePicker onChange={onChange} format="DD/MM/YYYY" />
+            <DatePicker onChange={(date, dateStr) => handleFieldValue("hostelFeeDate", dateStr)} format="DD/MM/YYYY" />
           </Space>
         </Form.Item>
 
         <Form.Item
           className="form__item"
-          name="hostel-payment-receipt"
+          name="hotelFeeReceiptNo"
           label="Hostel Fee Payment Receipt No."
           rules={[
             {
