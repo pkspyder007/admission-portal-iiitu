@@ -14,7 +14,7 @@ const transport = nodemailer.createTransport({
          clientId: process.env.GCID,
          clientSecret: process.env.GCSECRET,
          refreshToken: process.env.REFRESH_TOKEN,
-         accessToken: myAccessToken //access token variable we defined earlier
+         accessToken: myAccessToken //access token variable 
     }});
 
 
