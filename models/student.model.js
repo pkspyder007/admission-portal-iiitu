@@ -1,6 +1,7 @@
 //Import the dependencies
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const bcrypt = require("bcryptjs");
 
 //Create User schema and model
 const StudentSchema = new Schema({
@@ -10,9 +11,11 @@ const StudentSchema = new Schema({
   },
   regNo: {
     type: String,
+    unique: "Registration Number conflict consult Administrator"
   },
-  JeeRegNo: {
+  jeeRegNo: {
     type: String,
+    unique: 'Jee Registration Number already exists.',
     required: "JEE Mains Registration Cannot be empty.",
   },
   email: {
@@ -43,11 +46,28 @@ const StudentSchema = new Schema({
       type: String,
       required: "Password cannot be empty",
   },
-  firstLogin: {
+  hasChangedPassword: {
       type: Boolean,
-      defaut: true
+      defaut: false
+  },
+  isFirstLogin: {
+      type: Boolean,
+      default: true
   }
 });
+
+StudentSchema.pre("save", function(next) {
+    if(!this.isModified("password")) {
+        return next();
+    }
+    this.password = bcrypt.hashSync(this.password, 10);
+    next();
+});
+
+StudentSchema.methods.comparePassword = function(plaintext, callback) {
+    return callback(null, bcrypt.compareSync(plaintext, this.password));
+};
+
 
 //Export the schema
 const Student = mongoose.model("Student", StudentSchema);

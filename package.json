@@ -15,8 +15,10 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "googleapis": "^61.0.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.8",
-    "nodemailer": "^6.4.13"
+    "nodemailer": "^6.4.13",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
