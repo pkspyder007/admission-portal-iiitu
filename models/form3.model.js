@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
 
 const Form3Schema = new Schema({
@@ -42,7 +43,7 @@ const Form3Schema = new Schema({
         type: String,
         required: "Student Aadhar no. cannot be empty."
     },
-    area: {
+    areaType: {
         type: String,
         required: "Area type cannot be empty."
     },
@@ -76,6 +77,7 @@ const Form3Schema = new Schema({
     },
     jeeMainRoll: {
         type: String,
+        unique: "A record with given JEE Main roll number already exists.",
         required: "Jee Main roll no. cannot be empty."
     },
     jeeMainScore: {
@@ -220,6 +222,9 @@ const Form3Schema = new Schema({
     },
 });
 
+Form3Schema.plugin(uniqueValidator)
+
+
 //Export the schema
-const Product = mongoose.model("Product", Form3Schema);
-module.exports = Product;
+const Form3 = mongoose.model("Product", Form3Schema);
+module.exports = Form3;

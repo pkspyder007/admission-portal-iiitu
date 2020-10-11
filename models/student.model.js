@@ -1,5 +1,6 @@
 //Import the dependencies
 const mongoose = require("mongoose");
+const uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
 const bcrypt = require("bcryptjs");
 
@@ -68,6 +69,7 @@ StudentSchema.methods.comparePassword = function(plaintext, callback) {
     return callback(null, bcrypt.compareSync(plaintext, this.password));
 };
 
+StudentSchema.plugin(uniqueValidator)
 
 //Export the schema
 const Student = mongoose.model("Student", StudentSchema);

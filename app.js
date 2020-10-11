@@ -7,7 +7,7 @@ const winston = require('winston');
 
 // Route Imports
 const studentRouter = require('./routes/student.routes');
-const { createStudent } = require('./controllers/student.controller');
+const uploadRouter = require('./routes/upload.routes');
 
 const app = express();
 dotenv.config();
@@ -18,6 +18,7 @@ app.use(cors());
 
 // Routers
 app.use('/api/student', studentRouter);
+app.use('/api/document', uploadRouter);
 
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -49,7 +50,14 @@ const logger = winston.createLogger({
     new winston.transports.File({ filename: 'exceptions.log', handleExceptions: true })
   ]
 });
- 
+
+process.on('uncaughtException', function (exception) {
+    console.log(exception); // to see your exception details in the console
+    // if you are on production, maybe you can send the exception details to your
+    // email as well ?
+  });
+   
+
 //
 // If we're not in production then log to the `console` with the format:
 // `${info.level}: ${info.message} JSON.stringify({ ...rest }) `

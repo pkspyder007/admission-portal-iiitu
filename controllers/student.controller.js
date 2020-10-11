@@ -1,5 +1,6 @@
 const { getRegNums, updateRegNums, sendEmail } = require("../utils/utils")
-const Student = require("../models/student.model")
+const Student = require("../models/student.model");
+const Form3 = require("../models/form3.model");
 
 exports.createStudent = async (std) => {
     try {
@@ -37,6 +38,7 @@ exports.loginStudent = async (req, res) => {
             }
             if(res) {
                 // Generate and Upadate Registration Number;
+                student.password = "";
                 if(student.isFirstLogin) {
                    try {
                     let regNo = '2K20';
@@ -66,7 +68,11 @@ exports.loginStudent = async (req, res) => {
                     student.regNo = regNo;
                     student.save();
                     updateRegNums();
-                    res.status(200).json({ message: 'Login Successful.'});
+
+                    let token = jwt.sign({ id: student.jeeRegNo }, process.env.SECRET_KEY, {
+                        expiresIn: 86400,
+                    });
+                    res.status(200).json({ message: 'Login Successful.', auth: true, token: token, data: student});
                     return;
                    } catch (error) {
                        console.error(error);
@@ -74,11 +80,43 @@ exports.loginStudent = async (req, res) => {
                        return;
                    }
                 }
+
+                let token = jwt.sign({ id: student.jeeRegNo }, process.env.SECRET_KEY, {
+                    expiresIn: 86400,
+                });
+
+                res.status(200).json({ message: 'Login Successful.', auth: true, token: token, data: student});
+                return;
             } else {
                 res.status(400).json({ message: 'Invalid Credentials.'});
                 return;
             }
         });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ message: "Something went wrong."});
+        return;
+    }
+}
+
+exports.form3DataInput = async (req, res) => {
+    try {
+        let std = await Student.findOne({ jeeRegNo: req.userId});
+        if(!std) {
+            res.status(400).json({message: "Current user's jee not found in the database."});
+            return;
+        }
+
+        let newForm3 = await Form3.create(req.data.body);
+
+        if(!newForm3) {
+            res.status(500).json({message: "Current user's jee not found in the database."});
+            return;
+        }
+
+        res.status(200).json({ message: "Data Added Succesfully."});
+        return;
+
     } catch (error) {
         console.error(error.message);
         res.status(500).json({ message: "Something went wrong."});

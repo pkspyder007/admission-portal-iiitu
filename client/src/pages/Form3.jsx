@@ -13,6 +13,8 @@ import {
   DatePicker,
   Radio,
   Space,
+  Upload,
+  message,
 } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import "../css/RegistrationForm.scss";
@@ -126,11 +128,32 @@ const RegistrationForm = () => {
   }
 
   const { Options } = Select;
-
+  // let uploadProps ={
+  //   name: 'doc',
+  //   action: '//localhost:4000/api/document/upload',
+  //   headers: {
+  //     authorization: 'authorization-text',
+  //   }
+  // }
+  // const onFileChange = (info) => {
+  //   if (info.file.status !== 'uploading') {
+  //     console.log(info.file, info.fileList);
+  //   }
+  //   if (info.file.status === 'done') {
+  //     message.success(`${info.file.name} file uploaded successfully`);
+  //   } else if (info.file.status === 'error') {
+  //     message.error(`${info.file.name} file upload failed.`);
+  //   }
+  // }
+  
   return (
     <div className="form__container">
+      
     <h1>Indian Institute Of Information Technology Una (H.P)</h1>
     <h3>Transit Campus-II Chandpur, Haroli, Una-177220</h3>
+    {/* <Upload {...uploadProps} onChange={onFileChange}>
+      <Button>Upload</Button>
+    </Upload> */}
     <h5>Data Sheet(Session 2020-21)</h5>
       <Form
         className="form__body"
@@ -956,7 +979,7 @@ const RegistrationForm = () => {
               type: "date",
               message: "The input is not valid date",
             },
-            {
+            { 
               required: true,
               message: "Please enter date",
             },
