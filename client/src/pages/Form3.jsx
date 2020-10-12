@@ -1,62 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Form,
   Input,
-  Tooltip,
-  Cascader,
   Select,
-  Row,
-  Col,
-  Checkbox,
   Button,
-  AutoComplete,
   DatePicker,
-  Radio,
   Space,
-  Upload,
   message,
 } from "antd";
-import { QuestionCircleOutlined } from "@ant-design/icons";
 import "../css/RegistrationForm.scss";
 import TextArea from "antd/lib/input/TextArea";
-
+import Axios from 'axios';
 
 const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
-const residences = [
-  {
-    value: "zhejiang",
-    label: "Zhejiang",
-    children: [
-      {
-        value: "hangzhou",
-        label: "Hangzhou",
-        children: [
-          {
-            value: "xihu",
-            label: "West Lake",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: "jiangsu",
-    label: "Jiangsu",
-    children: [
-      {
-        value: "nanjing",
-        label: "Nanjing",
-        children: [
-          {
-            value: "zhonghuamen",
-            label: "Zhong Hua Men",
-          },
-        ],
-      },
-    ],
-  },
-];
 const formItemLayout = {
   labelCol: {
     xs: {
@@ -90,9 +46,35 @@ const tailFormItemLayout = {
 
 const RegistrationForm = () => {
   const [form] = Form.useForm();
+  // const [std, setStd] = useState({regNo: '', jeeReg: '', category: '', branchAlloted:''});
+  const [token, setToken] = useState('')
+
+  useEffect(() => {
+    const std = JSON.parse(localStorage.getItem('std'));
+    // setStd(std);
+    setToken(localStorage.getItem('x-access-token'))
+    handleFieldValue("regNo", std.regNo);
+    // handleFieldValue("branch", std.branchAlloted);
+
+    return () => {
+      // cleanup
+    }
+  }, [])
 
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
+    Axios({
+      'method': 'post',
+      url: '/api/student/',
+      headers: {'x-access-token': token},
+      data: values
+    }).then(res=> {
+      console.log(res.data);
+      message.success(res.data.message);
+    }).catch(err => {
+      console.log(err);
+      message.error(err.response.data.message);
+    });
   };
 
   const prefixSelector = (
@@ -106,28 +88,13 @@ const RegistrationForm = () => {
       </Select>
     </Form.Item>
   );
-  const [autoCompleteResult, setAutoCompleteResult] = useState([]);
 
-  const onWebsiteChange = (value) => {
-    if (!value) {
-      setAutoCompleteResult([]);
-    } else {
-      setAutoCompleteResult(
-        [".com", ".org", ".net"].map((domain) => `${value}${domain}`)
-      );
-    }
-  };
 
-  const websiteOptions = autoCompleteResult.map((website) => ({
-    label: website,
-    value: website,
-  }));
 
-  function onChange(date, dateString) {
-    console.log(date, dateString);
-  }
+  // function onChange(date, dateString) {
+  //   console.log(date, dateString);
+  // }
 
-  const { Options } = Select;
   // let uploadProps ={
   //   name: 'doc',
   //   action: '//localhost:4000/api/document/upload',
@@ -187,7 +154,7 @@ const RegistrationForm = () => {
         >
           {/* <Input /> */}
           <Space direction="vertical">
-            <DatePicker onChange={(date, dateStr) => handleFieldValue("date", dateStr)} format="DD/MM/YYYY" />
+            <DatePicker placeholder="Date of form submission" onChange={(date, dateStr) => handleFieldValue("date", dateStr)} format="DD/MM/YYYY" />
           </Space>
         </Form.Item>
 
@@ -202,7 +169,7 @@ const RegistrationForm = () => {
             },
           ]}
         >
-          <Input />
+          <Input disabled/>
         </Form.Item>
 
         <Form.Item
@@ -475,7 +442,7 @@ const RegistrationForm = () => {
         </Form.Item>
         <Form.Item
           className="form__item"
-          name="jee-main-score"
+          name="jeeMainScore"
           label="JEE(Main) Score"
           rules={[
             {
@@ -489,7 +456,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="jeeMainScore"
+          name="jeeMainAirCrl"
           label="JEE(Main) AIR-CRL"
           rules={[
             {
@@ -503,7 +470,7 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="jeeMainAirCrl"
+          name="jeeMainAirCat"
           label="JEE(Main) AIR-Category"
           rules={[
             {
@@ -680,6 +647,7 @@ const RegistrationForm = () => {
               required: true,
             },
           ]}
+          disabled
         >
         <Select onChange={val => handleFieldValue("branch", val)}>
          <Option value="CSE">Computer Science and Engineering</Option>
@@ -697,7 +665,7 @@ const RegistrationForm = () => {
               required: true,
             },
           ]}
-          initialValues="Yes"
+          initialValue="Yes"
         >
         <Select onChange={(val) => handleFieldValue("hosteller", val)} style={{ width: 200 }}>
             <Option value="Yes">Yes</Option>
@@ -809,12 +777,12 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="guardianName"
-          label="Guardian's Name"
+          name="gaurdianName"
+          label="Gaurdian's Name"
           rules={[
             {
               required: false,
-              message: "Please enter guardian's name!",
+              message: "Please enter gaurdian's name!",
             },
           ]}
         >
@@ -823,12 +791,12 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="guardianMobile"
-          label="Guardian's Mobile"
+          name="gaurdianMobile"
+          label="Gaurdian's Mobile"
           rules={[
             {
               required: false,
-              message: "Please enter guardian's mobile!",
+              message: "Please enter gaurdian's mobile!",
             },
           ]}
         >
@@ -837,12 +805,12 @@ const RegistrationForm = () => {
 
         <Form.Item
           className="form__item"
-          name="guardianEmail"
-          label="Guardian's Email"
+          name="gaurdianEmail"
+          label="Gaurdian's Email"
           rules={[
             {
               required: false,
-              message: "Please enter guardian's email!",
+              message: "Please enter gaurdian's email!",
             },
           ]}
         >

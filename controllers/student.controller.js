@@ -1,6 +1,7 @@
 const { getRegNums, updateRegNums, sendEmail } = require("../utils/utils")
 const Student = require("../models/student.model");
 const Form3 = require("../models/form3.model");
+const jwt = require("jsonwebtoken")
 
 exports.createStudent = async (std) => {
     try {
@@ -23,6 +24,10 @@ exports.createStudent = async (std) => {
     }
 }
 
+// exports.test = (req, res) => {
+//     res.status(500).json({message: 'err name'});
+// }
+
 exports.loginStudent = async (req, res) => {
     try {
         let student = await Student.findOne({ jeeRegNo: req.body.jeeRegNo });
@@ -30,36 +35,42 @@ exports.loginStudent = async (req, res) => {
             res.status(400).json({ message: 'Student Not Found!'});
             return;
         }
-        student.comparePassword(req.body.password, (err, res) => {
+        student.comparePassword(req.body.password, (err, result) => {
             if(err) {
                 console.error(err.message);
                 res.status(400).json({ message: err.message});
                 return;
             }
-            if(res) {
+            if(result) {
                 // Generate and Upadate Registration Number;
-                student.password = "";
+                
                 if(student.isFirstLogin) {
                    try {
                     let regNo = '2K20';
                     let prevRegNums = getRegNums(); 
-                    if(student.branchAlloted = 'CSE') {
+                    if(student.branchAlloted == 'CSE') {
                         if(prevRegNums.CSE < 10) {
-                            regNo = `${regNo}0${prevRegNums.CSE}`
+                            regNo = `${regNo}CSE00${prevRegNums.CSE}`
+                        } else if(prevRegNums.CSE < 100) {
+                            egNo = `${regNo}CSE0${prevRegNums.CSE}`
                         } else {
                             regNo = `${regNo}${prevRegNums.CSE}`
                         }
                     }
-                    if(student.branchAlloted = 'IT') {
+                    if(student.branchAlloted == 'IT') {
                         if(prevRegNums.IT < 10) {
-                            regNo = `${regNo}0${prevRegNums.IT}`
+                            regNo = `${regNo}IT00${prevRegNums.IT}`
+                        }else if(prevRegNums.CSE < 100) {
+                            egNo = `${regNo}IT0${prevRegNums.CSE}`
                         } else {
                             regNo = `${regNo}${prevRegNums.IT}`
                         }
                     }
-                    if(student.branchAlloted = 'ECE') {
+                    if(student.branchAlloted == 'ECE') {
                         if(prevRegNums.ECE < 10) {
-                            regNo = `${regNo}0${prevRegNums.ECE}`
+                            regNo = `${regNo}ECE00${prevRegNums.ECE}`
+                        } else if(prevRegNums.CSE < 100) {
+                            egNo = `${regNo}ECE0${prevRegNums.CSE}`
                         } else {
                             regNo = `${regNo}${prevRegNums.ECE}`
                         }
@@ -72,6 +83,7 @@ exports.loginStudent = async (req, res) => {
                     let token = jwt.sign({ id: student.jeeRegNo }, process.env.SECRET_KEY, {
                         expiresIn: 86400,
                     });
+                    student.password = "";
                     res.status(200).json({ message: 'Login Successful.', auth: true, token: token, data: student});
                     return;
                    } catch (error) {
@@ -84,7 +96,7 @@ exports.loginStudent = async (req, res) => {
                 let token = jwt.sign({ id: student.jeeRegNo }, process.env.SECRET_KEY, {
                     expiresIn: 86400,
                 });
-
+                student.password = "";
                 res.status(200).json({ message: 'Login Successful.', auth: true, token: token, data: student});
                 return;
             } else {
@@ -107,7 +119,7 @@ exports.form3DataInput = async (req, res) => {
             return;
         }
 
-        let newForm3 = await Form3.create(req.data.body);
+        let newForm3 = await Form3.create(req.body);
 
         if(!newForm3) {
             res.status(500).json({message: "Current user's jee not found in the database."});

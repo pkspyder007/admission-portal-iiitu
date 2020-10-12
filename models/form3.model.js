@@ -137,8 +137,8 @@ const Form3Schema = new Schema({
         required: "Branch cannot be empty."
     },
     hosteller: {
-        type: Boolean,
-        default: true
+        type: String,
+        default: "Yes"
     },
     hostelName: {
         type: String,
@@ -201,7 +201,7 @@ const Form3Schema = new Schema({
         required: "Institute fee Date cannot be empty."
     },
     instituteFeeReceiptNo: {
-        type: Date,
+        type: String,
         required: "Institute fee Recipt no. cannot be empty."
     },
     totalFee: {
@@ -217,7 +217,7 @@ const Form3Schema = new Schema({
         required: "hostel fee Date cannot be empty."
     },
     hotelFeeReceiptNo: {
-        type: Date,
+        type: String,
         required: "Hostel fee Recipt no. cannot be empty."
     },
 });
@@ -226,5 +226,5 @@ Form3Schema.plugin(uniqueValidator)
 
 
 //Export the schema
-const Form3 = mongoose.model("Product", Form3Schema);
+const Form3 = mongoose.model("Form3", Form3Schema);
 module.exports = Form3;

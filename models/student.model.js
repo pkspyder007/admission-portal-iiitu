@@ -45,7 +45,7 @@ const StudentSchema = new Schema({
   },
   password: {
       type: String,
-      required: "Password cannot be empty",
+      // required: "Password cannot be empty",
   },
   hasChangedPassword: {
       type: Boolean,

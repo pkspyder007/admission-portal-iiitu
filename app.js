@@ -8,6 +8,7 @@ const winston = require('winston');
 // Route Imports
 const studentRouter = require('./routes/student.routes');
 const uploadRouter = require('./routes/upload.routes');
+const { createStudent } = require('./controllers/student.controller');
 
 const app = express();
 dotenv.config();
@@ -71,8 +72,8 @@ process.on('uncaughtException', function (exception) {
 const tempStd = {
     name: 'Praveen Kumar',
     regNo: '',
-    jeeRegNo: '1234566',
-    email: 'pkspyder007@gmail.com',
+    jeeRegNo: '1234',
+    email: 'praveenkr.564@gmail.com',
     mobile: '9634049244',
     category: 'Sc',
     fatherName: 'GP Singh',
@@ -80,4 +81,4 @@ const tempStd = {
     fessPaid: 20000,
     password: ''
 }
-// createStudent(tempStd);
+createStudent(tempStd);
