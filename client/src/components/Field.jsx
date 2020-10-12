@@ -6,24 +6,21 @@ function Field({ children }) {
   // const [form] = Form.useForm();
   return (
     <div className="field__container">
-      {/* <table>
-        <liead className="table__head">
-          <li>SNo</li>
-          <li>kabckabkjbfkajlfnalnflanlfnalnflnalnl</li>
+      <h1>Indian Institute Of Information Technology Una (H.P)</h1>
+      <h2>Transit Campus-II Chandpur, Haroli, Una-177220</h2>
+      <h3>Btech Admissions</h3>
+      <h4>Documents Verification Form</h4>
+      <p><strong>NOTE:</strong> Each candidate is required to produce one set of documents/certificates alongwith other credentials given below.
+      <strong> A candidate will not be admitted if the original documents/certificates are not produced for verification.</strong> Formats of various certificates/affidavits
+      alongwith the instructions are available on the <strong>Institute website and candidates are advised to use the same.</strong></p>
+      <ul style={{ fontWeight: "bold" }}>
+        <li>SNo</li>
+        <li>Details of Documents/Certificates</li>
+        <div style={{ display: "flex", justifyContent: "space-evenly" }}>
           <li>Yes</li>
           <li>No</li>
           <li>NA</li>
-        </liead>
-        <tbody className="table__body">{children}</tbody>
-      </table> */}
-      <ul>
-      <li>SNo</li>
-          <li>kabckabkjbfkajlfnalnflanlfnalnflnalnl</li>
-          <div style={{display: 'flex',justifyContent:'space-evenly'}}>
-          <li>Yes</li>
-          <li>No</li>
-          <li>NA</li>
-          </div>  
+        </div>
       </ul>
       {children}
     </div>

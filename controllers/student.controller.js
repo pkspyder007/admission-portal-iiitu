@@ -1,6 +1,7 @@
 const { getRegNums, updateRegNums, sendEmail } = require("../utils/utils")
 const Student = require("../models/student.model");
 const Form3 = require("../models/form3.model");
+const Form1 = require("../models/form1.model");
 const jwt = require("jsonwebtoken")
 
 exports.createStudent = async (std) => {

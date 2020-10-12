@@ -10,17 +10,107 @@ function Form1() {
   const [docs, setDocs] = useState([
     {
       sno: "1",
-      title: "Jee(Main) score card(self attested)",
+      title: "Form No. 01: Document Verification Form",
       res: "",
     },
     {
       sno: "2",
-      title: "Jee(Main) score card(self attested)",
+      title: "Document verification cum Seat Acceptance Letter(ORIGINAL) (Seat upgradation letter,if any) along with 4 number of color photographs",
       res: "",
     },
     {
       sno: "3",
-      title: "Jee(Main) score card(self attested)",
+      title: "Jee(Main) score card(Self Attested)",
+      res: "",
+    },
+    {
+      sno: "4",
+      title: "Jee(Main) Admit Card for verification of identity of the candidate(Self Attested)",
+      res: "",
+    },
+    {
+      sno: "5",
+      title: "Marksheet/Certificate of Class X[As Date of birth proof](Self Attested)",
+      res: "",
+    },
+    {
+      sno: "6",
+      title: "Marksheet and pass Certificate of Class XII(Self Attested)",
+      res: "",
+    },
+    {
+      sno: "7",
+      title: "Conduct/Character Certificate from Head of Institution Last Attended(Self Attested)",
+      res: "",
+    },
+    {
+      sno: "8",
+      title: "Migration/Transfer Certificate(Original)",
+      res: "",
+    },
+    {
+      sno: "9",
+      title: "Photo ID proof(Self Attested)",
+      res: "",
+    },
+    {
+      sno: "10",
+      title: "Form No:02 Fee Payment Form",
+      res: "",
+    },
+    {
+      sno: "11",
+      title: "Form No:03 Data Sheet",
+      res: "",
+    },
+    {
+      sno: "12",
+      title: "Form No:04 Undertaking Moral and Disciplinary",
+      res: "",
+    },
+    {
+      sno: "13",
+      title: "Form No:05 Anti Ragging Affidavits(Students and Parents)(02 copies each)",
+      res: "",
+    },
+    {
+      sno: "14",
+      title: "Form No:06 Institute Admit Card",
+      res: "",
+    },
+    {
+      sno: "15",
+      title: "Form No:07 Course Registration Form",
+      res: "",
+    },
+    {
+      sno: "16",
+      title: "Form No:08 Medical Fitness Certificate(Original)",
+      res: "",
+    },
+    {
+      sno: "17",
+      title: "Form No:09 Study Gap Affidavit",
+      res: "",
+    },
+    {
+      sno: "18",
+      title: "Form No:10 Valid Category Certificate(OBC/EWS/SC/ST) on JoSAA format [OBC-NCL Certificate must be issued on or after April 1,2020](Self Attested) (NOTE:The caste of candidate must be in state-wise central list) ",
+      res: "",
+    },
+    {
+      sno: "19",
+      title: "Form No:11 Undertaking in Required Format(for OBC-NCL Candidates Only) (Original)",
+      res: "",
+    },
+    {
+      sno: "20",
+      title: "Form No:12 Undertaking-OBC",
+      res: "",
+    },
+    {
+      sno: "21",
+      title: "Form No:13 Disability Certificate(if any)",
       res: "",
     },
   ]);

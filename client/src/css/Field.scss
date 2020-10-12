@@ -1,16 +1,18 @@
 .field__container{
-    // table{
-    //   width: 100%;
-    //   text-align: center;
-    // }
-    // display:grid;
-    // margin:0 20px;
-    // grid-template-rows: .5fr 7fr .5fr .5fr .5fr;
-    // text-align: center;
-    // ul{
-    //     display: flex;
-    //     // flex-direction: column;
-    // }
+  text-align: center;
+
+  h4{
+      font-weight: 800;
+      margin-bottom: 40px;
+      background-color:indigo;
+      color:white;
+      margin-left: 26px;
+      margin-right: 26px;
+  }
+  p{
+      margin:24px 52px;
+      border-bottom: 2px solid grey;
+  }
 
     ul {
         display:grid;
@@ -32,4 +34,5 @@
     display:flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 52px;
 }

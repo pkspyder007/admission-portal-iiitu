@@ -100,7 +100,7 @@ const RegistrationForm = () => {
     {/* <Upload {...uploadProps} onChange={onFileChange}>
       <Button>Upload</Button>
     </Upload> */}
-    <h5>Data Sheet(Session 2020-21)</h5>
+    <h4>Data Sheet(Session 2020-21)</h4>
       <Form
         className="form__body"
         {...formItemLayout}
