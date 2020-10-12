@@ -1,5 +1,5 @@
 import React from 'react';
-import { Upload, message, Button, Row, Col } from 'antd';
+import { Upload, message, Button, Row, Col, notification } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
 
@@ -10,6 +10,20 @@ const DocumentUpload = (props) => {
     action: `${process.env.REACT_APP_BACKEND}/api/document/upload`,
     headers: {
       'x-access-token': localStorage.getItem('x-access-token'),
+    }
+  }
+
+  const beforeUpload = (file) => {
+    file.name = "hey.jpg"
+    console.log(file);
+    if(file.size/(1024*1024) <= 2) {
+      notification["error"]({
+        message: "Please select a file under 2 MB.",
+        // description: "Filesize is greater than 2 MB."
+      })
+      return false;
+    } else {
+      return true;
     }
   }
   const onFileChange = (info) => {
@@ -29,7 +43,7 @@ const DocumentUpload = (props) => {
         <Row gutter="24">
          <Col><p>{props.title}</p></Col>
          <Col>
-            <Upload onChange={onFileChange} {...uploadProps} accept=".jpg,.jpeg,.png,.pdf,.doc,.docx">
+            <Upload beforeUpload={beforeUpload} onChange={onFileChange} {...uploadProps} accept=".jpg,.jpeg,.png,.pdf">
                 <Button icon={<UploadOutlined />}>Click to Upload</Button>
             </Upload>
             </Col>       
