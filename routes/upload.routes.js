@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const multer  = require('multer');
 const { access, mkdirSync } = require('fs');
+const verifyToken = require('../middlewares/auth');
 const router = express.Router();
 
 const storage = multer.diskStorage({
@@ -31,7 +32,7 @@ var upload = multer({storage: storage})
 
 
 // Upload Image
-router.post("/upload", upload.single('doc'), (req, res) => {
+router.post("/upload", verifyToken, upload.single('doc'), (req, res) => {
     console.log(5);
     return res.json({
         image: req.file.path

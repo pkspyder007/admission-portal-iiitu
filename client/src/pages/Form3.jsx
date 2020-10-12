@@ -89,30 +89,6 @@ const RegistrationForm = () => {
     </Form.Item>
   );
 
-
-
-  // function onChange(date, dateString) {
-  //   console.log(date, dateString);
-  // }
-
-  // let uploadProps ={
-  //   name: 'doc',
-  //   action: '//localhost:4000/api/document/upload',
-  //   headers: {
-  //     authorization: 'authorization-text',
-  //   }
-  // }
-  // const onFileChange = (info) => {
-  //   if (info.file.status !== 'uploading') {
-  //     console.log(info.file, info.fileList);
-  //   }
-  //   if (info.file.status === 'done') {
-  //     message.success(`${info.file.name} file uploaded successfully`);
-  //   } else if (info.file.status === 'error') {
-  //     message.error(`${info.file.name} file upload failed.`);
-  //   }
-  // }
-
   const handleFieldValue = (field,  value) => {
     form.setFieldsValue({[field]: value});
   }
