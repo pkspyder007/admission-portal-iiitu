@@ -37,7 +37,6 @@ exports.loginStudent = async (req, res) => {
             return;
         }
 
-        console.log(req.body.password, student, 1);
         // console.log(bcrypt.compareSync(req.body.password, student.password));
         student.comparePassword(req.body.password, (err, result) => {
             if (err) {
@@ -45,10 +44,8 @@ exports.loginStudent = async (req, res) => {
                 res.status(400).json({ message: err.message });
                 return;
             }
-            console.log(result);
             if (result) {
                 // Generate and Upadate Registration Number;
-
                 if (student.isFirstLogin) {
                     try {
                         let regNo = '2K20';
@@ -82,7 +79,7 @@ exports.loginStudent = async (req, res) => {
                         }
                         student.isFirstLogin = false;
                         student.regNo = regNo;
-                        console.log(req.body.password, student, 2);
+                        console.log(regNo);
                         student.save();
                         updateRegNums();
 
