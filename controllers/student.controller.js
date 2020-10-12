@@ -1,12 +1,13 @@
 const { getRegNums, updateRegNums, sendEmail } = require("../utils/utils")
 const Student = require("../models/student.model");
 const Form3 = require("../models/form3.model");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 exports.createStudent = async (std) => {
     try {
         let password = Math.random().toString(36).substring(7);
-        std.password = password;
+        std.password = bcrypt.hashSync(password, 10);
         const newStudent = await Student.create(std);
         let mail = `
             <p> Dear ${std.name} , </p>
@@ -35,12 +36,16 @@ exports.loginStudent = async (req, res) => {
             res.status(400).json({ message: 'Student Not Found!' });
             return;
         }
+
+        console.log(req.body.password, student, 1);
+        // console.log(bcrypt.compareSync(req.body.password, student.password));
         student.comparePassword(req.body.password, (err, result) => {
             if (err) {
                 console.error(err.message);
                 res.status(400).json({ message: err.message });
                 return;
             }
+            console.log(result);
             if (result) {
                 // Generate and Upadate Registration Number;
 
@@ -77,14 +82,15 @@ exports.loginStudent = async (req, res) => {
                         }
                         student.isFirstLogin = false;
                         student.regNo = regNo;
+                        console.log(req.body.password, student, 2);
                         student.save();
                         updateRegNums();
+
 
                         let token = jwt.sign({ id: student.jeeRegNo }, process.env.SECRET_KEY, {
                             expiresIn: 86400,
                         });
-                        student.password = "";
-                        res.status(200).json({ message: 'Login Successful.', auth: true, token: token, data: student });
+                        res.status(200).json({ message: 'Login Successful.', auth: true, token: token, data: { ...student, password: '' } });
                         return;
                     } catch (error) {
                         console.error(error);
@@ -145,7 +151,7 @@ exports.form1DataInput = async (req, res) => {
             return;
         }
 
-        let newForm1 = await Form1.create({ data: req.body, jeeRegNo: req.userId });
+        let newForm1 = await Form1.create({ docList: req.body, jeeRegNo: req.userId });
 
         if (!newForm1) {
             res.status(500).json({ message: "Current user's jee reg, no. not found in the database." });

@@ -32,41 +32,41 @@ const StudentSchema = new Schema({
     required: "Category cannot be empty."
   },
   fatherName: {
-      type: String,
-      required: "Father's Name cannot be empty."
+    type: String,
+    required: "Father's Name cannot be empty."
   },
   branchAlloted: {
-      type: String,
-      required: "Branch cannot be empty."
+    type: String,
+    required: "Branch cannot be empty."
   },
   feesPaid: {
-      type: Number,
-      reuired: "Fees paid cannot be empty."
+    type: Number,
+    reuired: "Fees paid cannot be empty."
   },
   password: {
-      type: String,
-      // required: "Password cannot be empty",
+    type: String,
+    // required: "Password cannot be empty",
   },
   hasChangedPassword: {
-      type: Boolean,
-      defaut: false
+    type: Boolean,
+    defaut: false
   },
   isFirstLogin: {
-      type: Boolean,
-      default: true
+    type: Boolean,
+    default: true
   }
 });
 
-StudentSchema.pre("save", function(next) {
-    if(!this.isModified("password")) {
-        return next();
-    }
-    this.password = bcrypt.hashSync(this.password, 10);
-    next();
-});
+// StudentSchema.pre("save", function(next) {
+//     if(!this.isModified("password")) {
+//         return next();
+//     }
+//     this.password = bcrypt.hashSync(this.password, 10);
+//     next();
+// });
 
-StudentSchema.methods.comparePassword = function(plaintext, callback) {
-    return callback(null, bcrypt.compareSync(plaintext, this.password));
+StudentSchema.methods.comparePassword = function (plaintext, callback) {
+  return callback(null, bcrypt.compareSync(plaintext, this.password));
 };
 
 StudentSchema.plugin(uniqueValidator)
