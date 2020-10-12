@@ -1,0 +1,35 @@
+.field__container{
+    // table{
+    //   width: 100%;
+    //   text-align: center;
+    // }
+    // display:grid;
+    // margin:0 20px;
+    // grid-template-rows: .5fr 7fr .5fr .5fr .5fr;
+    // text-align: center;
+    // ul{
+    //     display: flex;
+    //     // flex-direction: column;
+    // }
+
+    ul {
+        display:grid;
+        margin:0 20px;
+        grid-template-columns: 2fr 5fr 3fr ;
+        text-align: center;
+        list-style: none;
+        margin-bottom: 24px;
+        .ant-radio-group  {
+            display: flex;
+            justify-content: space-evenly;
+            // grid-template-rows: repeat(0.5fr,3);
+        }
+    }
+
+}
+
+.review__container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
