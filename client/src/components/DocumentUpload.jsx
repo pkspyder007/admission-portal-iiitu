@@ -4,19 +4,21 @@ import { UploadOutlined } from '@ant-design/icons';
 
 
 const DocumentUpload = (props) => {
-    console.log(`${process.env.REACT_APP_BACKEND}/api/document/upload`);
   let uploadProps ={
     name: 'doc',
     action: `${process.env.REACT_APP_BACKEND}/api/document/upload`,
     headers: {
+      'filename': props.fileName,
       'x-access-token': localStorage.getItem('x-access-token'),
     }
   }
 
+  console.log(props);
+
   const beforeUpload = (file) => {
-    file.name = "hey.jpg"
-    console.log(file);
-    if(file.size/(1024*1024) <= 2) {
+    // file.name = "hey.jpg"
+    // return true;
+    if(file.size/(1024*1024) > 2) {
       notification["error"]({
         message: "Please select a file under 2 MB.",
         // description: "Filesize is greater than 2 MB."
@@ -27,6 +29,7 @@ const DocumentUpload = (props) => {
     }
   }
   const onFileChange = (info) => {
+
     if (info.file.status !== 'uploading') {
       // console.log(info.file, info.fileList);
       console.log(info.file.percent);

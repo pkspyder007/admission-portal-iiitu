@@ -22,9 +22,9 @@ const Dashboard = () => {
                         <Typography.Text>e.g. : 2244ee42-caste-certificate.pdf</Typography.Text>
                      <br/>
                      <br/>
-                    <DocumentUpload title="Caste certificate" />
+                    <DocumentUpload fileName="caste-certificate" title="Caste certificate" />
                     <br/>
-                    <DocumentUpload title="12th marksheet" />
+                    <DocumentUpload fileName="test" title="12th marksheet" />
                 </TabPane>
                 <TabPane tab={`Downloads`} key={3} >
                     <Downloads />
