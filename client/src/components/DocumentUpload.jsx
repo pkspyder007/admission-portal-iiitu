@@ -1,5 +1,5 @@
 import React from 'react';
-import { Upload, message, Button } from 'antd';
+import { Upload, message, Button, Row, Col } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
 
@@ -14,7 +14,8 @@ const DocumentUpload = (props) => {
   }
   const onFileChange = (info) => {
     if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
+      // console.log(info.file, info.fileList);
+      console.log(info.file.percent);
     }
     if (info.file.status === 'done') {
       message.success(`${info.file.name} file uploaded successfully`);
@@ -25,11 +26,14 @@ const DocumentUpload = (props) => {
       
 
     return (
-        <div>
-            <Upload {...uploadProps} accept=".jpg,.jpeg,.png,.pdf,.doc,.docx">
+        <Row gutter="24">
+         <Col><p>{props.title}</p></Col>
+         <Col>
+            <Upload onChange={onFileChange} {...uploadProps} accept=".jpg,.jpeg,.png,.pdf,.doc,.docx">
                 <Button icon={<UploadOutlined />}>Click to Upload</Button>
-            </Upload>       
-        </div>
+            </Upload>
+            </Col>       
+        </Row>
     )
 }
 
