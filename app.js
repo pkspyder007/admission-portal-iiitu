@@ -22,19 +22,19 @@ app.use('/api/student', studentRouter);
 app.use('/api/document', uploadRouter);
 
 mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: true,
-    useCreateIndex: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: true,
+  useCreateIndex: true
 })
-.then(() => console.log('Connected to DB.'))
-.catch(e => console.error(e.message));
+  .then(() => console.log('Connected to DB.'))
+  .catch(e => console.error(e.message));
 
 const PORT = process.env.API_PORT || 5000;
 app.listen(PORT, () => console.log(`Server is running on PORT:${PORT}`));
 
 
- 
+
 const logger = winston.createLogger({
   level: 'info',
   format: winston.format.json(),
@@ -53,11 +53,11 @@ const logger = winston.createLogger({
 });
 
 process.on('uncaughtException', function (exception) {
-    console.log(exception); // to see your exception details in the console
-    // if you are on production, maybe you can send the exception details to your
-    // email as well ?
-  });
-   
+  console.log(exception); // to see your exception details in the console
+  // if you are on production, maybe you can send the exception details to your
+  // email as well ?
+});
+
 
 //
 // If we're not in production then log to the `console` with the format:
@@ -70,15 +70,15 @@ process.on('uncaughtException', function (exception) {
 // }
 
 const tempStd = {
-    name: 'Praveen Kumar',
-    regNo: '',
-    jeeRegNo: '1234',
-    email: 'praveenkr.564@gmail.com',
-    mobile: '9634049244',
-    category: 'Sc',
-    fatherName: 'GP Singh',
-    branchAlloted: 'CSE',
-    fessPaid: 20000,
-    password: ''
+  name: 'Praveen Kumar',
+  regNo: '',
+  jeeRegNo: '1234',
+  email: 'pkspyder007@gmail.com',
+  mobile: '9634049244',
+  category: 'Sc',
+  fatherName: 'GP Singh',
+  branchAlloted: 'CSE',
+  fessPaid: 20000,
+  password: ''
 }
 createStudent(tempStd);

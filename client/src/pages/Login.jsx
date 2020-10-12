@@ -9,7 +9,7 @@ const Login = (props) => {
             localStorage.setItem('x-access-token', data.token);
             localStorage.setItem('std', JSON.stringify(data.data));
             message.success(data.message);
-            props.history.push('/form3');
+            // props.history.push('/');
         })
         .catch(err => {
             console.log(err.message);
