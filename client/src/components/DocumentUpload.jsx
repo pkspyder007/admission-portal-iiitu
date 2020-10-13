@@ -1,5 +1,5 @@
 import React from 'react';
-import { Upload, message, Button, Row, Col, notification } from 'antd';
+import { Upload, message, Button, Row, Col, notification, Divider } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
 
@@ -12,8 +12,6 @@ const DocumentUpload = (props) => {
       'x-access-token': localStorage.getItem('x-access-token'),
     }
   }
-
-  console.log(props);
 
   const beforeUpload = (file) => {
     // file.name = "hey.jpg"
@@ -43,13 +41,14 @@ const DocumentUpload = (props) => {
       
 
     return (
-        <Row gutter="24">
+        <Row justify="space-between" gutter="24">
          <Col><p>{props.title}</p></Col>
          <Col>
             <Upload beforeUpload={beforeUpload} onChange={onFileChange} {...uploadProps} accept=".jpg,.jpeg,.png,.pdf">
                 <Button icon={<UploadOutlined />}>Click to Upload</Button>
             </Upload>
-            </Col>       
+            </Col>   
+            <Divider />    
         </Row>
     )
 }

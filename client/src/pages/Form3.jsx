@@ -54,6 +54,7 @@ const RegistrationForm = () => {
     // setStd(std);
     setToken(localStorage.getItem('x-access-token'))
     handleFieldValue("regNo", std.regNo);
+    handleFieldValue("branch", std.branchAlloted);
     // handleFieldValue("branch", std.branchAlloted);
 
     return () => {
@@ -623,9 +624,8 @@ const RegistrationForm = () => {
               required: true,
             },
           ]}
-          disabled
         >
-        <Select onChange={val => handleFieldValue("branch", val)}>
+        <Select disabled onChange={val => handleFieldValue("branch", val)}>
          <Option value="CSE">Computer Science and Engineering</Option>
          <Option value="IT">Electronics and Communication Engineering</Option>
          <Option value="ECE">Information Technology</Option>

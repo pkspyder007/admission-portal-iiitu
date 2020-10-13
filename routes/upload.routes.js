@@ -29,7 +29,7 @@ const storage = multer.diskStorage({
     filename: function (req, file, cb) {
         // You could rename the file name
         // cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-        let fileName = `${req.headers['filename']}.${getExtension(file.originalname)}`
+        let fileName = `${req.headers['filename']}${getExtension(file.originalname)}`
         cb(null, req.userId + '-' + fileName);
     }
 });

@@ -1,18 +1,19 @@
 import React from "react";
 import "../css/Field.scss";
-import { Form, Input, Checkbox, Radio } from "antd";
+import { Radio } from "antd";
+import HeaderInfo from "./HeaderInfo";
 
 function Field({ children }) {
   // const [form] = Form.useForm();
   return (
     <div className="field__container">
-      <h1>Indian Institute Of Information Technology Una (H.P)</h1>
-      <h2>Transit Campus-II Chandpur, Haroli, Una-177220</h2>
-      <h3>Btech Admissions</h3>
-      <h4>Documents Verification Form</h4>
-      <p><strong>NOTE:</strong> Each candidate is required to produce one set of documents/certificates alongwith other credentials given below.
-      <strong> A candidate will not be admitted if the original documents/certificates are not produced for verification.</strong> Formats of various certificates/affidavits
-      alongwith the instructions are available on the <strong>Institute website and candidates are advised to use the same.</strong></p>
+     <HeaderInfo title="Document Verification form"
+        note={`
+        <strong>NOTE:</strong> Each candidate is required to produce one set of documents/certificates alongwith other credentials given below.
+        <strong> A candidate will not be admitted if the original documents/certificates are not produced for verification.</strong> Formats of various certificates/affidavits
+        alongwith the instructions are available on the <strong>Institute website and candidates are advised to use the same.</strong>
+        `}
+     />
       <ul style={{ fontWeight: "bold" }}>
         <li>SNo</li>
         <li>Details of Documents/Certificates</li>
