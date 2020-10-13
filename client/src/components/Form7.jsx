@@ -58,6 +58,15 @@ const CSEList = [
     p:6,
     credits:3
   },
+  {
+    sno: '',
+    code: '',
+    title: 'Total',
+    l: 11,
+    t:1,
+    p: 18, 
+    credits: 21,
+  }
 ];
 
 const ITList = [
@@ -115,6 +124,15 @@ const ITList = [
     p:6,
     credits:3
   },
+  {
+    sno: '',
+    code: '',
+    title: 'Total',
+    l: 15,
+    t:1,
+    p: 18, 
+    credits: 25,
+  }
 ];
 
 const ECEList = [
@@ -172,11 +190,20 @@ const ECEList = [
     p:6,
     credits:3
   },
+  {
+    sno: '',
+    code: '',
+    title: 'Total',
+    l: 15,
+    t:1,
+    p: 18, 
+    credits: 25,
+  }
 ];
 
-const CSETotal = { l: 11,  t:1, p: 18, credits: 21};
-const ITTotal = { l: 15,  t:1, p: 18, credits: 25};
-const ECETotal = { l: 15,  t:1, p: 18, credits: 25};
+// const CSETotal = { l: 11,  t:1, p: 18, credits: 21};
+// const ITTotal = { l: 15,  t:1, p: 18, credits: 25};
+// const ECETotal = { l: 15,  t:1, p: 18, credits: 25};
 
 const columns = [
   {
@@ -305,7 +332,7 @@ const Form7 = () => {
       </>
       )}
       <Divider />
-      <Table dataSource={dataSource} columns={columns} pagination={false} />
+      <Table dataSource={dataSource} columns={columns} pagination={false} rowKey="sno" />
       <Divider />
       <Row justify="center" gutter={[24, 44]}>
         <Col >

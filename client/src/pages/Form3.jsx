@@ -11,6 +11,7 @@ import {
 import "../css/RegistrationForm.scss";
 import TextArea from "antd/lib/input/TextArea";
 import Axios from 'axios';
+import HeaderInfo from "../components/HeaderInfo";
 
 const { Option } = Select;
 const formItemLayout = {
@@ -96,12 +97,17 @@ const RegistrationForm = () => {
   return (
     <div className="form__container">
       
-    <h1>Indian Institute Of Information Technology Una (H.P)</h1>
-    <h3>Transit Campus-II Chandpur, Haroli, Una-177220</h3>
+    {/* <h1>Indian Institute Of Information Technology Una (H.P)</h1> */}
+    {/* <h3>Transit Campus-II Chandpur, Haroli, Una-177220</h3> */}
     {/* <Upload {...uploadProps} onChange={onFileChange}>
       <Button>Upload</Button>
     </Upload> */}
-    <h4>Data Sheet(Session 2020-21)</h4>
+    {/* <h4>Data Sheet(Session 2020-21)</h4> */}
+   <div className="field__container">
+   <HeaderInfo
+      title="Data Sheet(Session 2020-21)"
+    />
+   </div>
       <Form
         className="form__body"
         {...formItemLayout}
@@ -976,7 +982,7 @@ const RegistrationForm = () => {
 
         <Form.Item className="form__item" {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
-            Register
+            Submit
           </Button>
         </Form.Item>
       </Form>

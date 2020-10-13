@@ -1,19 +1,41 @@
-import React from 'react';
-import { Form, Input, Button, message } from 'antd';
+import React, {useEffect} from 'react';
+import { Form, Input, Button, message, notification } from 'antd';
 import Axios from 'axios';
 
 const Login = (props) => {
+
+  useEffect(() => {
+    Axios({
+      method: 'post',
+      url: "/api/student/verifyToken",
+      headers: {
+        'x-access-token': localStorage.getItem('x-access-token')
+      }
+    }).then(res => {
+      if(res.data.auth) {
+        props.history.push("/")
+      } else {
+        notification["error"]({
+          message: "Please Login to continue",
+          description: "You have been logged out due to session timeout."
+        })
+      }
+    }).catch(err => {
+      // message.error(err.message);
+    })
+  }, [])
+
   const onFinish = (values) => {
     Axios.post('/api/student/login', values)
         .then(({data}) => {
             localStorage.setItem('x-access-token', data.token);
             localStorage.setItem('std', JSON.stringify(data.data));
             message.success(data.message);
-            // props.history.push('/');
+            props.history.push('/');
         })
         .catch(err => {
             console.log(err.message);
-            message.error()
+            message.error(err.response.data.message)
         })
   };
 
