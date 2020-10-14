@@ -5,9 +5,6 @@ const bcrypt = require('bcryptjs');
 const Form1 = require("../models/form1.model");
 const jwt = require("jsonwebtoken")
 
-
-
-
 exports.createStudent = async (std) => {
     try {
         let password = Math.random().toString(36).substring(7);
@@ -89,9 +86,9 @@ exports.loginStudent = async (req, res) => {
 
 
                         let token = jwt.sign({ id: student.jeeRegNo }, process.env.SECRET_KEY, {
-                            expiresIn: 86400,
+                            // expiresIn: 86400,
                         });
-                        res.status(200).json({ message: 'Login Successful.', auth: true, token: token, data: { ...student, password: '' } });
+                        res.status(200).json({ message: 'Login Successful.', auth: true, token: token, data: { ...student._doc, password: '' } });
                         return;
                     } catch (error) {
                         console.error(error);
@@ -167,4 +164,64 @@ exports.form1DataInput = async (req, res) => {
         res.status(500).json({ message: "Something went wrong." });
         return;
     }
+}
+
+exports.updateSteps = async (req, res) => {
+    try {
+        let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { ...req.body });
+        res.status(200).json({
+            ...newStd._doc,
+            password: ''
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+        console.error(err.message);
+    }
+}
+
+exports.float = async (req, res) => {
+    try {
+        let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { ...req.body, step5: false, completed: true });
+        let mailComplete = `
+                <p> Dear ${newStd.name} , </p>
+                <p>You have completed your registration process for insitute counselling.</p>
+                <p>Take a print of your Admit card from the link below or from profile section of admission portal </p>
+            `;
+        sendEmail(newStd.email, 'Admission appliaction process update', mailComplete)
+        res.status(200).json({
+            ...newStd._doc,
+            password: ''
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+        console.error(error.message);
+    }
+}
+
+exports.freeze = async (req, res) => {
+
+    try {
+        let form3Data = await Form3.findOneAndUpdate({ jeeRegNo: req.userId }, { ...req.body });
+        try {
+            let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { ...req.body, will: 'FREEZE', step5: false, completed: true });
+            let mailComplete = `
+                <p> Dear ${newStd.name} , </p>
+                <p>You have completed your registration process for insitute counselling.</p>
+                <p>Take a print of your Admit card from the link below or from profile section of admission portal </p>
+            `;
+            sendEmail(newStd.email, 'Admission appliaction process update', mailComplete)
+            res.status(200).json({
+                ...newStd._doc,
+                password: ''
+            });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+            console.error(err.message);
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+        console.error(error.message);
+    }
+
+
 }

@@ -132,10 +132,37 @@ function Form1() {
     }).then(e=>{
         notification["success"]({
             message: 'Form submitted'
+        });
+        Axios({
+          method: "POST",
+          url: "/api/student/updateSteps",
+          headers: {
+            'x-access-token': localStorage.getItem('x-access-token')
+          },
+          data: {
+            step1: false,
+            step2: false,
+            step3: false,
+            step4: true,
+            step5: false,
+          },
         })
+          .then((res) => {
+            notification["success"]({
+              message: "Please re-login and continue to next step.",
+            });
+          })
+          .catch((err) => {
+            notification["error"]({
+              message:
+                "Something went wrong while updating your progress please consult with the administration if problem persists.",
+              description: err.response.data.message,
+            });
+          });
     }).catch(err => {
         notification["error"]({
-            message: 'Your request failed'
+            message: 'Your request failed',
+            description: err.response.data.message
         })
     })
   };

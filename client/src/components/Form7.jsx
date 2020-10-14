@@ -1,7 +1,8 @@
 import React from 'react'
-import { Row, Col, Table, Divider, Checkbox, Button } from 'antd'
+import { Row, Col, Table, Divider, Checkbox, Button, notification } from 'antd'
 import HeaderInfo from './HeaderInfo';
 import { useState, useEffect } from 'react';
+import Axios from "axios";
 
 const CSEList = [
   {
@@ -247,6 +248,7 @@ const columns = [
 const Form7 = () => {
   const [std, setStd] = useState(null);
   const [dataSource, setDataSource] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
     let std = JSON.parse(localStorage.getItem('std'));
@@ -264,11 +266,36 @@ const Form7 = () => {
       default:
         break;
     }
+  }, []);
 
-    return () => {
-      
-    }
-  }, [])
+  const handleSubmit = () => {
+    Axios({
+      method: "POST",
+      url: "/api/student/updateSteps",
+      headers: {
+        'x-access-token': localStorage.getItem('x-access-token')
+      },
+      data: {
+        step1: false,
+        step2: false,
+        step3: false,
+        step4: false,
+        step5: true,
+      },
+    })
+      .then((res) => {
+        notification["success"]({
+          message: "Please re-login and continue to next step.",
+        });
+      })
+      .catch((err) => {
+        notification["error"]({
+          message:
+            "Something went wrong while updating your progress please consult with the administration if problem persists.",
+          description: err.response.data.message,
+        });
+      });
+  }
 
   return (
     <div>
@@ -336,13 +363,13 @@ const Form7 = () => {
       <Divider />
       <Row justify="center" gutter={[24, 44]}>
         <Col >
-          <Checkbox />
+          <Checkbox onChange={(e) => setIsChecked(!isChecked)} />
         </Col>
         <Col >
         <strong>I have read the information and accept.</strong>
         </Col>
         <Col >
-          <Button size="large" type="primary">Submit</Button>
+          <Button disabled={!isChecked} size="large" type="primary" onClick={handleSubmit}>Submit</Button>
         </Col>
       </Row>
     </div>

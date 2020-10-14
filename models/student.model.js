@@ -54,7 +54,40 @@ const StudentSchema = new Schema({
   isFirstLogin: {
     type: Boolean,
     default: true
+  },
+  step1: {
+    type: Boolean,
+    default: true
+  },
+  step2: {
+    type: Boolean,
+    default: false
+  },
+  step3: {
+    type: Boolean,
+    default: false
+  },
+  step4: {
+    type: Boolean,
+    default: false
+  },
+  step5: {
+    type: Boolean,
+    default: false
+  },
+  will: {
+    type: String,
+    default: "FREEZE-DEFAULT"
+  },
+  completed: {
+    type: Boolean,
+    default: false
+  },
+  doc: {
+    type: String,
+    default: 'Same as in Form 3'
   }
+
 });
 
 // StudentSchema.pre("save", function(next) {

@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 
 const Form3Schema = new Schema({
     date: {
-        type: Date,
-        default: Date.now()
+        type: String,
+        default: new Date().toString('dd-MM-yyyy')
     },
     regNo: {
         type: String,
@@ -20,7 +20,7 @@ const Form3Schema = new Schema({
         required: "Email cannot be empty."
     },
     dob: {
-        type: Date,
+        type: String,
         required: "DOB cannot be empty."
     },
     religion: {
@@ -186,39 +186,39 @@ const Form3Schema = new Schema({
     },
     josaaFeeAmount: {
         type: Number,
-        required: "Josaa fee amount cannot be empty."
-    } ,
+        // required: "Josaa fee amount cannot be empty."
+    },
     josaaFeeDate: {
-        type: Date,
-        required: "Josaa fee Date cannot be empty."
+        type: String,
+        // required: "Josaa fee Date cannot be empty."
     },
     instituteFeeAmount: {
         type: Number,
-        required: "Institute fee amount cannot be empty."
-    } ,
+        // required: "Institute fee amount cannot be empty."
+    },
     instituteFeeDate: {
-        type: Date,
-        required: "Institute fee Date cannot be empty."
+        type: String,
+        // required: "Institute fee Date cannot be empty."
     },
     instituteFeeReceiptNo: {
         type: String,
-        required: "Institute fee Recipt no. cannot be empty."
+        // required: "Institute fee Recipt no. cannot be empty."
     },
     totalFee: {
         type: Number,
-        required: "Total fee amount cannot be empty."
+        // required: "Total fee amount cannot be empty."
     },
     hostelFeeAmount: {
         type: Number,
-        required: "hostel fee amount cannot be empty."
-    } ,
+        // required: "hostel fee amount cannot be empty."
+    },
     hostelFeeDate: {
-        type: Date,
-        required: "hostel fee Date cannot be empty."
+        type: String,
+        // required: "hostel fee Date cannot be empty."
     },
     hotelFeeReceiptNo: {
         type: String,
-        required: "Hostel fee Recipt no. cannot be empty."
+        // required: "Hostel fee Recipt no. cannot be empty."
     },
 });
 

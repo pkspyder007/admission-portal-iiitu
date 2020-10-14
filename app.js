@@ -25,7 +25,8 @@ mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: true,
-  useCreateIndex: true
+  useCreateIndex: true,
+  useFindAndModify: false
 })
   .then(() => console.log('Connected to DB.'))
   .catch(e => console.error(e.message));
@@ -73,7 +74,7 @@ const tempStd = {
   name: 'Praveen Kumar',
   regNo: '',
   jeeRegNo: '1234',
-  email: 'pkspyder007@gmail.com',
+  email: 'so@iiitu.ac.in',
   mobile: '9634049244',
   category: 'Sc',
   fatherName: 'GP Singh',

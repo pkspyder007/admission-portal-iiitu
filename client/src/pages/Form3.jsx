@@ -7,6 +7,7 @@ import {
   DatePicker,
   Space,
   message,
+  notification
 } from "antd";
 import "../css/RegistrationForm.scss";
 import TextArea from "antd/lib/input/TextArea";
@@ -67,12 +68,32 @@ const RegistrationForm = () => {
     console.log("Received values of form: ", values);
     Axios({
       'method': 'post',
-      url: '/api/student/',
-      headers: {'x-access-token': token},
+      url: '/api/student/form3',
+      headers: {'x-access-token': localStorage.getItem('x-access-token')},
       data: values
     }).then(res=> {
-      console.log(res.data);
       message.success(res.data.message);
+      Axios({
+        method: "post",
+        url: '/api/student/updateSteps',
+        headers: { 'x-access-token': localStorage.getItem('x-access-token')},
+        data: {
+          step1: false,
+          step2: true,
+          step3: false,
+          step4: false,
+          step5: false,
+        }
+      }).then(res => {
+        notification["success"]({
+          message: 'Please re-login and continue to next step.'
+        })
+      }).catch(err => {
+        notification["error"]({
+          message: 'Something went wrong while updating your progress please consult with the administration if problem persists.',
+          description: err.response.data.message
+        })
+      })
     }).catch(err => {
       console.log(err);
       message.error(err.response.data.message);
@@ -125,10 +146,6 @@ const RegistrationForm = () => {
           name="date"
           label="Date"
           rules={[
-            {
-              type: "date",
-              message: "The input is not valid date",
-            },
             {
               required: true,
               message: "Please enter date",
@@ -190,10 +207,6 @@ const RegistrationForm = () => {
           name="dob"
           label="Date of Birth (DD/MM/YYYY)"
           rules={[
-            {
-              type: "date",
-              message: "The input is not valid date",
-            },
             {
               required: true,
               message: "Please enter ypur DOB",
@@ -798,9 +811,6 @@ const RegistrationForm = () => {
         >
           <Input />
         </Form.Item>
-
-        {/* FEE STATUS */}
-
         <Form.Item
           className="form__item"
           name="annualFamilyIncome"
@@ -814,6 +824,9 @@ const RegistrationForm = () => {
         >
           <Input />
         </Form.Item>
+
+        {/* FEE STATUS */}
+          {/*}
 
         <Form.Item
           className="form__item"
@@ -844,7 +857,6 @@ const RegistrationForm = () => {
             },
           ]}
         >
-          {/* <Input /> */}
           <Space direction="vertical">
             <DatePicker onChange={(date, dateStr) => handleFieldValue("josaaFeeDate", dateStr)} format="DD/MM/YYYY" />
           </Space>
@@ -961,24 +973,7 @@ const RegistrationForm = () => {
           <Input />
         </Form.Item>
 
-        {/* <Form.Item
-          className="form__item"
-          name="agreement"
-          valuePropName="checked"
-          rules={[
-            {
-              validator: (_, value) =>
-                value
-                  ? Promise.resolve()
-                  : Promise.reject("Should accept agreement"),
-            },
-          ]}
-          {...tailFormItemLayout}
-        >
-          <Checkbox>
-            I have read the <a href="">agreement</a>
-          </Checkbox>
-        </Form.Item> */}
+        */}
 
         <Form.Item className="form__item" {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <mate charest="utf-8" />
+        <title>Admit Card</title>
+    </head>
+    <style>
+        .container{
+            border: 1px solid black;
+            margin: auto;
+        }
+        .head {
+            display: grid;
+            grid-template-columns: 2fr 7fr 1fr;
+            text-align: center;
+            border-bottom: 1px solid black;
+        }
+        .head img {
+            margin: auto;
+            height: 150px;
+            width: 150px;
+        }
+        .content {
+            padding: 24px;
+        }
+        .content p {
+            font-size: 18px;
+        }
+        .r-1 {
+            display: grid;
+            grid-template-columns: 5fr 5fr;
+        }
+        .r-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+        .r-3 {
+            display: grid;
+            grid-template-columns: 5fr 5fr;
+        }
+        .r-4 {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <!-- head -->
+            <div class="head">
+                <img src="./iiit-una-logo.png" alt="IIITU">
+                <div class="c-info">
+                    <h3>Indian Institute of Information Technology</h3>
+                    <h3>Una (H.P.)</h3>
+                    <h4>Transit Campus-II, Chandpur, Haroli, Una-177220</h4>
+                    <span>
+                        <h2>Institute Admit Card</h2>
+                        <p>(B.Tech)</p>
+                    </span>
+                </div>
+                <span></span>
+            </div>
+
+                <!-- head end -->
+               <div class="content">
+                <div class="r-1"><p>Mr/Ms: {{name}}</p> <p>S/D/O: {{fname}}</p></div>
+                <div class="r-2"><p>Registration No: {{regNo}}</p></div>
+                <div class="r-3"><p>School: {{school}}</p> <p>Branch: {{branch}}</p></div>
+                <div class="r-4"><p>Date of Registration in the Institute: {{regDate}}</p></div>
+                <strong>Admission is provisional subject to submission of proper document(s) by 30, Nov, '20</strong>
+               </div>
+        </div>
+    </body>
+</html>
