@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { Row, Col, Radio, Button, Divider, notification, message, Input, Space, DatePicker, Form, InputNumber} from "antd";
 import HeaderInfo from "./HeaderInfo";
 import Axios from "axios";
+import { withRouter } from 'react-router-dom';
 
 const tailFormItemLayout = {
   wrapperCol: {
@@ -16,7 +17,7 @@ const tailFormItemLayout = {
   },
 };
 
-const Willingness = () => {
+const Willingness = ({history}) => {
   const [will, setWill] = useState("FREEZE");
   const [form] = Form.useForm();
 
@@ -66,8 +67,9 @@ const Willingness = () => {
     }).then(res => {
       notification["success"]({
         message: 'Your Application is completed!!',
-        description: 'Please re-login and download a copy of your application.'
-      })
+        description: 'Please re-login and download a copy of your application. If not redirected!'
+      });
+      history.push('/admit-card')
     }).catch(err => {
       notification["error"]({
         message: 'Something went wrong while updating your progress please consult with the administration if problem persists.',
@@ -255,4 +257,4 @@ const Willingness = () => {
   );
 };
 
-export default Willingness;
+export default withRouter(Willingness);

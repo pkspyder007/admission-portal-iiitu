@@ -73,27 +73,15 @@ const RegistrationForm = () => {
       data: values
     }).then(res=> {
       message.success(res.data.message);
-      Axios({
-        method: "post",
-        url: '/api/student/updateSteps',
-        headers: { 'x-access-token': localStorage.getItem('x-access-token')},
-        data: {
-          step1: false,
-          step2: true,
-          step3: false,
-          step4: false,
-          step5: false,
-        }
-      }).then(res => {
-        notification["success"]({
-          message: 'Please re-login and continue to next step.'
-        })
-      }).catch(err => {
-        notification["error"]({
-          message: 'Something went wrong while updating your progress please consult with the administration if problem persists.',
-          description: err.response.data.message
-        })
-      })
+      let std = JSON.parse(localStorage.getItem('std'))
+      localStorage.setItem('std',JSON.stringify({...std,
+        step1: false,
+        step2: true,
+        step3: false,
+        step4: false,
+        step5: false,
+       }));
+       window.location.reload();
     }).catch(err => {
       console.log(err);
       message.error(err.response.data.message);
@@ -117,13 +105,6 @@ const RegistrationForm = () => {
   }
   return (
     <div className="form__container">
-      
-    {/* <h1>Indian Institute Of Information Technology Una (H.P)</h1> */}
-    {/* <h3>Transit Campus-II Chandpur, Haroli, Una-177220</h3> */}
-    {/* <Upload {...uploadProps} onChange={onFileChange}>
-      <Button>Upload</Button>
-    </Upload> */}
-    {/* <h4>Data Sheet(Session 2020-21)</h4> */}
    <div className="field__container">
    <HeaderInfo
       title="Data Sheet(Session 2020-21)"

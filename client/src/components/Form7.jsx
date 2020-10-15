@@ -285,8 +285,17 @@ const Form7 = () => {
     })
       .then((res) => {
         notification["success"]({
-          message: "Please re-login and continue to next step.",
+          message: "Please refresh and continue to next step.",
         });
+        let std = JSON.parse(localStorage.getItem('std'))
+        localStorage.setItem('std', JSON.stringify({...std,
+          step1: false,
+          step2: false,
+          step3: false,
+          step4: false,
+          step5: true,
+         }));
+         window.location.reload();
       })
       .catch((err) => {
         notification["error"]({

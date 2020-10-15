@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Row, Button, Checkbox, message, notification } from "antd";
 import HeaderInfo from "./HeaderInfo";
 import DocumentUpload from "./DocumentUpload";
@@ -6,6 +6,22 @@ import Axios from "axios";
 
 const UploadDocList = () => {
   const [isChecked, setIsChecked] = useState(false);
+  const [docs, setDocs] = useState([]);
+
+  useEffect(() => {
+    message.success('Fetching data...');
+    Axios({
+      method: "get",
+      url: '/api/student/form1',
+      headers: { 'x-access-token': localStorage.getItem('x-access-token')}
+    }).then(res => {
+      setDocs(res.data.docList);
+
+    }).catch(err => {
+      message.error(err.response.data.message);
+    })
+  }, []);
+
   const onSubmit = () => {
     message.info("Please wait submitting your response.");
     Axios({
@@ -24,8 +40,17 @@ const UploadDocList = () => {
     })
       .then((res) => {
         notification["success"]({
-          message: "Please re-login and continue to next step.",
+          message: "Please refresh and continue to next step.",
         });
+        let std = JSON.parse(localStorage.getItem('std'))
+        localStorage.setItem('std', JSON.stringify({...std,
+          step1: false,
+          step2: false,
+          step3: false,
+          step4: true,
+          step5: false,
+         }));
+         window.location.reload();
       })
       .catch((err) => {
         notification["error"]({
@@ -47,7 +72,25 @@ const UploadDocList = () => {
                         `}
         />
       </div>
-      <Row justify="center" gutter={[16, 24]}>
+
+      {docs.map(doc => {
+        if(doc.res === "YES") {
+          return (
+            <Row key={doc.sno} justify="center" gutter={[16, 24]}>
+              <Col>
+                <DocumentUpload
+                  fileName={doc.fileName}
+                  title={doc.title}
+                />
+              </Col>
+            </Row>
+          )
+        } else {
+          return '';
+        }
+      })}
+
+      {/* <Row justify="center" gutter={[16, 24]}>
         <Col>
           <DocumentUpload
             fileName="form1"
@@ -216,7 +259,7 @@ const UploadDocList = () => {
         <Col>
           <DocumentUpload fileName="signature" title="Signature" />
         </Col>
-      </Row>
+      </Row> */}
       <div className="review__container">
         <span>
           <Checkbox

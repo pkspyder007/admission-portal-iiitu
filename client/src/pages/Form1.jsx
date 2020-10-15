@@ -11,105 +11,126 @@ function Form1() {
     {
       sno: "1",
       title: "Form No. 01: Document Verification Form",
-      res: "",
+      fileName: "form-1",
+      res: "NO",
     },
     {
       sno: "2",
+      fileName: 'seat-accesptance-letter',
       title: "Document verification cum Seat Acceptance Letter(ORIGINAL) (Seat upgradation letter,if any) along with 4 number of color photographs",
-      res: "",
+      res: "NO",
     },
     {
       sno: "3",
+      fileName: 'jee-main-score-card',
       title: "Jee(Main) score card(Self Attested)",
-      res: "",
+      res: "NO",
     },
     {
       sno: "4",
+      fileName: 'jee-main-admit-card',
       title: "Jee(Main) Admit Card for verification of identity of the candidate(Self Attested)",
-      res: "",
+      res: "NO",
     },
     {
       sno: "5",
+      fileName: '10-marksheet',
       title: "Marksheet/Certificate of Class X[As Date of birth proof](Self Attested)",
-      res: "",
+      res: "NO",
     },
     {
       sno: "6",
+      fileName: '12-marksheet',
       title: "Marksheet and pass Certificate of Class XII(Self Attested)",
-      res: "",
+      res: "NO",
     },
     {
       sno: "7",
+      fileName: "character-certi",
       title: "Conduct/Character Certificate from Head of Institution Last Attended(Self Attested)",
-      res: "",
+      res: "NO",
     },
     {
       sno: "8",
+      fileName: 'transfer-migration',
       title: "Migration/Transfer Certificate(Original)",
-      res: "",
+      res: "NO",
     },
     {
       sno: "9",
+      fileName: 'photo-id-proof',
       title: "Photo ID proof(Self Attested)",
-      res: "",
+      res: "NO",
     },
     {
       sno: "10",
+      fileName: 'form-2-fee-payment',
       title: "Form No:02 Fee Payment Form",
-      res: "",
+      res: "NO",
     },
     {
       sno: "11",
+      fileName: 'form-3-data-sheet',
       title: "Form No:03 Data Sheet",
-      res: "",
+      res: "NO",
     },
     {
       sno: "12",
+      fileName: 'form-4-undertaking',
       title: "Form No:04 Undertaking Moral and Disciplinary",
-      res: "",
+      res: "NO",
     },
     {
       sno: "13",
+      fileName: 'form-5-anti-ragging',
       title: "Form No:05 Anti Ragging Affidavits(Students and Parents)(02 copies each)",
-      res: "",
+      res: "NO",
     },
     {
       sno: "14",
+      fileName: "form-6-admit-card",
       title: "Form No:06 Institute Admit Card",
-      res: "",
+      res: "NO",
     },
     {
       sno: "15",
+      fileName: "form-7",
       title: "Form No:07 Course Registration Form",
-      res: "",
+      res: "NO",
     },
     {
       sno: "16",
+      fileName: "form-8-medical",
       title: "Form No:08 Medical Fitness Certificate(Original)",
-      res: "",
+      res: "NO",
     },
     {
       sno: "17",
+      fileName: "form-9-study-gap",
       title: "Form No:09 Study Gap Affidavit",
-      res: "",
+      res: "NO",
     },
     {
       sno: "18",
+      fileName: 'form-10-category',
       title: "Form No:10 Valid Category Certificate(OBC/EWS/SC/ST) on JoSAA format [OBC-NCL Certificate must be issued on or after April 1,2020](Self Attested) (NOTE:The caste of candidate must be in state-wise central list) ",
-      res: "",
+      res: "NO",
     },
     {
       sno: "19",
+      fileName: "form-11-obl-ncl-undertaking",
       title: "Form No:11 Undertaking in Required Format(for OBC-NCL Candidates Only) (Original)",
-      res: "",
+      res: "NO",
     },
     {
       sno: "20",
+      fileName: "form-11-obl-undertaking",
       title: "Form No:12 Undertaking-OBC",
-      res: "",
+      res: "NO",
     },
     {
       sno: "21",
+      fileName: "form-13-disability",
       title: "Form No:13 Disability Certificate(if any)",
       res: "",
     },
@@ -133,32 +154,15 @@ function Form1() {
         notification["success"]({
             message: 'Form submitted'
         });
-        Axios({
-          method: "POST",
-          url: "/api/student/updateSteps",
-          headers: {
-            'x-access-token': localStorage.getItem('x-access-token')
-          },
-          data: {
-            step1: false,
-            step2: false,
-            step3: false,
-            step4: true,
-            step5: false,
-          },
-        })
-          .then((res) => {
-            notification["success"]({
-              message: "Please re-login and continue to next step.",
-            });
-          })
-          .catch((err) => {
-            notification["error"]({
-              message:
-                "Something went wrong while updating your progress please consult with the administration if problem persists.",
-              description: err.response.data.message,
-            });
-          });
+        let std = JSON.parse(localStorage.getItem('std'))
+        localStorage.setItem('std', JSON.stringify({...std,
+          step1: false,
+          step2: false,
+          step3: true,
+          step4: false,
+          step5: false,
+         }));
+         window.location.reload();
     }).catch(err => {
         notification["error"]({
             message: 'Your request failed',

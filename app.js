@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const winston = require('winston');
-
+const path = require('path');
 
 // Route Imports
 const studentRouter = require('./routes/student.routes');
@@ -16,6 +16,7 @@ dotenv.config();
 // Middlewares
 app.use(express.json());
 app.use(cors());
+app.use(express.static(path, join(__dirname), 'client', 'build'));
 
 // Routers
 app.use('/api/student', studentRouter);
@@ -78,7 +79,7 @@ const tempStd = {
   name: 'Praveen Kumar',
   regNo: '',
   jeeRegNo: '1234',
-  email: 'so@iiitu.ac.in',
+  email: '19137@iiitu.ac.in',
   mobile: '9634049244',
   category: 'Sc',
   fatherName: 'GP Singh',

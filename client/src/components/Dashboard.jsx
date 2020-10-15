@@ -24,11 +24,11 @@ const Dashboard = (props) => {
         <TabPane  tab={`Step 1 - Data Sheet`} key={1} disabled={!step1}>
           <RegistrationForm />
         </TabPane>
-        <TabPane tab={`Step 2 - Upload Documents`} key={2} disabled={!step2}>
-          <UploadDocList />
-        </TabPane>
-        <TabPane tab={`Step 3 - Document Undertaking`} key={3} disabled={!step3}>
+        <TabPane tab={`Step 2 - Document Undertaking`} key={2} disabled={!step2}>
           <Form1 />
+        </TabPane>
+        <TabPane tab={`Step 3 - Upload Documents`} key={3} disabled={!step3}>
+          <UploadDocList />
         </TabPane>
         <TabPane tab={`Step 4 - Course Registration`} key={4} disabled={!step4}>
           <Form7 />

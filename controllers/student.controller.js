@@ -125,6 +125,10 @@ exports.form3DataInput = async (req, res) => {
 
         let newForm3 = await Form3.create(req.body);
 
+        std.step1 = false;
+        std.step2 = true;
+        std.save();
+
         if (!newForm3) {
             res.status(500).json({ message: "Current user's jee not found in the database." });
             return;
@@ -151,6 +155,10 @@ exports.form1DataInput = async (req, res) => {
 
         let newForm1 = await Form1.create({ docList: req.body, jeeRegNo: req.userId });
 
+        std.step2 = false;
+        std.step3 = true;
+        std.save();
+
         if (!newForm1) {
             res.status(500).json({ message: "Current user's jee reg, no. not found in the database." });
             return;
@@ -159,6 +167,18 @@ exports.form1DataInput = async (req, res) => {
         res.status(200).json({ message: "Data Added Succesfully." });
         return;
 
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ message: "Something went wrong." });
+        return;
+    }
+}
+
+exports.form1Data = async (req, res) => {
+    try {
+        let docList = await Form1.findOne({ jeeRegNo: req.userId });
+        res.status(200).json({ docList: docList.docList });
+        return
     } catch (error) {
         console.error(error.message);
         res.status(500).json({ message: "Something went wrong." });
@@ -181,7 +201,7 @@ exports.updateSteps = async (req, res) => {
 
 exports.float = async (req, res) => {
     try {
-        let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { ...req.body, step5: false, completed: true });
+        let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { ...req.body, step5: false, doc: Date().toString('dd-MM-yyyy'), completed: true });
         let mailComplete = `
                 <p> Dear ${newStd.name} , </p>
                 <p>You have completed your registration process for insitute counselling.</p>
@@ -203,7 +223,7 @@ exports.freeze = async (req, res) => {
     try {
         let form3Data = await Form3.findOneAndUpdate({ jeeRegNo: req.userId }, { ...req.body });
         try {
-            let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { ...req.body, will: 'FREEZE', step5: false, completed: true });
+            let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { ...req.body, will: 'FREEZE', step5: false, doc: Date().toString('dd-MM-yyyy'), completed: true });
             let mailComplete = `
                 <p> Dear ${newStd.name} , </p>
                 <p>You have completed your registration process for insitute counselling.</p>

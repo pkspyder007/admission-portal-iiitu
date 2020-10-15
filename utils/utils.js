@@ -40,9 +40,8 @@ const sendEmail = (to, sub, htmlContent) => {
         }
     });
 
-
     const mailOptions = {
-        from: '19137@iiitu.ac.in', // sender
+        from: 'noreply-admissions@iiitu.ac.in', // sender
         to: to, // receiver
         subject: sub, // Subject
         html: htmlContent // html body
