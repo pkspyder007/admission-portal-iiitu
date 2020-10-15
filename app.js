@@ -7,8 +7,10 @@ const winston = require('winston');
 
 // Route Imports
 const studentRouter = require('./routes/student.routes');
+const adminRouter = require('./routes/admin.routes');
 const uploadRouter = require('./routes/upload.routes');
 const { createStudent } = require('./controllers/student.controller');
+const { createAdmin } = require('./controllers/admin.controller');
 
 const app = express();
 dotenv.config();
@@ -20,6 +22,7 @@ app.use(cors());
 // Routers
 app.use('/api/student', studentRouter);
 app.use('/api/document', uploadRouter);
+app.use('/api/admin',adminRouter);
 
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
@@ -87,3 +90,10 @@ const tempStd = {
   password: ''
 }
 createStudent(tempStd);
+
+
+const tempAd = {
+  email : "admin@iiitu.ac.in",
+}
+
+createAdmin(tempAd);
