@@ -4,6 +4,15 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const winston = require('winston');
 const path = require('path');
+const morgan = require('morgan');
+const fs = require('fs');
+const rfs = require('rotating-file-stream');
+
+const accessLogStream = rfs.createStream('access.log', {
+  interval: '1d', // rotate daily
+  path: path.join(__dirname, 'server-log')
+})
+
 
 // Route Imports
 const studentRouter = require('./routes/student.routes');
@@ -16,7 +25,11 @@ dotenv.config();
 // Middlewares
 app.use(express.json());
 app.use(cors());
-app.use(express.static(path, join(__dirname), 'client', 'build'));
+app.use(express.static(path.join(__dirname, 'client', 'build')));
+
+// setup the logger
+morgan.token('authToken', function (req, res) { return req.headers['x-access-token'] })
+app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" "acess-token :authToken"', { stream: accessLogStream }))
 
 // Routers
 app.use('/api/student', studentRouter);
