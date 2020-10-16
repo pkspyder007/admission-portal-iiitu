@@ -28,7 +28,7 @@ dotenv.config();
 app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'client', 'build')));
-// app.use(express.static(path.join(__dirname, 'admin', 'build')));
+app.use(express.static(path.join(__dirname, 'admin', 'build')));
 app.use(express.static(path.join(__dirname, 'uploads')));
 
 // setup the logger
@@ -51,9 +51,10 @@ mongoose.connect(process.env.MONGO_URI, {
   .catch(e => console.error(e.message));
 
 
-// app.get("/admin/*", (req, res) => {
-//   res.sendFile(path.join(__dirname, 'admin', 'build', 'index.html'));
-// })
+app.get("/admin/", (req, res) => {
+  console.log('admin');
+  res.sendFile(path.join(__dirname, 'admin', 'build', 'index.html'));
+})
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
