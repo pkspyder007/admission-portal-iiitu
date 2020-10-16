@@ -28,6 +28,8 @@ dotenv.config();
 app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'client', 'build')));
+// app.use(express.static(path.join(__dirname, 'admin', 'build')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 // setup the logger
 morgan.token('authToken', function (req, res) { return req.headers['x-access-token'] })
@@ -36,7 +38,7 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 // Routers
 app.use('/api/student', studentRouter);
 app.use('/api/document', uploadRouter);
-app.use('/api/admin',adminRouter);
+app.use('/api/admin', adminRouter);
 
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
@@ -47,6 +49,11 @@ mongoose.connect(process.env.MONGO_URI, {
 })
   .then(() => console.log('Connected to DB.'))
   .catch(e => console.error(e.message));
+
+
+// app.get("/admin/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, 'admin', 'build', 'index.html'));
+// })
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
@@ -107,7 +114,7 @@ createStudent(tempStd);
 
 
 const tempAd = {
-  email : "admin@iiitu.ac.in",
+  email: "admin@iiitu.ac.in",
 }
 
-createAdmin(tempAd);
+// createAdmin(tempAd);

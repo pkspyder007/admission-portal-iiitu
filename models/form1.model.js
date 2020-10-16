@@ -8,9 +8,13 @@ const Form1Schema = new Schema({
     type: Array,
     required: "Document list cannot be empty."
   },
+  regNo: {
+    type: String,
+    required: "Reg no. cannot be empty."
+  },
   jeeRegNo: {
     type: String,
-    required: "JEE reg no. cannot be empty."
+    required: "Reg no. cannot be empty."
   }
 });
 

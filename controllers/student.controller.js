@@ -153,7 +153,7 @@ exports.form1DataInput = async (req, res) => {
             return;
         }
 
-        let newForm1 = await Form1.create({ docList: req.body, jeeRegNo: req.userId });
+        let newForm1 = await Form1.create({ docList: req.body, regNo: std.regNo, jeeRegNo: req.userId });
 
         std.step2 = false;
         std.step3 = true;
@@ -176,7 +176,12 @@ exports.form1DataInput = async (req, res) => {
 
 exports.form1Data = async (req, res) => {
     try {
-        let docList = await Form1.findOne({ jeeRegNo: req.userId });
+        const std = Student.findOne({ jeeRegNo: req.userId });
+        if (!std) {
+            res.status(500).json({ message: "Could not find student record" });
+            return;
+        }
+        let docList = await Form1.findOne({ regNo: std.regNo });
         res.status(200).json({ docList: docList.docList });
         return
     } catch (error) {
@@ -201,7 +206,8 @@ exports.updateSteps = async (req, res) => {
 
 exports.float = async (req, res) => {
     try {
-        let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { ...req.body, step5: false, doc: Date().toString('dd-MM-yyyy'), completed: true });
+        let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { step5: false, doc: Date().toString('dd-MM-yyyy'), completed: true });
+
         let mailComplete = `
                 <p> Dear ${newStd.name} , </p>
                 <p>You have completed your registration process for insitute counselling.</p>
@@ -221,9 +227,9 @@ exports.float = async (req, res) => {
 exports.freeze = async (req, res) => {
 
     try {
-        let form3Data = await Form3.findOneAndUpdate({ jeeRegNo: req.userId }, { ...req.body });
+        let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { will: 'FREEZE', step5: false, doc: Date().toString('dd-MM-yyyy'), completed: true });
         try {
-            let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { ...req.body, will: 'FREEZE', step5: false, doc: Date().toString('dd-MM-yyyy'), completed: true });
+            let form3Data = await Form3.findOneAndUpdate({ regNo: newStd.regNo }, { ...req.body });
             let mailComplete = `
                 <p> Dear ${newStd.name} , </p>
                 <p>You have completed your registration process for insitute counselling.</p>

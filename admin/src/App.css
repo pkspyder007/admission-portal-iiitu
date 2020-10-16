@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.form3 {
+  background-color: white;
+}
+
+.form3 .ant-row {
+  border-bottom: 1px solid #282c34;
+}
+
+@media print {
+  .hop {
+    display: none !important;
+  }
+}
+
