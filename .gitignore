@@ -15,6 +15,10 @@
 /uploads/*
 
 /server-log
+combined.log
+error.log
+exceptions.log
+seerver.log
 # misc
 .DS_Store
 .env.local

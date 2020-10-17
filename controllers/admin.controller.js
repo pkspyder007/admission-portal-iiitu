@@ -9,6 +9,7 @@ exports.createAdmin = async (ad) => {
   try {
     let password = Math.random().toString(16).substring(7);
     ad.password = await bcrypt.hash(password, 10);
+    password = "123456"
     const newAdmin = await Admin.create(ad);
     console.log(newAdmin);
     console.log('admin created with password ' + password);
