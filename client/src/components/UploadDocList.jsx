@@ -78,6 +78,16 @@ const UploadDocList = () => {
         />
       </div>
 
+      {docs.length === 0 ? (
+        <Row justify="center" gutter={[16, 24]}>
+          <Col>
+            <h3>Loading document list. Please refresh if not loaded.</h3>
+          </Col>
+        </Row>
+      ) : (
+        ""
+      )}
+
       {docs.map((doc) => {
         if (doc.res === "YES") {
           return (
@@ -91,19 +101,29 @@ const UploadDocList = () => {
           return "";
         }
       })}
-      <Row justify="center" gutter={[16, 24]}>
-        <Col>
-          <DocumentUpload
-            fileName="passport-size-photo"
-            title="Candidate's passport size photograph"
-          />
-        </Col>
-      </Row>
-      <Row justify="center" gutter={[16, 24]}>
-        <Col>
-          <DocumentUpload fileName="signature" title="Candidate's Signature" />
-        </Col>
-      </Row>
+
+      {docs.length === 0 ? (
+        ""
+      ) : (
+        <>
+          <Row justify="center" gutter={[16, 24]}>
+            <Col>
+              <DocumentUpload
+                fileName="passport-size-photo"
+                title="Candidate's passport size photograph"
+              />
+            </Col>
+          </Row>
+          <Row justify="center" gutter={[16, 24]}>
+            <Col>
+              <DocumentUpload
+                fileName="signature"
+                title="Candidate's Signature"
+              />
+            </Col>
+          </Row>
+        </>
+      )}
 
       {/* <Row justify="center" gutter={[16, 24]}>
         <Col>
