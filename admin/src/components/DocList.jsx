@@ -38,12 +38,12 @@ const DocList = ({match}) => {
   ];
 
   const getDocument = (fileName) => {
-    window.open(`${process.env.REACT_APP_BACKEND}/api/admin/docs/${jeeRegNo}/${fileName}`, "_blank")
+    window.open(`http://${process.env.REACT_APP_BACKEND}/api/admin/docs/${jeeRegNo}/${fileName}`, "_blank")
   }
   useEffect(() => {
     Axios({
       method: "get",
-      url: `${process.env.REACT_APP_BACKEND}/api/admin/form1/${match.params.regNo}`,
+      url: `http://${process.env.REACT_APP_BACKEND}/api/admin/form1/${match.params.regNo}`,
       headers: { "x-access-token": localStorage.getItem("x-access-token") },
     })
       .then((res) => {

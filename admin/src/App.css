@@ -45,9 +45,20 @@
   border-bottom: 1px solid #282c34;
 }
 
+#GFG {
+  max-width: 1200px;
+  margin: auto;
+}
+
 @media print {
   .hop {
     display: none !important;
+  }
+
+  #GFG {
+    padding: 12px;
+    margin-top: -150px;
+    max-width: 100%;
   }
 }
 

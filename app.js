@@ -118,4 +118,4 @@ const tempAd = {
   email: "admin@iiitu.ac.in",
 }
 
-// createAdmin(tempAd);
+createAdmin(tempAd);

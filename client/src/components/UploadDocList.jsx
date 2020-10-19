@@ -9,17 +9,18 @@ const UploadDocList = () => {
   const [docs, setDocs] = useState([]);
 
   useEffect(() => {
-    message.success('Fetching data...');
+    message.success("Fetching data...");
     Axios({
       method: "get",
-      url: '/api/student/form1',
-      headers: { 'x-access-token': localStorage.getItem('x-access-token')}
-    }).then(res => {
-      setDocs(res.data.docList);
-
-    }).catch(err => {
-      message.error(err.response.data.message);
+      url: "/api/student/form1",
+      headers: { "x-access-token": localStorage.getItem("x-access-token") },
     })
+      .then((res) => {
+        setDocs(res.data.docList);
+      })
+      .catch((err) => {
+        message.error(err.response.data.message);
+      });
   }, []);
 
   const onSubmit = () => {
@@ -28,7 +29,7 @@ const UploadDocList = () => {
       method: "POST",
       url: "/api/student/updateSteps",
       headers: {
-        'x-access-token': localStorage.getItem('x-access-token')
+        "x-access-token": localStorage.getItem("x-access-token"),
       },
       data: {
         step1: false,
@@ -42,15 +43,19 @@ const UploadDocList = () => {
         notification["success"]({
           message: "Please refresh and continue to next step.",
         });
-        let std = JSON.parse(localStorage.getItem('std'))
-        localStorage.setItem('std', JSON.stringify({...std,
-          step1: false,
-          step2: false,
-          step3: false,
-          step4: true,
-          step5: false,
-         }));
-         window.location.reload();
+        let std = JSON.parse(localStorage.getItem("std"));
+        localStorage.setItem(
+          "std",
+          JSON.stringify({
+            ...std,
+            step1: false,
+            step2: false,
+            step3: false,
+            step4: true,
+            step5: false,
+          })
+        );
+        window.location.reload();
       })
       .catch((err) => {
         notification["error"]({
@@ -73,22 +78,32 @@ const UploadDocList = () => {
         />
       </div>
 
-      {docs.map(doc => {
-        if(doc.res === "YES") {
+      {docs.map((doc) => {
+        if (doc.res === "YES") {
           return (
             <Row key={doc.sno} justify="center" gutter={[16, 24]}>
               <Col>
-                <DocumentUpload
-                  fileName={doc.fileName}
-                  title={doc.title}
-                />
+                <DocumentUpload fileName={doc.fileName} title={doc.title} />
               </Col>
             </Row>
-          )
+          );
         } else {
-          return '';
+          return "";
         }
       })}
+      <Row justify="center" gutter={[16, 24]}>
+        <Col>
+          <DocumentUpload
+            fileName="passport-size-photo"
+            title="Candidate's passport size photograph"
+          />
+        </Col>
+      </Row>
+      <Row justify="center" gutter={[16, 24]}>
+        <Col>
+          <DocumentUpload fileName="signature" title="Candidate's Signature" />
+        </Col>
+      </Row>
 
       {/* <Row justify="center" gutter={[16, 24]}>
         <Col>

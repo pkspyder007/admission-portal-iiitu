@@ -10,7 +10,7 @@ export const Info = ({ title, value }) => {
   return (
     <Col className="data-info-col">
       <strong>{title} : </strong>
-      <span> &nbsp; {value}</span>
+      <span> &nbsp; {value ?? "--------"}</span>
     </Col>
   );
 };
@@ -38,7 +38,7 @@ const StudentInfo = () => {
     message.info("Please wait...");
     Axios({
       method: "get",
-      url: `${process.env.REACT_APP_BACKEND}/api/admin/form3/${regNo}`,
+      url: `http://${process.env.REACT_APP_BACKEND}/api/admin/form3/${regNo}`,
       headers: { "x-access-token": localStorage.getItem("x-access-token") },
     })
       .then((res) => {
@@ -62,7 +62,6 @@ const StudentInfo = () => {
         placeholder="Search By Registration Number"
         enterButton="Search"
         size="large"
-        value="2k20cse001"
         className="hop"
         onSearch={(value) => handleSearch(value)}
       />
@@ -172,22 +171,22 @@ const StudentInfo = () => {
             <Info title="Annual Family Income" value={std.annualFamilyIncome} />
           </Row>
           <Row justify="space-between" gutter={[48, 24]}>
-            <Info title="JoSAA-2020 Amount" value={`₹ ${std.josaaFeeAmount}`} />
+            <Info title="JoSAA-2020 Amount" value={`₹ ${std.josaaFeeAmount ?? "Not Provided Yet"}`} />
             <Info title="Date" value={std.josaaFeeDate} />
           </Row>
           <Row justify="space-between" gutter={[48, 24]}>
             <Info
               title="IIIT UNA Institute Fee Amount"
-              value={`₹ ${std.instituteFeeAmount}`}
+              value={`₹ ${std.instituteFeeAmount ?? "Not Provided Yet"}`}
             />
             <Info title="Date" value={std.instituteFeeDate} />
             <Info title="Recipt No." value={std.instituteFeeReceiptNo} />
           </Row>
           <Row justify="space-between" gutter={[48, 24]}>
-            <Info title="Total Amount" value={`₹ ${std.totalFee}`} />
+            <Info title="Total Amount" value={`₹ ${std.totalFee ?? "Not Provided Yet"}`} />
           </Row>
           <Row justify="space-between" gutter={[48, 24]}>
-            <Info title="Hostel Fee Amount" value={`₹ ${std.hostelFeeAmount}`} />
+            <Info title="Hostel Fee Amount" value={`₹ ${std.hostelFeeAmount ?? "Not Provided Yet"}`} />
             <Info title="Date" value={std.hostelFeeDate} />
             <Info title="Recipt No." value={std.hotelFeeReceiptNo} />
           </Row>
