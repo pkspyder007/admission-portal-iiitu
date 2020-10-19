@@ -176,12 +176,7 @@ exports.form1DataInput = async (req, res) => {
 
 exports.form1Data = async (req, res) => {
     try {
-        const std = Student.findOne({ jeeRegNo: req.userId });
-        if (!std) {
-            res.status(500).json({ message: "Could not find student record" });
-            return;
-        }
-        let docList = await Form1.findOne({ regNo: std.regNo });
+        let docList = await Form1.findOne({ jeeRegNo: req.userId });
         res.status(200).json({ docList: docList.docList });
         return
     } catch (error) {
