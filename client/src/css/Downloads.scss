@@ -1,0 +1,23 @@
+.header__info{
+    text-align: center;
+  
+    h4{
+        font-weight: 800;
+        margin-bottom: 40px;
+        background-color:indigo;
+        color:white;
+        margin-left: 26px;
+        margin-right: 26px;
+    }
+}
+.downloads__container{
+    margin:24px;
+    display: flex;
+    flex-direction: column;
+    line-height: 2;
+    font-size: 16px;
+    text-align: left;
+    ul{
+        list-style:none
+    }
+}

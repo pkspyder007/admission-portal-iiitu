@@ -102,8 +102,8 @@ process.on('uncaughtException', function (exception) {
 const tempStd = {
   name: 'Praveen Kumar',
   regNo: '',
-  jeeRegNo: '1234',
-  email: '19137@iiitu.ac.in',
+  jeeRegNo: '12345',
+  email: '19315@iiitu.ac.in',
   mobile: '9634049244',
   category: 'Sc',
   fatherName: 'GP Singh',
