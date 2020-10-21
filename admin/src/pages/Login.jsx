@@ -8,7 +8,7 @@ const Login = (props) => {
   useEffect(() => {
     Axios({
       method: 'post',
-      url: `//${process.env.REACT_APP_BACKEND}/api/admin/verifyToken`,
+      url: `/api/admin/verifyToken`,
       headers: {
         'x-access-token': localStorage.getItem('x-access-token')
       }
@@ -28,7 +28,7 @@ const Login = (props) => {
   }, [])
 
   const onFinish = (values) => {
-    Axios.post(`//${process.env.REACT_APP_BACKEND}/api/admin/login`, values)
+    Axios.post(`/api/admin/login`, values)
         .then(({data}) => {
             localStorage.setItem('x-access-token', data.token);
             localStorage.setItem('std', JSON.stringify(data.data));
@@ -37,7 +37,7 @@ const Login = (props) => {
         })
         .catch(err => {
             console.log(err.message);
-            message.error(err.response.data.message)
+            message.error(err.message)
         })
   };
 

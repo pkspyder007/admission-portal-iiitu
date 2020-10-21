@@ -38,12 +38,12 @@ const DocList = ({match}) => {
   ];
 
   const getDocument = (fileName) => {
-    window.open(`http://${process.env.REACT_APP_BACKEND}/api/admin/docs/${jeeRegNo}/${fileName}`, "_blank")
+    window.open(`/api/admin/docs/${jeeRegNo}/${fileName}`, "_blank")
   }
   useEffect(() => {
     Axios({
       method: "get",
-      url: `http://${process.env.REACT_APP_BACKEND}/api/admin/form1/${match.params.regNo}`,
+      url: `/api/admin/form1/${match.params.regNo}`,
       headers: { "x-access-token": localStorage.getItem("x-access-token") },
     })
       .then((res) => {
@@ -51,12 +51,12 @@ const DocList = ({match}) => {
         setJeeRegNo(res.data.jeeRegNo)
       })
       .catch((err) => {
-        message.error(err.response.data.message);
+        message.error(err.message);
         setDocs([])
       });
   }, [jeeRegNo]);
   return (
-    <div>
+    <div style={{ maxWidth: "1200px"}}>
        <Table dataSource={docs} columns={columns} pagination={false} rowKey="sno" />
     </div>
   )

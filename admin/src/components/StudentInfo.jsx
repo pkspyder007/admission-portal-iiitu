@@ -38,7 +38,7 @@ const StudentInfo = () => {
     message.info("Please wait...");
     Axios({
       method: "get",
-      url: `http://${process.env.REACT_APP_BACKEND}/api/admin/form3/${regNo}`,
+      url: `/api/admin/form3/${regNo}`,
       headers: { "x-access-token": localStorage.getItem("x-access-token") },
     })
       .then((res) => {

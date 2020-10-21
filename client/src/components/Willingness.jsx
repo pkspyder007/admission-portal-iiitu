@@ -42,6 +42,16 @@ const Willingness = ({history}) => {
         "x-access-token": localStorage.getItem('x-access-token')
       }
     }).then(res => {
+      let std = JSON.parse(localStorage.getItem('std'))
+        localStorage.setItem('std', JSON.stringify({...std,
+          step1: false,
+          step2: false,
+          step3: false,
+          step4: false,
+          step5: false,
+         }));
+         window.location.reload();
+
       notification["success"]({
         message: 'Your Application is completed!!',
         description: 'Please re-login and download a copy of your application.'
@@ -65,6 +75,16 @@ const Willingness = ({history}) => {
         "x-access-token": localStorage.getItem('x-access-token')
       }
     }).then(res => {
+      let std = JSON.parse(localStorage.getItem('std'))
+        localStorage.setItem('std', JSON.stringify({...std,
+          step1: false,
+          step2: false,
+          step3: false,
+          step4: false,
+          step5: false,
+         }));
+         window.location.reload();
+
       notification["success"]({
         message: 'Your Application is completed!!',
         description: 'Please re-login and download a copy of your application. If not redirected!'
