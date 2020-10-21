@@ -16,10 +16,7 @@ const accessLogStream = rfs.createStream('access.log', {
 
 // Route Imports
 const studentRouter = require('./routes/student.routes');
-// const adminRouter = require('./routes/admin.routes');
 const uploadRouter = require('./routes/upload.routes');
-const { createStudent } = require('./controllers/student.controller');
-const { createAdmin } = require('./controllers/admin.controller');
 
 const app = express();
 dotenv.config();
@@ -28,7 +25,6 @@ dotenv.config();
 app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'client', 'build')));
-// app.use(express.static(path.join(__dirname, 'admin', 'build')));
 app.use(express.static(path.join(__dirname, 'uploads')));
 
 // setup the logger
@@ -38,7 +34,6 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 // Routers
 app.use('/api/student', studentRouter);
 app.use('/api/document', uploadRouter);
-// app.use('/api/admin', adminRouter);
 
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
@@ -49,28 +44,6 @@ mongoose.connect(process.env.MONGO_URI, {
 })
   .then(() => {
     console.log('Connected to DB.')
-    // const tempStd = {
-    //   name: 'Praveen Kumar',
-    //   regNo: '',
-    //   jeeRegNo: '1234',
-    //   email: '19137@iiitu.ac.in',
-    //   mobile: '9634049244',
-    //   category: 'Sc',
-    //   fatherName: 'GP Singh',
-    //   branchAlloted: 'CSE',
-    //   fessPaid: 20000,
-    //   password: ''
-    // }
-
-    // for (let i = 0; i < 100; i++) {
-    //   tempStd.regNo = i + 1;
-    //   tempStd.jeeRegNo = `tempStd.jeeRegNo${i}`;
-    //   if (i % 3 == 0)
-    //     tempStd.branchAlloted = "IT"
-    //   if (i % 5 == 0)
-    //     tempStd.branchAlloted = "ECE"
-    //   createStudent(tempStd)
-    // }
   })
   .catch(e => console.error(e.message));
 
@@ -111,20 +84,3 @@ process.on('uncaughtException', function (exception) {
   // if you are on production, maybe you can send the exception details to your
   // email as well ?
 });
-
-
-//
-// If we're not in production then log to the `console` with the format:
-// `${info.level}: ${info.message} JSON.stringify({ ...rest }) `
-//
-// if (process.env.NODE_ENV !== 'production') {
-//   logger.add(new winston.transports.Console({
-//     format: winston.format.simple(),
-//   }));
-// }
-
-const tempAd = {
-  email: "admin@iiitu.ac.in",
-}
-
-createAdmin(tempAd);
