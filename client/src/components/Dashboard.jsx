@@ -8,6 +8,7 @@ import Form7 from "./Form7";
 import Form1 from "../pages/Form1";
 import Willingness from "./Willingness";
 import Profile from "./Profile";
+import StudentInfo from "./StudentInfo";
 
 const { TabPane } = Tabs;
 
@@ -17,23 +18,29 @@ const Dashboard = (props) => {
     props.history.push("/login");
   };
   const std = JSON.parse(localStorage.getItem('std'));
-  const { step1, step2, step3, step4, step5 } = std;
+  if(!std) {
+    props.history.push("/login");
+    return
+  }
+  const { completed, step1} = std;
   return (
     <div id="dashboard">
       <Tabs defaultActiveKey="6" tabPosition="left">
-        <TabPane  tab={`Step 1 - Data Sheet`} key={1} disabled={!step1}>
-          <RegistrationForm />
+        <TabPane  tab={`Step 1 - Data Sheet`} key={1} disabled={completed}>
+          {step1 && (<RegistrationForm />)}
+          {!step1 && (<StudentInfo />)}
+          {/* <StudentInfo /> */}
         </TabPane>
-        <TabPane tab={`Step 2 - Document Undertaking`} key={2} disabled={!step2}>
+        <TabPane tab={`Step 2 - Document Undertaking`} key={2} disabled={completed}>
           <Form1 />
         </TabPane>
-        <TabPane tab={`Step 3 - Upload Documents`} key={3} disabled={!step3}>
+        <TabPane tab={`Step 3 - Upload Documents`} key={3} disabled={completed}>
           <UploadDocList />
         </TabPane>
-        <TabPane tab={`Step 4 - Course Registration`} key={4} disabled={!step4}>
+        <TabPane tab={`Step 4 - Course Registration`} key={4} disabled={completed}>
           <Form7 />
         </TabPane>
-        <TabPane tab={`Step 5 - Willingness/ Fee details`} key={5} disabled={!step5}>
+        <TabPane tab={`Step 5 - Willingness/ Fee details`} key={5} disabled={completed}>
           <Willingness />
         </TabPane>
         <TabPane tab={`Profile`} key={6}>

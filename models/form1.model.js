@@ -10,7 +10,8 @@ const Form1Schema = new Schema({
   },
   regNo: {
     type: String,
-    required: "Reg no. cannot be empty."
+    required: "Reg no. cannot be empty.",
+    unique: "Form has already been submitted."
   },
   jeeRegNo: {
     type: String,

@@ -14,7 +14,7 @@ const accessLogStream = rfs.createStream('access.log', {
 });
 
 const { seedStudents } = require("./seedStudents");
-
+const { seedAdmin } = require("./seedAdmin");
 
 // Route Imports
 const studentRouter = require('./routes/student.routes');
@@ -47,7 +47,7 @@ mongoose.connect(process.env.MONGO_URI, {
   .then(() => {
     console.log('Connected to DB.')
     seedStudents();
-    // seed
+    seedAdmin();
 
   })
   .catch(e => console.error(e.message));

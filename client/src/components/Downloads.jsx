@@ -1,5 +1,4 @@
 import React from 'react'
-import {Link} from 'react-router-dom';
 import '../css/Downloads.scss';
 import '../css/Field.scss'
 import HeaderInfo from './HeaderInfo';

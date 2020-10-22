@@ -42,20 +42,13 @@ const Willingness = ({history}) => {
         "x-access-token": localStorage.getItem('x-access-token')
       }
     }).then(res => {
-      let std = JSON.parse(localStorage.getItem('std'))
-        localStorage.setItem('std', JSON.stringify({...std,
-          step1: false,
-          step2: false,
-          step3: false,
-          step4: false,
-          step5: false,
-         }));
-         window.location.reload();
-
       notification["success"]({
         message: 'Your Application is completed!!',
         description: 'Please re-login and download a copy of your application.'
-      })
+      });
+      alert("Please re-login to continue.");
+      localStorage.setItem("x-access-token", "");
+      history.push('/login')
     }).catch(err => {
       notification["error"]({
         message: 'Something went wrong while updating your progress please consult with the administration if problem persists.',
@@ -75,21 +68,14 @@ const Willingness = ({history}) => {
         "x-access-token": localStorage.getItem('x-access-token')
       }
     }).then(res => {
-      let std = JSON.parse(localStorage.getItem('std'))
-        localStorage.setItem('std', JSON.stringify({...std,
-          step1: false,
-          step2: false,
-          step3: false,
-          step4: false,
-          step5: false,
-         }));
-         window.location.reload();
 
       notification["success"]({
         message: 'Your Application is completed!!',
         description: 'Please re-login and download a copy of your application. If not redirected!'
       });
-      history.push('/admit-card')
+      alert("Process completed. Please re-login to continue.");
+      localStorage.setItem("x-access-token", "");
+      history.push('/login')
     }).catch(err => {
       notification["error"]({
         message: 'Something went wrong while updating your progress please consult with the administration if problem persists.',

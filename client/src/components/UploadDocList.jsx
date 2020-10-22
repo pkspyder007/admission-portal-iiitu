@@ -55,6 +55,7 @@ const UploadDocList = () => {
             step5: false,
           })
         );
+        alert("Step completed")
         window.location.reload();
       })
       .catch((err) => {

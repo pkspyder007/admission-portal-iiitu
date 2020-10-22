@@ -81,6 +81,7 @@ const RegistrationForm = () => {
         step4: false,
         step5: false,
        }));
+       alert("Step Completed.")
        window.location.reload();
     }).catch(err => {
       console.log(err);

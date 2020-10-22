@@ -6,7 +6,7 @@ import { UploadOutlined } from '@ant-design/icons';
 const DocumentUpload = (props) => {
   let uploadProps ={
     name: 'doc',
-    action: `${process.env.REACT_APP_BACKEND}/api/document/upload`,
+    action: `/api/document/upload`,
     headers: {
       'filename': props.fileName,
       'x-access-token': localStorage.getItem('x-access-token'),

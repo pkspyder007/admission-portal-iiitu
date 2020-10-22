@@ -56,7 +56,7 @@ const DocList = ({match}) => {
       });
   }, [jeeRegNo]);
   return (
-    <div style={{ maxWidth: "1200px"}}>
+    <div style={{ maxWidth: "1200px", margin: "auto"}}>
        <Table dataSource={docs} columns={columns} pagination={false} rowKey="sno" />
     </div>
   )

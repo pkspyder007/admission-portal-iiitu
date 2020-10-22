@@ -12,7 +12,7 @@ exports.createStudent = async (std) => {
         const newStudent = await Student.create(std);
         let mail = `
             <p> Dear ${std.name} , </p>
-            <p>please complete your counselling process by going to our admission portal and follow the procedure.</p>
+            <p>please complete your counselling process by going to our admission portal <a href="http://117.252.73.157">here</a> and follow the procedure.</p>
             <p>Your login credentails are : </p>
             <p>ID: ${std.jeeRegNo} </p>
             <p>OTP: ${password} </p> <br />
@@ -144,6 +144,24 @@ exports.form3DataInput = async (req, res) => {
     }
 }
 
+exports.getForm3 = async (req, res) => {
+    try {
+        let std = await Form3.findOne({ regNo: req.params.regNo });
+        if (!std) {
+            res.status(400).json({ message: "Current user's jee number not found in the database." });
+            return;
+        }
+
+        res.status(200).json({ std });
+        return;
+
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ message: "Something went wrong." });
+        return;
+    }
+}
+
 
 exports.form1DataInput = async (req, res) => {
     try {
@@ -153,6 +171,11 @@ exports.form1DataInput = async (req, res) => {
             return;
         }
 
+        let temp = await Form1.find({ regNo: std.regNo });
+        if (temp) {
+            res.status(400).json({ message: "Form has been already submitted" });
+            return;
+        }
         let newForm1 = await Form1.create({ docList: req.body, regNo: std.regNo, jeeRegNo: req.userId });
 
         std.step2 = false;
@@ -181,7 +204,7 @@ exports.form1Data = async (req, res) => {
         return
     } catch (error) {
         console.error(error.message);
-        res.status(500).json({ message: "Something went wrong." });
+        res.status(500).json({ message: "No data found" });
         return;
     }
 }
@@ -201,14 +224,15 @@ exports.updateSteps = async (req, res) => {
 
 exports.float = async (req, res) => {
     try {
-        let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { step5: false, doc: Date().toString('dd-MM-yyyy'), completed: true });
+        let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { will: 'FLOAT', step5: false, doc: Date().toString('dd-MM-yyyy'), completed: true });
 
         let mailComplete = `
                 <p> Dear ${newStd.name} , </p>
                 <p>You have completed your registration process for insitute counselling.</p>
-                <p>Take a print of your Admit card from the link below or from profile section of admission portal </p>
+                <p>Take a print of your Admit card from profile section of admission portal </p>
             `;
-        sendEmail(newStd.email, 'Admission appliaction process update', mailComplete)
+        sendEmail(newStd.email, 'Admission appliaction process update', mailComplete);
+        sendEmail("so@iiitu.ac.in", 'Admission appliaction process update', `Student with registration Number: ${newStd.regNo} compeleted the process.`);
         res.status(200).json({
             ...newStd._doc,
             password: ''
@@ -226,11 +250,12 @@ exports.freeze = async (req, res) => {
         try {
             let form3Data = await Form3.findOneAndUpdate({ regNo: newStd.regNo }, { ...req.body });
             let mailComplete = `
-                <p> Dear ${newStd.name} , </p>
-                <p>You have completed your registration process for insitute counselling.</p>
-                <p>Take a print of your Admit card from the link below or from profile section of admission portal </p>
+            <p> Dear ${newStd.name} , </p>
+            <p>You have completed your registration process for insitute counselling.</p>
+            <p>Take a print of your Admit card from profile section of admission portal </p>
             `;
             sendEmail(newStd.email, 'Admission appliaction process update', mailComplete)
+            sendEmail("so@iiitu.ac.in", 'Admission appliaction process update', `Student with registration Number: ${newStd.regNo} compeleted the process.`);
             res.status(200).json({
                 ...newStd._doc,
                 password: ''

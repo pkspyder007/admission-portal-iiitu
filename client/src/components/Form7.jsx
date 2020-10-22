@@ -295,6 +295,7 @@ const Form7 = () => {
           step4: false,
           step5: true,
          }));
+         alert("Step completed")
          window.location.reload();
       })
       .catch((err) => {
@@ -370,7 +371,7 @@ const Form7 = () => {
       <Divider />
       <Table dataSource={dataSource} columns={columns} pagination={false} rowKey="sno" />
       <Divider />
-      <Row justify="center" gutter={[24, 44]}>
+      {(std && std.step4) && (<Row justify="center" gutter={[24, 44]}>
         <Col >
           <Checkbox onChange={(e) => setIsChecked(!isChecked)} />
         </Col>
@@ -380,7 +381,7 @@ const Form7 = () => {
         <Col >
           <Button disabled={!isChecked} size="large" type="primary" onClick={handleSubmit}>Submit</Button>
         </Col>
-      </Row>
+      </Row>)}
     </div>
   )
 }

@@ -132,7 +132,7 @@ function Form1() {
       sno: "21",
       fileName: "form-13-disability",
       title: "Form No:13 Disability Certificate(if any)",
-      res: "",
+      res: "NO",
     },
   ]);
 
@@ -162,6 +162,7 @@ function Form1() {
           step4: false,
           step5: false,
          }));
+         alert("Step completed")
          window.location.reload();
     }).catch(err => {
         notification["error"]({

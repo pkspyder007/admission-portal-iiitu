@@ -1,6 +1,6 @@
 const { createAdmin } = require("./controllers/admin.controller.js");
 
-export.seedAdmin = () => {
+exports.seedAdmin = () => {
 	const admin = {
 		email: "admin@iiitu.ac.in"
 	}

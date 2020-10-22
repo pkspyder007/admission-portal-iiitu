@@ -1,10 +1,7 @@
-import React, { useState, useEffect, createRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Divider, Input, Row, Col, message } from "antd";
-import { useScreenshot, createFileName } from "use-react-screenshot";
 import Axios from "axios";
-import { Link } from "react-router-dom";
 
-const { Search } = Input;
 
 export const Info = ({ title, value }) => {
   return (
@@ -18,62 +15,29 @@ export const Info = ({ title, value }) => {
 const StudentInfo = () => {
   const [std, setStd] = useState({});
 
-  const ref = createRef(null);
-  const [image, takeScreenShot] = useScreenshot();
-
-  const download = (image, { name = "img", extension = "png" } = {}) => {
-    const a = document.createElement("a");
-    a.href = image;
-    a.download = createFileName(extension, name);
-    a.click();
-  };
-
-  // const getImage = () => takeScreenShot(ref.current);
-
-  function getImage() { 
-    window.print() 
-} 
-
-  const handleSearch = (regNo) => {
+  useEffect(() => {
+    const stdTemp = JSON.parse(localStorage.getItem("std"))
     message.info("Please wait...");
     Axios({
       method: "get",
-      url: `/api/admin/form3/${regNo}`,
+      url: `/api/student/form3/${stdTemp.regNo}`,
       headers: { "x-access-token": localStorage.getItem("x-access-token") },
     })
       .then((res) => {
-        setStd(res.data);
+        setStd(res.data.std);
       })
       .catch((err) => {
         message.error(err.response.data.message);
         setStd({})
       });
-  };
-
-  useEffect(() => {
-    if (image) {
-      download(image, { name: `${std.regNo}-form3`, extension: "png" });
-    }
-  }, [image]);
+  }, []);
 
   return (
     <div className="form3">
-      <Search
-        placeholder="Search By Registration Number"
-        enterButton="Search"
-        size="large"
-        className="hop"
-        onSearch={(value) => handleSearch(value)}
-      />
-      <Divider />
       {/* Header */}
-      {std._id && (
         <>
-        <div id="GFG" style={{ padding: 24 }} ref={ref}>
-          <Row style={{ borderBottom: "none" }} justify="center" gutter={[56, 24]}>
-            <Col>
-            <img src="https://upload.wikimedia.org/wikipedia/en/c/cf/Iiit-una-logo.png" height="135px" alt="IIIT UNA"/>
-            </Col>
+        <div id="GFG" style={{ padding: 24 }}>
+          <Row style={{ borderBottom: "none" }} justify="center">
             <Col>
               <h2>Indian Institute of Information Technology Una (H.P.) </h2>
               <h2>Transit Campus–II, Chandpur, Haroli, Una-177220 </h2>
@@ -194,12 +158,7 @@ const StudentInfo = () => {
             <Info title="Recipt No." value={std.hotelFeeReceiptNo} />
           </Row>
         </div>
-      <button className="hop" onClick={getImage}>Print</button>
-      <Link to={`/adminDashboard/docs/${std.regNo}`}>
-        <button className="hop">View Docs</button>
-      </Link>
       </>
-      )}
     </div>
   );
 };
