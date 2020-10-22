@@ -1,7 +1,19 @@
-const { createStudents } = require("./controllers/student.controller.controller.js");
+const { createStudent } = require("./controllers/student.controller.js");
 
-const std = {
-	email: "admin@iiitu.ac.in"
+
+exports.seedStudents = () => {
+
+	const tempStd = {
+		  name: 'Praveen Kumar',
+		  regNo: '',
+		  jeeRegNo: '1234',
+		  email: '19137@iiitu.ac.in',
+		  mobile: '9634049244',
+		  category: 'Sc',
+		  fatherName: 'GP Singh',
+		  branchAlloted: 'CSE',
+		  fessPaid: 20000,
+		  password: ''
+		}
+	createStudent(tempStd);
 }
-
-createStudents(std);

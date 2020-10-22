@@ -11,7 +11,9 @@ const rfs = require('rotating-file-stream');
 const accessLogStream = rfs.createStream('access.log', {
   interval: '1d', // rotate daily
   path: path.join(__dirname, 'server-log')
-})
+});
+
+const { seedStudents } = require("./seedStudents");
 
 
 // Route Imports
@@ -44,6 +46,9 @@ mongoose.connect(process.env.MONGO_URI, {
 })
   .then(() => {
     console.log('Connected to DB.')
+    seedStudents();
+    // seed
+
   })
   .catch(e => console.error(e.message));
 
