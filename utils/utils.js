@@ -4,7 +4,7 @@ const OAuth2 = google.auth.OAuth2;
 const fs = require("fs")
 const dotenv = require('dotenv');
 dotenv.config();
-const path = require("path")
+const path = require("path");
 const myOAuth2Client = new OAuth2(process.env.GCID, process.env.GCSECRET, "https://developers.google.com/oauthplayground");
 
 const getRegNums = () => {
@@ -17,9 +17,24 @@ const getRegNums = () => {
     }
 }
 
-const updateRegNums = () => {
-    const { CSE, IT, ECE } = getRegNums();
-    const data = `CSE,${parseInt(CSE) + 1}\nIT,${parseInt(IT) + 1}\nECE,${parseInt(ECE) + 1}`
+const updateRegNums = (branch) => {
+    let regNums = getRegNums();
+
+    switch (branch) {
+        case "CSE":
+            regNums.CSE = parseInt(regNums.CSE) + 1;
+            break;
+        case "IT":
+            regNums.IT = parseInt(regNums.IT) + 1;
+            break;
+        case "ECE":
+            regNums.ECE = parseInt(regNums.ECE) + 1;
+            break;
+        default:
+            break;
+    }
+    const { CSE, IT, ECE } = regNums;
+    const data = `CSE,${parseInt(CSE)}\nIT,${parseInt(IT)}\nECE,${parseInt(ECE)}`
     fs.writeFileSync(path.join(process.cwd(), "data/regNumbers.csv"), data, "utf-8");
 }
 
@@ -57,7 +72,4 @@ const sendEmail = (to, sub, htmlContent) => {
     });
 
 }
-
 module.exports = { getRegNums, updateRegNums, sendEmail };
-
-

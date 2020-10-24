@@ -19,6 +19,7 @@ const { seedAdmin } = require("./seedAdmin");
 // Route Imports
 const studentRouter = require('./routes/student.routes');
 const uploadRouter = require('./routes/upload.routes');
+const { updateRegNums, getRegNums } = require('./utils/utils');
 
 const app = express();
 dotenv.config();
@@ -46,9 +47,8 @@ mongoose.connect(process.env.MONGO_URI, {
 })
   .then(() => {
     console.log('Connected to DB.')
-    seedStudents();
-    seedAdmin();
-
+    // seedStudents();
+    // seedAdmin();
   })
   .catch(e => console.error(e.message));
 
@@ -72,10 +72,6 @@ const logger = winston.createLogger({
   format: winston.format.json(),
   defaultMeta: { service: 'user-service' },
   transports: [
-    //
-    // - Write all logs with level `error` and below to `error.log`
-    // - Write all logs with level `info` and below to `combined.log`
-    //
     new winston.transports.File({ filename: 'error.log', level: 'error' }),
     new winston.transports.File({ filename: 'combined.log' }),
   ],
@@ -85,7 +81,5 @@ const logger = winston.createLogger({
 });
 
 process.on('uncaughtException', function (exception) {
-  console.log(exception); // to see your exception details in the console
-  // if you are on production, maybe you can send the exception details to your
-  // email as well ?
+  console.log(exception);
 });
