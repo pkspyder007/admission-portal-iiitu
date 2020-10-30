@@ -5,6 +5,7 @@ import './css/general.scss'
 import Login from './pages/Login';
 import Index from './pages/Index';
 import AdmitCard from './components/AdmitCard';
+import Register from './pages/Register';
 
 
 function App() {
@@ -14,10 +15,8 @@ function App() {
         <Switch>
           <Route path="/" exact={true} component={Index} />
           <Route path="/login" exact={true} component={Login} />
+          <Route path="/register" exact={true} component={Register} />
           <Route path="/admit-card" exact={true} component={AdmitCard} />
-
-          {/* <Route path="/form3" exact={true} component={RegistrationForm} /> */}
-          {/* <Route path="/form1" exact={true} component={Form1} /> */}
         </Switch>
       </BrowserRouter>
     </div>

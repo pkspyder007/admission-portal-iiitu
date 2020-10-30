@@ -3,7 +3,80 @@ const Student = require("../models/student.model");
 const Form3 = require("../models/form3.model");
 const bcrypt = require('bcryptjs');
 const Form1 = require("../models/form1.model");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+
+const stdData = require("../data/stddata.json");
+
+exports.register = async (req, res) => {
+    try {
+        let std = null;
+        stdData.forEach(student => {
+            if(student["JEE(Main) App No"] == req.body.jeeRegNo) {
+                std = student;
+            }
+        });
+
+        if(!std) {
+            res.status(401).json({ message: "Student record not found please check the JEE MAIN application number."});
+            return;
+        }
+
+        try {
+            if(std["DOB"] != req.body.dob) {
+                return res.status(400).json({
+                    message: "Date of Birth do not match."
+                });
+            }
+            if(std["State of Eligibility"].trim().toLowerCase() != req.body.soe.trim().toLowerCase()) {
+                return res.status(400).json({
+                    message: "State of Eligibilty do not match. Please check for spaces or copy paste from website"
+                });
+            }
+            let b = std["Program"];
+            let tempStd = {
+                name: std["Name"],
+                regNo: '',
+                jeeRegNo: std["JEE(Main) App No"],
+                email: req.body.email,
+                mobile: req.body.mobile,
+                fatherName: req.body.fatherName,
+                category: std["Category"],
+                branchAlloted: '',
+                fessPaid: 0,
+                password: ''
+            }        
+            if(b == "Computer Science and Engineering (4 Years, Bachelor of Technology)") {
+                tempStd.branchAlloted = "CSE"
+            }
+            if(b == "Electronics and Communication Engineering (4 Years, Bachelor of Technology)") {
+                tempStd.branchAlloted = "ECE"
+            }
+            if(b == "Information Technology (4 Years, Bachelor of Technology)") {
+                tempStd.branchAlloted = "IT"
+            }
+            let password = Math.random().toString(36).substring(7);
+            tempStd.password = bcrypt.hashSync(password, 10);
+            const newStudent = await Student.create(tempStd);
+            let mail = `
+                <p> Dear ${newStudent.name} , </p>
+                <p>please complete your counselling process by going to our admission portal <a href="http://117.252.73.157/login">here</a> and follow the procedure.</p>
+                <p>Your login credentails are : </p>
+                <p>ID: ${newStudent.jeeRegNo} </p>
+                <p>OTP: ${password} </p> <br />
+            `;
+            sendEmail(newStudent.email, 'Registration for IIIT UNA counselling.', mail)
+            console.log('Student Added To Database with Following JEE registration Number : ' + newStudent.jeeRegNo + " password : " + password);
+            return res.json({message: `Registration Successful! \n Check your email you registred with for further instructions \n Your credentials are : \n ID: ${newStudent.jeeRegNo} \n Password: ${password}`})
+        } catch (error) {
+            console.error(error);
+            res.status(401).json({ message: "Something went wrong. " + error.message})
+        }
+        
+    } catch (error) {
+        console.error(error);
+        res.status(401).json({ message: "Something went wrong. " + error.message})
+    }
+}
 
 exports.createStudent = async (std) => {
     try {
@@ -12,11 +85,10 @@ exports.createStudent = async (std) => {
         const newStudent = await Student.create(std);
         let mail = `
             <p> Dear ${std.name} , </p>
-            <p>please complete your counselling process by going to our admission portal <a href="http://117.252.73.157">here</a> and follow the procedure.</p>
+            <p>please complete your counselling process by going to our admission portal <a href="http://117.252.73.157/login">here</a> and follow the procedure.</p>
             <p>Your login credentails are : </p>
             <p>ID: ${std.jeeRegNo} </p>
             <p>OTP: ${password} </p> <br />
-            <p>Please change your OTP after loggin in. </p>
         `;
         sendEmail(std.email, 'Registration for IIIT UNA counselling.', mail)
         console.info('email: ' + std.email + ', password: ' + password);

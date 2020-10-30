@@ -1,9 +1,10 @@
 const express = require('express');
-const { loginStudent, form3DataInput, form1DataInput, updateSteps, float, freeze, form1Data, getForm3 } = require('../controllers/student.controller');
+const { loginStudent, form3DataInput, form1DataInput, updateSteps, float, freeze, form1Data, getForm3, register } = require('../controllers/student.controller');
 const router = express.Router();
 const verifyToken = require('../middlewares/auth');
 
 router.post('/login', loginStudent);
+router.post('/register', register);
 router.post('/form3', verifyToken, form3DataInput);
 router.get('/form3/:regNo', verifyToken, getForm3);
 router.post('/form1', verifyToken, form1DataInput);

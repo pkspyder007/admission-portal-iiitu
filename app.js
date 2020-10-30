@@ -5,7 +5,6 @@ const cors = require('cors');
 const winston = require('winston');
 const path = require('path');
 const morgan = require('morgan');
-const fs = require('fs');
 const rfs = require('rotating-file-stream');
 
 const accessLogStream = rfs.createStream('access.log', {
@@ -13,13 +12,11 @@ const accessLogStream = rfs.createStream('access.log', {
   path: path.join(__dirname, 'server-log')
 });
 
-const { seedStudents } = require("./seedStudents");
 const { seedAdmin } = require("./seedAdmin");
 
 // Route Imports
 const studentRouter = require('./routes/student.routes');
 const uploadRouter = require('./routes/upload.routes');
-const { updateRegNums, getRegNums } = require('./utils/utils');
 
 const app = express();
 dotenv.config();
@@ -48,7 +45,7 @@ mongoose.connect(process.env.MONGO_URI, {
   .then(() => {
     console.log('Connected to DB.')
     // seedStudents();
-    // seedAdmin();
+    seedAdmin();
   })
   .catch(e => console.error(e.message));
 
@@ -83,3 +80,4 @@ const logger = winston.createLogger({
 process.on('uncaughtException', function (exception) {
   console.log(exception);
 });
+

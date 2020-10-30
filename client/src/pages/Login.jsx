@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
-import { Form, Input, Button, message, notification } from 'antd';
+import { Link } from "react-router-dom"
+import { Form, Input, Button, message, notification, Row } from 'antd';
 import Axios from 'axios';
 
 const Login = (props) => {
@@ -93,6 +94,10 @@ const Login = (props) => {
         </Button>
       </Form.Item>
     </Form>
+    <Row justify="center">
+          Not registered ?
+              <Link to="/register"> Register Here</Link>
+          </Row>
     </div>
   );
 };
