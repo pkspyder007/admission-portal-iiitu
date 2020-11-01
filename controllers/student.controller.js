@@ -56,9 +56,49 @@ exports.register = async (req, res) => {
             }
             let password = Math.random().toString(36).substring(7);
             tempStd.password = bcrypt.hashSync(password, 10);
-            const newStudent = await Student.create(tempStd);
-            let mail = `
-                <p> Dear ${newStudent.name} , </p>
+
+            let totalStd = await Student.find({});
+            
+            let regNo = '2K20';
+            let prevRegNums = getRegNums();
+            if (tempStd.branchAlloted == 'CSE') {
+                if (prevRegNums.CSE < 10) {
+                    regNo = `${regNo}CSE00${prevRegNums.CSE}`
+                } else if (prevRegNums.CSE < 100) {
+                    egNo = `${regNo}CSE0${prevRegNums.CSE}`
+                } else {
+                    regNo = `${regNo}${prevRegNums.CSE}`
+                }
+                        }
+                        if (tempStd.branchAlloted == 'IT') {
+                            if (prevRegNums.IT < 10) {
+                                regNo = `${regNo}IT00${prevRegNums.IT}`
+                            } else if (prevRegNums.CSE < 100) {
+                                egNo = `${regNo}IT0${prevRegNums.CSE}`
+                            } else {
+                                regNo = `${regNo}${prevRegNums.IT}`
+                            }
+                        }
+                        if (tempStd.branchAlloted == 'ECE') {
+                            if (prevRegNums.ECE < 10) {
+                                regNo = `${regNo}ECE00${prevRegNums.ECE}`
+                            } else if (prevRegNums.CSE < 100) {
+                                egNo = `${regNo}ECE0${prevRegNums.CSE}`
+                            } else {
+                                regNo = `${regNo}${prevRegNums.ECE}`
+                            }
+                        }
+                        // tempStd.isFirstLogin = false;
+                        tempStd.regNo = regNo;
+                        tempStd.sNo = totalStd.length + 1;
+
+                        updateRegNums(tempStd.branchAlloted);
+                        const newStudent = await Student.create(tempStd);
+                        if(!newStudent) return res.status(500).json({ message: "Student could not be registered!"});
+                        
+                        
+                        let mail = `
+                        <p> Dear ${newStudent.name} , </p>
                 <p>please complete your counselling process by going to our admission portal <a href="http://117.252.73.157/login">here</a> and follow the procedure.</p>
                 <p>Your login credentails are : </p>
                 <p>ID: ${newStudent.jeeRegNo} </p>
@@ -119,55 +159,55 @@ exports.loginStudent = async (req, res) => {
             }
             if (result) {
                 // Generate and Upadate Registration Number;
-                if (student.isFirstLogin) {
-                    try {
-                        let regNo = '2K20';
-                        let prevRegNums = getRegNums();
-                        if (student.branchAlloted == 'CSE') {
-                            if (prevRegNums.CSE < 10) {
-                                regNo = `${regNo}CSE00${prevRegNums.CSE}`
-                            } else if (prevRegNums.CSE < 100) {
-                                egNo = `${regNo}CSE0${prevRegNums.CSE}`
-                            } else {
-                                regNo = `${regNo}${prevRegNums.CSE}`
-                            }
-                        }
-                        if (student.branchAlloted == 'IT') {
-                            if (prevRegNums.IT < 10) {
-                                regNo = `${regNo}IT00${prevRegNums.IT}`
-                            } else if (prevRegNums.CSE < 100) {
-                                egNo = `${regNo}IT0${prevRegNums.CSE}`
-                            } else {
-                                regNo = `${regNo}${prevRegNums.IT}`
-                            }
-                        }
-                        if (student.branchAlloted == 'ECE') {
-                            if (prevRegNums.ECE < 10) {
-                                regNo = `${regNo}ECE00${prevRegNums.ECE}`
-                            } else if (prevRegNums.CSE < 100) {
-                                egNo = `${regNo}ECE0${prevRegNums.CSE}`
-                            } else {
-                                regNo = `${regNo}${prevRegNums.ECE}`
-                            }
-                        }
-                        student.isFirstLogin = false;
-                        student.regNo = regNo;
-                        console.log(regNo);
-                        student.save();
-                        updateRegNums();
+                // if (student.isFirstLogin) {
+                //     try {
+                //         let regNo = '2K20';
+                //         let prevRegNums = getRegNums();
+                //         if (student.branchAlloted == 'CSE') {
+                //             if (prevRegNums.CSE < 10) {
+                //                 regNo = `${regNo}CSE00${prevRegNums.CSE}`
+                //             } else if (prevRegNums.CSE < 100) {
+                //                 egNo = `${regNo}CSE0${prevRegNums.CSE}`
+                //             } else {
+                //                 regNo = `${regNo}${prevRegNums.CSE}`
+                //             }
+                //         }
+                //         if (student.branchAlloted == 'IT') {
+                //             if (prevRegNums.IT < 10) {
+                //                 regNo = `${regNo}IT00${prevRegNums.IT}`
+                //             } else if (prevRegNums.CSE < 100) {
+                //                 egNo = `${regNo}IT0${prevRegNums.CSE}`
+                //             } else {
+                //                 regNo = `${regNo}${prevRegNums.IT}`
+                //             }
+                //         }
+                //         if (student.branchAlloted == 'ECE') {
+                //             if (prevRegNums.ECE < 10) {
+                //                 regNo = `${regNo}ECE00${prevRegNums.ECE}`
+                //             } else if (prevRegNums.CSE < 100) {
+                //                 egNo = `${regNo}ECE0${prevRegNums.CSE}`
+                //             } else {
+                //                 regNo = `${regNo}${prevRegNums.ECE}`
+                //             }
+                //         }
+                //         student.isFirstLogin = false;
+                //         student.regNo = regNo;
+                //         console.log(regNo);
+                //         student.save();
+                //         updateRegNums();
 
 
-                        let token = jwt.sign({ id: student.jeeRegNo }, process.env.SECRET_KEY, {
-                            // expiresIn: 86400,
-                        });
-                        res.status(200).json({ message: 'Login Successful.', auth: true, token: token, data: { ...student._doc, password: '' } });
-                        return;
-                    } catch (error) {
-                        console.error(error);
-                        res.status(500).json({ message: "Something went wrong." });
-                        return;
-                    }
-                }
+                //         let token = jwt.sign({ id: student.jeeRegNo }, process.env.SECRET_KEY, {
+                //             // expiresIn: 86400,
+                //         });
+                //         res.status(200).json({ message: 'Login Successful.', auth: true, token: token, data: { ...student._doc, password: '' } });
+                //         return;
+                //     } catch (error) {
+                //         console.error(error);
+                //         res.status(500).json({ message: "Something went wrong." });
+                //         return;
+                //     }
+                // }
 
                 let token = jwt.sign({ id: student.jeeRegNo }, process.env.SECRET_KEY, {
                     expiresIn: 86400,

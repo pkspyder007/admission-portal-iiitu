@@ -33,6 +33,9 @@ const DocumentUpload = (props) => {
       console.log(info.file.percent);
     }
     if (info.file.status === 'done') {
+      if(props.afterUpload) {
+        props.afterUpload(true);
+      }
       message.success(`${info.file.name} file uploaded successfully`);
     } else if (info.file.status === 'error') {
       message.error(`${info.file.name} file upload failed.`);

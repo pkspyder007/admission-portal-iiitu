@@ -14,6 +14,10 @@ const StudentSchema = new Schema({
     type: String,
     unique: "Registration Number conflict consult Administrator"
   },
+  sNo: {
+    type: Number,
+    unique: "Sno Number conflict consult Administrator"
+  },
   jeeRegNo: {
     type: String,
     unique: 'Jee Registration Number already exists.',

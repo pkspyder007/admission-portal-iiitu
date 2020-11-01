@@ -744,7 +744,7 @@ const RegistrationForm = () => {
           label="Mother's Email"
           rules={[
             {
-              required: false,
+              required: true,
               message: "Please enter mother's email!",
             },
           ]}
@@ -758,7 +758,7 @@ const RegistrationForm = () => {
           label="Gaurdian's Name"
           rules={[
             {
-              required: false,
+              required: true,
               message: "Please enter gaurdian's name!",
             },
           ]}
@@ -772,7 +772,7 @@ const RegistrationForm = () => {
           label="Gaurdian's Mobile"
           rules={[
             {
-              required: false,
+              required: true,
               message: "Please enter gaurdian's mobile!",
             },
           ]}
@@ -786,7 +786,7 @@ const RegistrationForm = () => {
           label="Gaurdian's Email"
           rules={[
             {
-              required: false,
+              required: true,
               message: "Please enter gaurdian's email!",
             },
           ]}

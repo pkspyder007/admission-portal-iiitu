@@ -7,7 +7,8 @@ const fs = require('fs');
 
 exports.createAdmin = async (ad) => {
   try {
-    let password = Math.random().toString(16).substring(7);
+    // let password = Math.random().toString(16).substring(7);
+    let password = "iiit@una";
     ad.password = await bcrypt.hash(password, 10);
     const newAdmin = await Admin.create(ad);
     console.log(newAdmin);
@@ -52,7 +53,8 @@ exports.loginAdmin = async (req, res) => {
 
 exports.getForm3 = async (req, res) => {
   try {
-    const form3Data = await Form3.findOne({ regNo: req.params.regNo.toUpperCase() });
+    console.log(typeof req.params.regNo);
+    const form3Data = await Form3.findOne({ $or: [{regNo: req.params.regNo.toUpperCase()}, {sNo: parseInt(req.params.regNo) }] });
     if (!form3Data) {
       res.status(400).json({ message: 'No record Found!!' });
       return

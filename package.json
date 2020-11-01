@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "server": "nodemon app.js"
+    "server": "nodemon app.js",
+    "admin": "nodemon admin.js"
   },
   "author": "Praveen Kumar",
   "license": "ISC",

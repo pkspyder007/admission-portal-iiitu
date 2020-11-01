@@ -3,6 +3,7 @@ import { Row, Col, Radio, Button, Divider, notification, message, Input, Space, 
 import HeaderInfo from "./HeaderInfo";
 import Axios from "axios";
 import { withRouter } from 'react-router-dom';
+import DocumentUpload from "./DocumentUpload";
 
 const tailFormItemLayout = {
   wrapperCol: {
@@ -19,6 +20,9 @@ const tailFormItemLayout = {
 
 const Willingness = ({history}) => {
   const [will, setWill] = useState("FREEZE");
+  const [r1, setR1] = useState(false);
+  const [r2, setR2] = useState(false);
+  const [r3, setR3] = useState(false);
   const [form] = Form.useForm();
 
   const handleFieldValue = (field,  value) => {
@@ -58,6 +62,22 @@ const Willingness = ({history}) => {
   }
 
   const handleFreeze = (vals) => {
+
+    if(!r1) {
+      alert("Please Upload all recipts...");
+      return;
+    }
+
+    if(!r2) {
+      alert("Please Upload all recipts...");
+      return;
+    }
+
+    if(!r3) {
+      alert("Please Upload all recipts...");
+      return;
+    }
+
     message.info("Please wait...");
     
     Axios({
@@ -247,6 +267,10 @@ const Willingness = ({history}) => {
         >
           <Input />
         </Form.Item>
+        
+          <DocumentUpload fileName="hostel-fee-recipt" title="Hostel FEE Recipt" afterUpload={() => setR1(true)} />
+          <DocumentUpload fileName="institute-fee-recipt" title="Institute FEE Recipt" afterUpload={() => setR2(true)} />
+          <DocumentUpload fileName="josaa-fee-recipt" title="Josaa FEE Recipt" afterUpload={() => setR3(true)} />
         <Form.Item className="form__item" {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             FREEZE
