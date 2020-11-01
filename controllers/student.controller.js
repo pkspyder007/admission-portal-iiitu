@@ -32,6 +32,13 @@ exports.register = async (req, res) => {
                     message: "State of Eligibilty do not match. Please check for spaces or copy paste from website"
                 });
             }
+
+            if(std["Rank"] != req.body.rank) {
+                return res.status(400).json({
+                    message: "Data validation failed!"
+                });
+            }
+            
             let b = std["Program"];
             let tempStd = {
                 name: std["Name"],
@@ -284,7 +291,7 @@ exports.form1DataInput = async (req, res) => {
         }
 
         let temp = await Form1.find({ regNo: std.regNo });
-        if (temp) {
+        if (temp.length>0) {
             res.status(400).json({ message: "Form has been already submitted" });
             return;
         }
@@ -336,12 +343,12 @@ exports.updateSteps = async (req, res) => {
 
 exports.float = async (req, res) => {
     try {
-        let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { will: 'FLOAT', step5: false, doc: Date().toString('dd-MM-yyyy'), completed: true });
+        let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { will: req.body.will , step5: false, doc: Date().toString('dd-MM-yyyy'), completed: true });
 
         let mailComplete = `
                 <p> Dear ${newStd.name} , </p>
                 <p>You have completed your registration process for insitute counselling.</p>
-                <p>Take a print of your Admit card from profile section of admission portal </p>
+                
             `;
         sendEmail(newStd.email, 'Admission appliaction process update', mailComplete);
         sendEmail("so@iiitu.ac.in", 'Admission appliaction process update', `Student with registration Number: ${newStd.regNo} compeleted the process.`);
@@ -358,7 +365,7 @@ exports.float = async (req, res) => {
 exports.freeze = async (req, res) => {
 
     try {
-        let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { will: 'FREEZE', step5: false, doc: Date().toString('dd-MM-yyyy'), completed: true });
+        let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { will: 'ACCEPT', step5: false, doc: Date().toString('dd-MM-yyyy'), completed: true });
         try {
             let form3Data = await Form3.findOneAndUpdate({ regNo: newStd.regNo }, { ...req.body });
             let mailComplete = `

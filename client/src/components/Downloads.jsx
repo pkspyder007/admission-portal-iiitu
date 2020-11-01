@@ -13,13 +13,8 @@ const Downloads = () => {
       <h4>Documents Download</h4>
       </div>
         <div className="downloads__container">
-        <ul>
-            <li><a href="#" target="_blank" download="PDF">Download</a></li>
-            <li><a href="#" target="_blank" download="PDF">Download</a></li>
-            <li><a href="#" target="_blank" download="PDF">Download</a></li>
-            <li><a href="#" target="_blank" download="PDF">Download</a></li>
-            <li><a href="#" target="_blank" download="PDF">Download</a></li>
-        </ul>
+        <h2>All required Documents and their format can be found on our institutes website.</h2>
+        <a href="http://iiitu.ac.in">IIIT UNA website link</a>
         </div>
         </>
     )

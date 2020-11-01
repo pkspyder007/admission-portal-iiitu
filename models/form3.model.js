@@ -142,7 +142,8 @@ const Form3Schema = new Schema({
     },
     hostelName: {
         type: String,
-        required: "Hostel Type name cannot be empty."
+        default: 'DEFAULT'
+        // required: "Hostel Type name cannot be empty."
     },
     fatherName: {
         type: String,
@@ -154,7 +155,8 @@ const Form3Schema = new Schema({
     },
     gaurdianName: {
         type: String,
-        required: "Gaurdian's name cannot be empty."
+        default: ""
+        // required: "Gaurdian's name cannot be empty."
     },
     fatherMobile: {
         type: String,
@@ -166,7 +168,8 @@ const Form3Schema = new Schema({
     },
     gaurdianMobile: {
         type: String,
-        required: "Gaurdian's mobile cannot be empty."
+        default: ""
+        // required: "Gaurdian's mobile cannot be empty."
     },
     fatherEmail: {
         type: String,
@@ -174,11 +177,13 @@ const Form3Schema = new Schema({
     },
     motherEmail: {
         type: String,
-        required: "Mother's Email cannot be empty."
+        default: ""
+        // required: "Mother's Email cannot be empty."
     },
     gaurdianEmail: {
         type: String,
-        required: "Gaurdian's Email cannot be empty."
+        default: ""
+        // required: "Gaurdian's Email cannot be empty."
     },
     annualFamilyIncome: {
         type: String,

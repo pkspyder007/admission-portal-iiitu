@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const Form3 = require('../models/form3.model');
 const Form1 = require('../models/form1.model');
 const fs = require('fs');
+const { stderr } = require('process');
+const Student = require('../models/student.model');
 
 exports.createAdmin = async (ad) => {
   try {
@@ -53,8 +55,13 @@ exports.loginAdmin = async (req, res) => {
 
 exports.getForm3 = async (req, res) => {
   try {
-    console.log(typeof req.params.regNo);
-    const form3Data = await Form3.findOne({ $or: [{regNo: req.params.regNo.toUpperCase()}, {sNo: parseInt(req.params.regNo) }] });
+    const std = await Student.findOne({ $or: [{regNo: req.params.regNo.toUpperCase()}, {sNo: parseInt(req.params.regNo) }] });
+    console.log(std);
+    if (!std) {
+      res.status(400).json({ message: 'No record Found!!' });
+      return
+    }
+    const form3Data = await Form3.findOne({ regNo: std.regNo });
     if (!form3Data) {
       res.status(400).json({ message: 'No record Found!!' });
       return
@@ -64,7 +71,7 @@ exports.getForm3 = async (req, res) => {
     });
     return;
   } catch (error) {
-    console.error(error.message);
+    console.error(error);
     return res.status(500).json({ message: error.message });
   }
 }
@@ -87,6 +94,7 @@ exports.getForm1 = async (req, res) => {
 }
 
 exports.getDocs = (req, res) => {
+  console.log("sda");
   const testFolder = `${process.cwd()}/uploads/${req.params.jeeRegNo}`
   fs.readdirSync(testFolder).forEach(file => {
     if (file.split(".")[0] == `${req.params.jeeRegNo}-${req.params.name}`) {

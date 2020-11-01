@@ -103,7 +103,7 @@ const UploadDocList = () => {
         }
       })}
 
-      {docs.length === 0 ? (
+      {/* {docs.length === 0 ? (
         ""
       ) : (
         <>
@@ -124,7 +124,7 @@ const UploadDocList = () => {
             </Col>
           </Row>
         </>
-      )}
+      )} */}
 
       {/* <Row justify="center" gutter={[16, 24]}>
         <Col>

@@ -17,6 +17,7 @@ const { seedAdmin } = require("./seedAdmin");
 // Route Imports
 const studentRouter = require('./routes/student.routes');
 const uploadRouter = require('./routes/upload.routes');
+const { updateRegNums } = require('./utils/utils');
 
 const app = express();
 dotenv.config();
@@ -80,4 +81,3 @@ const logger = winston.createLogger({
 process.on('uncaughtException', function (exception) {
   console.log(exception);
 });
-

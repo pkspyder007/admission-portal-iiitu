@@ -65,7 +65,7 @@ const RegistrationForm = () => {
   }, [])
 
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    // console.log("Received values of form: ", values);
     Axios({
       'method': 'post',
       url: '/api/student/form3',
@@ -123,7 +123,7 @@ const RegistrationForm = () => {
         }}
         scrollToFirstError
       >
-        <Form.Item
+        {/* <Form.Item
           className="form__item"
           name="date"
           label="Date"
@@ -135,10 +135,10 @@ const RegistrationForm = () => {
           ]}
         >
           {/* <Input /> */}
-          <Space direction="vertical">
-            <DatePicker placeholder="Date of form submission" onChange={(date, dateStr) => handleFieldValue("date", dateStr)} format="DD/MM/YYYY" />
+          {/* <Space direction="vertical">
+            <DatePicker disabled initialValue={new Date().toString('dd-MM-yyyy')} placeholder={new Date().toString('dd-MM-yyyy')} onChange={(date, dateStr) => handleFieldValue("date", dateStr)} format="DD/MM/YYYY" />
           </Space>
-        </Form.Item>
+        </Form.Item> */} */}
 
         <Form.Item
           className="form__item"
@@ -633,24 +633,7 @@ const RegistrationForm = () => {
         </Select>
         </Form.Item>
 
-        <Form.Item
-          className="form__item"
-          name="hosteller"
-          label="Hosteller"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-          initialValue="Yes"
-        >
-        <Select onChange={(val) => handleFieldValue("hosteller", val)} style={{ width: 200 }}>
-            <Option value="Yes">Yes</Option>
-            <Option value="No" disabled>No</Option>
-          </Select>
-        </Form.Item>
-
-        <Form.Item
+        {/* <Form.Item
           className="form__item"
           name="hostelName"
           label="Hostel Name"
@@ -660,11 +643,11 @@ const RegistrationForm = () => {
             },
           ]}
         >
-        <Select onChange={(val) => handleFieldValue("hostelName", val)} style={{ width: 200 }}>
+        <Select onChange={(val) => handleFieldValue("hostelName", "DEFAULT")} style={{ width: 200 }} disabled>
             <Option value="BOYS">Boys</Option>
             <Option value="GIRLS">Girls</Option>
           </Select>
-        </Form.Item>
+        </Form.Item> */}
 
 
 
@@ -744,7 +727,7 @@ const RegistrationForm = () => {
           label="Mother's Email"
           rules={[
             {
-              required: true,
+              required: false,
               message: "Please enter mother's email!",
             },
           ]}
@@ -758,7 +741,7 @@ const RegistrationForm = () => {
           label="Gaurdian's Name"
           rules={[
             {
-              required: true,
+              required: false,
               message: "Please enter gaurdian's name!",
             },
           ]}
@@ -772,7 +755,7 @@ const RegistrationForm = () => {
           label="Gaurdian's Mobile"
           rules={[
             {
-              required: true,
+              required: false,
               message: "Please enter gaurdian's mobile!",
             },
           ]}
@@ -786,7 +769,7 @@ const RegistrationForm = () => {
           label="Gaurdian's Email"
           rules={[
             {
-              required: true,
+              required: false,
               message: "Please enter gaurdian's email!",
             },
           ]}
