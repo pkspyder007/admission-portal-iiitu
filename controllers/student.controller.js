@@ -351,11 +351,11 @@ exports.float = async (req, res) => {
 
         let mailComplete = `
                 <p> Dear ${newStd.name} , </p>
-                <p>You have completed your registration process for insitute counselling.</p>
+                <p>You have completed your ${req.body.will} process for insitute counselling.</p>
                 
             `;
         sendEmail(newStd.email, 'Admission appliaction process update', mailComplete);
-        sendEmail("so@iiitu.ac.in", 'Admission appliaction process update', `Student with registration Number: ${newStd.regNo} compeleted the process.`);
+        sendEmail("so@iiitu.ac.in", 'Admission appliaction process update', `Student with registration Number: ${newStd.regNo} ${req.body.will} the process.`);
         res.status(200).json({
             ...newStd._doc,
             password: ''
@@ -366,10 +366,20 @@ exports.float = async (req, res) => {
     }
 }
 
+exports.accept = async(req, res) => {
+    try {
+        let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { will: req.body.will});  
+        return res.json({message: "Response recorded."})
+    } catch (error) {
+        return res.status(400).json({message: "Something went wrong."});
+        
+    }
+}
+
 exports.freeze = async (req, res) => {
 
     try {
-        let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { will: 'ACCEPT', step5: false, doc: Date().toString('dd-MM-yyyy'), completed: true });
+        let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { will: req.body.will, step5: false, doc: Date().toString('dd-MM-yyyy'), completed: true });
         try {
             let form3Data = await Form3.findOneAndUpdate({ regNo: newStd.regNo }, { ...req.body });
             let mailComplete = `

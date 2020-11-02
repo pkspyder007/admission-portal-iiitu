@@ -144,29 +144,13 @@ const Willingness = ({ history }) => {
             <strong>
               Note:
             </strong>
-            Please select the option carefully.
+            Please fill the details carefully.
             <br />
             <br />
-            <strong>ACCEPT : </strong>
-            I accept the seat alloted at IIIT UNA and don't want to participate in CSAB special rounds.
-            <br />
-            <strong>WITHDRAW : </strong>
-            I want to withdraw the seat alloted at IIIT UNA and don't want to participate in CSAB special rounds.
-            <br />
-            <strong>PARTICIPATE : </strong>
-            I want to participate in CSAB special rounds.
           `}
         />
       </div>
-      <Row justify="center">
-        <Col>
-          <Radio.Group onChange={onChange} value={will}>
-            <Radio value="ACCEPT">ACCEPT</Radio>
-            <Radio value="WITHDRAW">WITHDRAW</Radio>
-            <Radio value="PARTICIPATE">PARTICIPATE</Radio>
-          </Radio.Group>
-        </Col>
-      </Row>
+        
       <Divider />
       {will === "ACCEPT" ? (
         <Row justify="center">

@@ -28,24 +28,38 @@ function Field({ children }) {
   );
 }
 
-export const DocRow = ({ sno, title, onChangeHandler }) => {
+export const DocRow = ({ sno, title, required, onChangeHandler }) => {
   return (
     <ul>
       <li>{sno}</li>
       <li>{title}</li>
+      {required ? (
+        <Radio.Group disabled value="YES" onChange={(e) => onChangeHandler(sno, e.target.value)}>
+        <li>
+        <Radio value="YES">Yes</Radio>
+        </li>
+        <li>
+        <Radio value="NO">No</Radio>
+        </li>
+        <li>
+        <Radio value="NA">NA</Radio>
+        </li>
+        </Radio.Group>
+      ) : (
 
-      <Radio.Group onChange={(e) => onChangeHandler(sno, e.target.value)}>
+        <Radio.Group onChange={(e) => onChangeHandler(sno, e.target.value)}>
         <li>
-          <Radio value="YES">Yes</Radio>
+        <Radio value="YES">Yes</Radio>
         </li>
         <li>
-          <Radio value="NO">No</Radio>
+        <Radio value="NO">No</Radio>
         </li>
         <li>
-          <Radio value="NA">NA</Radio>
+        <Radio value="NA">NA</Radio>
         </li>
-      </Radio.Group>
-    </ul>
+        </Radio.Group>
+        )}
+        </ul>
   );
 };
 

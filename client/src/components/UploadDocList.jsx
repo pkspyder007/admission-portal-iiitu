@@ -7,6 +7,20 @@ import Axios from "axios";
 const UploadDocList = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [docs, setDocs] = useState([]);
+  const [reqs, setReqs] = useState([]);
+
+  const afterUpload = (i) => {
+    setReqs([...reqs.map((d) => {
+      if(d.i === i) {
+        return {
+          i: d.i,
+          u:false
+        } 
+      } else {
+        return d;
+      }
+    })])
+  }
 
   useEffect(() => {
     message.success("Fetching data...");
@@ -17,6 +31,13 @@ const UploadDocList = () => {
     })
       .then((res) => {
         setDocs(res.data.docList);
+        let r = [];
+        res.data.docList.forEach((d,i) => {
+          if(d.res == "YES") {
+            r.push({i: i, u: true});
+          }
+        });
+        setReqs(r)
       })
       .catch((err) => {
         message.error(err.response.data.message);
@@ -24,7 +45,13 @@ const UploadDocList = () => {
   }, []);
 
   const onSubmit = () => {
-    message.info("Please wait submitting your response.");
+    let check = reqs.filter(d => d.u !== false);
+    // console.log(check.length);
+    if(check.length > 0) {
+      alert("please upload all documents");
+      return;
+    } else {
+      message.info("Please wait submitting your response.");
     Axios({
       method: "POST",
       url: "/api/student/updateSteps",
@@ -65,6 +92,8 @@ const UploadDocList = () => {
           description: err.response.data.message,
         });
       });
+    }
+    
   };
   return (
     <div>
@@ -89,12 +118,12 @@ const UploadDocList = () => {
         ""
       )}
 
-      {docs.map((doc) => {
+      {docs.map((doc, i) => {
         if (doc.res === "YES") {
           return (
             <Row key={doc.sno} justify="center" gutter={[16, 24]}>
               <Col>
-                <DocumentUpload fileName={doc.fileName} title={doc.title} />
+                <DocumentUpload fileName={doc.fileName} title={doc.title} afterUpload={() => afterUpload(i)} />
               </Col>
             </Row>
           );

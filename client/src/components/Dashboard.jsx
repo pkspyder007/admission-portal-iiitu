@@ -9,6 +9,7 @@ import Form1 from "../pages/Form1";
 import Willingness from "./Willingness";
 import Profile from "./Profile";
 import StudentInfo from "./StudentInfo";
+import Step0 from "./Step0";
 
 const { TabPane } = Tabs;
 
@@ -18,6 +19,7 @@ const Dashboard = (props) => {
     props.history.push("/login");
   };
   const std = JSON.parse(localStorage.getItem('std'));
+  const hideWill = JSON.parse(localStorage.getItem('hideWill'));
   if(!std) {
     props.history.push("/login");
     return
@@ -26,6 +28,9 @@ const Dashboard = (props) => {
   return (
     <div id="dashboard">
       <Tabs defaultActiveKey="6" tabPosition="left">
+        <TabPane tab={`Willingness`} key={0} disabled={hideWill}>
+          <Step0 />
+        </TabPane>
         <TabPane  tab={`Step 1 - Data Sheet`} key={1} disabled={completed}>
           {step1 && (<RegistrationForm />)}
           {!step1 && (<StudentInfo />)}
@@ -40,7 +45,7 @@ const Dashboard = (props) => {
         <TabPane tab={`Step 4 - Course Registration`} key={4} disabled={completed}>
           <Form7 />
         </TabPane>
-        <TabPane tab={`Step 5 - Willingness/ Fee details`} key={5} disabled={completed}>
+        <TabPane tab={`Step 5 - Fee details`} key={5} disabled={completed}>
           <Willingness />
         </TabPane>
         <TabPane tab={`Profile`} key={6}>

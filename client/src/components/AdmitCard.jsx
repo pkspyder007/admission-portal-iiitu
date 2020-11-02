@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import  { notification } from 'antd'
+import  { notification, Row } from 'antd'
 import Axios from 'axios'
 
 const AdmitCard = (props) => {
   const [std, setStd] = useState({name: '', fatherName: '', regNo: '', branchAlloted: '',doc: ''});
+  const will =  JSON.parse(localStorage.getItem('hideWill'));
 
   useEffect(() => {
     let std = JSON.parse(localStorage.getItem('std'));
@@ -36,6 +37,16 @@ const AdmitCard = (props) => {
       }
     })
   }, [])
+
+  if(will) {
+    return (
+      <div className="container" id="admit-card">
+        <Row justify="center">
+        <h1>You have not accepted the seat.</h1>
+        </Row>
+      </div>
+    );
+  }
 
   return (
     <div className="container" id="admit-card">

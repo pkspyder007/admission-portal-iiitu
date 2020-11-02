@@ -14,7 +14,7 @@ const Downloads = () => {
       </div>
         <div className="downloads__container">
         <h2>All required Documents and their format can be found on our institutes website.</h2>
-        <a href="http://iiitu.ac.in">IIIT UNA website link</a>
+        <a href="http://iiitu.ac.in" target="__blank">IIIT UNA website link</a>
         </div>
         </>
     )
