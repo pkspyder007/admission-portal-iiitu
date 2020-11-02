@@ -173,7 +173,8 @@ const Form3Schema = new Schema({
     },
     fatherEmail: {
         type: String,
-        required: "Father's Email cannot be empty."
+        default: ""
+        // required: "Father's Email cannot be empty."
     },
     motherEmail: {
         type: String,
