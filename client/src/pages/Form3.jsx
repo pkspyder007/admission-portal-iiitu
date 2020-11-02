@@ -138,7 +138,7 @@ const RegistrationForm = () => {
           {/* <Space direction="vertical">
             <DatePicker disabled initialValue={new Date().toString('dd-MM-yyyy')} placeholder={new Date().toString('dd-MM-yyyy')} onChange={(date, dateStr) => handleFieldValue("date", dateStr)} format="DD/MM/YYYY" />
           </Space>
-        </Form.Item> */} */}
+        </Form.Item> */}
 
         <Form.Item
           className="form__item"
@@ -443,7 +443,7 @@ const RegistrationForm = () => {
             },
           ]}
         >
-          <Input />
+          <Input type="number" />
         </Form.Item>
 
         <Form.Item
@@ -457,7 +457,7 @@ const RegistrationForm = () => {
             },
           ]}
         >
-          <Input />
+          <Input type="number" />
         </Form.Item>
 
         <Form.Item
