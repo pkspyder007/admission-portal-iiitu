@@ -244,10 +244,6 @@ exports.form3DataInput = async (req, res) => {
 
         let newForm3 = await Form3.create(req.body);
 
-        if(!newForm3) {
-            return res.status(400).json({ message: `Something went wrong.` });
-        }
-
         std.step1 = false;
         std.step2 = true;
         std.save();
@@ -262,7 +258,7 @@ exports.form3DataInput = async (req, res) => {
 
     } catch (error) {
         console.error(error.message);
-        res.status(500).json({ message: "Something went wrong." });
+        res.status(500).json({ message: `Something went wrong. ${error.message}` });
         return;
     }
 }
@@ -368,7 +364,7 @@ exports.float = async (req, res) => {
 
 exports.accept = async(req, res) => {
     try {
-        let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { will: req.body.will});  
+        let newStd = await Student.findOneAndUpdate({ jeeRegNo: req.userId }, { will: "ACCEPT"});  
         return res.json({message: "Response recorded."})
     } catch (error) {
         return res.status(400).json({message: "Something went wrong."});

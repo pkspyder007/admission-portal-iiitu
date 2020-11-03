@@ -103,3 +103,12 @@ exports.getDocs = (req, res) => {
     }
   });
 }
+
+exports.getAllStudents = async (req, res) => {
+  try {
+    let stds = await Student.find({});
+    return res.json(stds);
+  } catch (error) {
+    return res.status(500).json({message: error.message})
+  }
+}

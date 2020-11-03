@@ -1,36 +1,11 @@
 import React from 'react';
-import { Layout, message, Card, Col, Row, Table, Button, Space } from 'antd';
+import { Layout, message, Card, Col, Row, Typography } from 'antd';
 import '../css/AdminDashboard.scss';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 const { Header } = Layout;
-
-const columns = [
-  {
-    title: 'S. No.',
-    dataIndex: 'sNo',
-    key: 'sno',
-  },
-  {
-    title: 'Student Name',
-    dataIndex: 'name',
-    key: 'code',
-  },
-  {
-    title: 'Reg. number',
-    dataIndex: 'regNo',
-    key: 'res',
-  },
-  {
-    title: 'Action',
-    key: 'fileName',
-    render: (text, record) => {
-      return <Link to={`/student/${record.sNo}`}> View </Link>
-    },
-  },
-];
 
 const DashboardAdmin = () =>{
 
@@ -60,12 +35,11 @@ const DashboardAdmin = () =>{
 return(
 <Layout className="layout__container">
     <Layout>
-      <Header className="site-layout-sub-header-background" style={{ padding: 0 }} />
-      {/* <div style={{ margin: '24px 16px 0' }}>
-        <div className="site-layout-background" style={{ padding: 24 }}>
-            {cse.length}          
-        </div>
-      </div> */}
+      <Header className="site-layout-sub-header-background" style={{ padding: 0 }}>
+        <Row justify="center">
+          <Typography.Title style={{color: "#fff"}}>IIIT UNA</Typography.Title>
+        </Row>
+        </Header>
       <div className="site-card-wrapper">
         <Row gutter={16}>
           <Col span={8}>
@@ -88,7 +62,23 @@ return(
         </Row>
       </div>
         <div style={{maxWidth: "1000px" , margin: " 24px auto"}}>
-        <Table columns={columns} dataSource={stds} rowKey="regNo" />
+        {/* <Table columns={columns} dataSource={stds} rowKey="regNo" /> */}
+        <Row justify="space-between" gutter={[24, 48]}>
+              <Col ><strong>S.No</strong></Col>
+              <Col ><strong>Name</strong></Col>
+              <Col ><strong>Reg Number</strong></Col>
+              <Col ><strong>View</strong></Col>
+            </Row>
+        {stds.map(s=> {
+          return (
+            <Row justify="space-between" gutter={[24, 48]}>
+              <Col >{s.sNo}</Col>
+              <Col>{s.name}</Col>
+              <Col>{s.regNo}</Col>
+              <Col><Link to={`/student/${s.sNo}`}> View </Link></Col>
+            </Row>
+          );
+        })}
         </div>
       {/* <Footer style={{ textAlign: 'center' }}>Portal Created by Cybernauts@IIITU</Footer> */}
     </Layout>

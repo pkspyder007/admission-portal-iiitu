@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createRef } from "react";
-import { Divider, Input, Row, Col, message } from "antd";
+import { Divider, Input, Row, Col, message, Button } from "antd";
 import { useScreenshot, createFileName } from "use-react-screenshot";
 import Axios from "axios";
 import { Link } from "react-router-dom";
@@ -35,7 +35,7 @@ const StudentInfo = (props) => {
 } 
 
   const handleSearch = (regNo) => {
-    message.info("Please wait...");
+    // message.info("Please wait...");
     Axios({
       method: "get",
       url: `/api/admin/form3/${regNo}`,
@@ -198,12 +198,13 @@ const StudentInfo = (props) => {
             <Info title="Recipt No." value={std.hotelFeeReceiptNo} />
           </Row>
         </div>
-      <button className="hop" onClick={getImage}>Print</button>
+      <Button type="primary" className="hop" onClick={getImage}>Print</Button> <span> - </span>
       <Link to={`/adminDashboard/docs/${std.regNo}`}>
-        <button className="hop">View Docs</button>
+        <Button type="primary" className="hop">View Docs</Button>
       </Link>
       </>
       )}
+      <Divider className="hop" />
     </div>
   );
 };
