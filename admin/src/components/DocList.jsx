@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { message, Table, Space, Button } from 'antd';
 import Axios from 'axios';
+import { DownloadOutlined } from '@ant-design/icons';
 
 
 const DocList = ({match}) => {
@@ -29,9 +30,14 @@ const DocList = ({match}) => {
         // console.log(record.fileName);
         let disabled = record.res !== "YES"; 
         return (
+          <>
           <Space size="middle">
             <Button onClick={() => getDocument(record.fileName)} disabled={disabled}>View</Button>
+            <a href={`/api/admin/docs/${jeeRegNo}/${record.fileName}`} download>
+            <Button disabled={disabled} type="primary" icon={<DownloadOutlined />} size="middle" />
+            </a>
           </Space>
+          </>
         )
       },
     },

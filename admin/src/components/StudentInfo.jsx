@@ -15,7 +15,7 @@ export const Info = ({ title, value }) => {
   );
 };
 
-const StudentInfo = () => {
+const StudentInfo = (props) => {
   const [std, setStd] = useState({});
 
   const ref = createRef(null);
@@ -50,21 +50,25 @@ const StudentInfo = () => {
       });
   };
 
+  // useEffect(() => {
+  //   if (image) {
+  //     download(image, { name: `${std.regNo}-form3`, extension: "png" });
+  //   }
+  // }, [image]);
+
   useEffect(() => {
-    if (image) {
-      download(image, { name: `${std.regNo}-form3`, extension: "png" });
-    }
-  }, [image]);
+    handleSearch(props.id)
+  }, []);
 
   return (
     <div className="form3">
-      <Search
+      {/* <Search
         placeholder="Search By Registration Number"
         enterButton="Search"
         size="large"
         className="hop"
         onSearch={(value) => handleSearch(value)}
-      />
+      /> */}
       <Divider />
       {/* Header */}
       {std._id && (
