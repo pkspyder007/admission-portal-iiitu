@@ -71,7 +71,7 @@ return(
             </Row>
         {stds.map(s=> {
           return (
-            <Row justify="space-between" gutter={[24, 48]}>
+            <Row justify="space-between" gutter={[24, 48]} key={s.regNo}>
               <Col >{s.sNo}</Col>
               <Col>{s.name}</Col>
               <Col>{s.regNo}</Col>

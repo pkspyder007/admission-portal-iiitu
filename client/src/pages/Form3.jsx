@@ -56,6 +56,9 @@ const RegistrationForm = () => {
     // setStd(std);
     setToken(localStorage.getItem('x-access-token'))
     handleFieldValue("regNo", std.regNo);
+    handleFieldValue("name", std.name);
+    handleFieldValue("email", std.email);
+    handleFieldValue("jeeMainRoll", std.jeeRegNo);
     handleFieldValue("branch", std.branchAlloted);
     // handleFieldValue("branch", std.branchAlloted);
 
@@ -166,7 +169,7 @@ const RegistrationForm = () => {
             },
           ]}
         >
-          <Input />
+          <Input disabled />
         </Form.Item>
 
         <Form.Item
@@ -181,7 +184,7 @@ const RegistrationForm = () => {
             },
           ]}
         >
-          <Input />
+          <Input disabled/>
         </Form.Item>
 
         <Form.Item
@@ -280,11 +283,11 @@ const RegistrationForm = () => {
         <Form.Item
           className="form__item"
           name="studentAadharNo"
-          label="Student's Aadhar Number"
+          label="Student's Aadhaar Number"
           rules={[
             {
               required: true,
-              message: "Please enter your aadhar number!",
+              message: "Please enter your aadhaar number!",
             },
           ]}
         >
@@ -310,7 +313,7 @@ const RegistrationForm = () => {
         <Form.Item
           className="form__item"
           name="state"
-          label="State"
+          label="State of residency"
           rules={[
             {
               required: true,
@@ -416,7 +419,7 @@ const RegistrationForm = () => {
             },
           ]}
         >
-          <Input />
+          <Input disabled />
         </Form.Item>
         <Form.Item
           className="form__item"

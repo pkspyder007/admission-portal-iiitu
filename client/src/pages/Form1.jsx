@@ -12,57 +12,57 @@ function Form1() {
       sno: "1",
       fileName: 'seat-accesptance-letter',
       title: "Document verification cum Seat Acceptance Letter(ORIGINAL) (Seat upgradation letter,if any) ",
-      res: "NO",
-      required: false
+      res: "YES",
+      required: true
     },
     {
       sno: "2",
       fileName: 'jee-main-score-card',
       title: "Jee(Main) score card(Self Attested)",
-      res: "NO",
-      required: false
+      res: "YES",
+      required: true
     },
     {
       sno: "3",
       fileName: 'jee-main-admit-card',
       title: "Jee(Main) Admit Card for verification of identity of the candidate(Self Attested)",
-      res: "NO",
-      required: false
+      res: "YES",
+      required: true
     },
     {
       sno: "4",
       fileName: '10-marksheet',
       title: "Marksheet/Certificate of Class X[As Date of birth proof](Self Attested)",
-      res: "NO",
-      required: false
+      res: "YES",
+      required: true
     },
     {
       sno: "5",
       fileName: '12-marksheet',
       title: "Marksheet and pass Certificate of Class XII(Self Attested)",
-      res: "NO",
-      required: false
+      res: "YES",
+      required: true
     },
     {
       sno: "6",
       fileName: "character-certi",
       title: "Conduct/Character Certificate from Head of Institution Last Attended(Self Attested)",
-      res: "NO",
-      required: false
+      res: "YES",
+      required: true
     },
     {
       sno: "7",
       fileName: 'transfer-migration',
       title: "Migration/Transfer Certificate(Original)",
-      res: "NO",
-      required: false
+      res: "YES",
+      required: true
     },
     {
       sno: "8",
       fileName: 'photo-id-proof',
       title: "Photo ID proof(Self Attested)",
-      res: "NO",
-      required: false
+      res: "YES",
+      required: true
     },
     {
       sno: "9",
