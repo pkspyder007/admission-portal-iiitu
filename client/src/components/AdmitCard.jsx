@@ -38,16 +38,6 @@ const AdmitCard = (props) => {
     })
   }, [])
 
-  if(std.will !== "ACCEPT") {
-    return (
-      <div className="container" id="admit-card">
-        <Row justify="center">
-        <h1>You have not accepted the seat.</h1>
-        </Row>
-      </div>
-    );
-  }
-
   return (
     <div className="container" id="admit-card">
             <div className="head">

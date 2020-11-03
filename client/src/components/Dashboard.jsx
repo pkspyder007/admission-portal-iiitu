@@ -19,7 +19,7 @@ const Dashboard = (props) => {
     props.history.push("/login");
   };
   const std = JSON.parse(localStorage.getItem('std'));
-  const hideWill = JSON.parse(localStorage.getItem('hideWill'));
+  const hideWill = std.will !== "FREEZE-DEFAULT";
   if(!std) {
     props.history.push("/login");
     return
