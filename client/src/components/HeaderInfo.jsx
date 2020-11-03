@@ -4,14 +4,14 @@ import React from "react";
 const HeaderInfo = ({ title, note }) => {
   return (
     <div>
-      <Row justify="center">
+      {/* <Row justify="center">
       <img
             src="https://upload.wikimedia.org/wikipedia/en/c/cf/Iiit-una-logo.png"
             height="135px"
             alt="IIIT UNA"
             style={{marginRight: "24px"}}
           />
-      </Row>
+      </Row> */}
       <Row justify="center">
          
         <Col>
