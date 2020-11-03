@@ -27,7 +27,7 @@ const Dashboard = (props) => {
   const { completed, step1} = std;
   return (
     <div id="dashboard">
-      <Tabs defaultActiveKey="6" tabPosition="left">
+      <Tabs defaultActiveKey={hideWill ? "6": "0"} tabPosition="left">
         <TabPane tab={`Willingness`} key={0} disabled={hideWill}>
           <Step0 />
         </TabPane>

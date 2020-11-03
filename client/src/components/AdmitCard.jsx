@@ -38,7 +38,7 @@ const AdmitCard = (props) => {
     })
   }, [])
 
-  if(will) {
+  if(std.will !== "ACCEPT") {
     return (
       <div className="container" id="admit-card">
         <Row justify="center">

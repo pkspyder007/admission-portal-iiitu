@@ -137,26 +137,7 @@ const StudentInfo = () => {
           <Row justify="space-between" gutter={[48, 24]}>
             <Info title="Annual Family Income" value={std.annualFamilyIncome} />
           </Row>
-          <Row justify="space-between" gutter={[48, 24]}>
-            <Info title="JoSAA-2020 Amount" value={`₹ ${std.josaaFeeAmount ?? "Not Provided Yet"}`} />
-            <Info title="Date" value={std.josaaFeeDate} />
-          </Row>
-          <Row justify="space-between" gutter={[48, 24]}>
-            <Info
-              title="IIIT UNA Institute Fee Amount"
-              value={`₹ ${std.instituteFeeAmount ?? "Not Provided Yet"}`}
-            />
-            <Info title="Date" value={std.instituteFeeDate} />
-            <Info title="Recipt No." value={std.instituteFeeReceiptNo} />
-          </Row>
-          <Row justify="space-between" gutter={[48, 24]}>
-            <Info title="Total Amount" value={`₹ ${std.totalFee ?? "Not Provided Yet"}`} />
-          </Row>
-          <Row justify="space-between" gutter={[48, 24]}>
-            <Info title="Hostel Fee Amount" value={`₹ ${std.hostelFeeAmount ?? "Not Provided Yet"}`} />
-            <Info title="Date" value={std.hostelFeeDate} />
-            <Info title="Recipt No." value={std.hotelFeeReceiptNo} />
-          </Row>
+          
         </div>
       </>
     </div>
