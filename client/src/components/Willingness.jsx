@@ -17,6 +17,7 @@ import HeaderInfo from "./HeaderInfo";
 import Axios from "axios";
 import { withRouter } from "react-router-dom";
 import DocumentUpload from "./DocumentUpload";
+import { GoldTwoTone } from "@ant-design/icons";
 
 const tailFormItemLayout = {
   wrapperCol: {
@@ -33,6 +34,7 @@ const tailFormItemLayout = {
 
 const Willingness = ({ history }) => {
   const [will, setWill] = useState("ACCEPT");
+  const [total, setTotal] = useState(0);
   const [r1, setR1] = useState(false);
   const [r2, setR2] = useState(false);
   const [r3, setR3] = useState(false);
@@ -51,7 +53,7 @@ const Willingness = ({ history }) => {
       return;
     }
 
-    if(!ack) {
+    if (!ack) {
       alert(`Please Upload ${will} acknowledgement.`);
       return;
     }
@@ -87,17 +89,17 @@ const Willingness = ({ history }) => {
 
   const handleFreeze = (vals) => {
     if (!r1) {
-      alert("Please Upload all recipts...");
+      alert("Please Upload Partial insitute fee recipt...");
       return;
     }
 
     if (!r2) {
-      alert("Please Upload all recipts...");
+      alert("Please Upload Insitute fee recipt...");
       return;
     }
 
     if (!r3) {
-      alert("Please Upload all recipts...");
+      alert("Please Upload JoSaa recipt...");
       return;
     }
 
@@ -106,7 +108,7 @@ const Willingness = ({ history }) => {
     Axios({
       method: "post",
       url: "/api/student/freeze",
-      data: { ...vals },
+      data: { ...vals,totalFee: (vals['instituteFeeAmount']||0) + (vals['institutePartialFeeAmount']||0) + (vals['josaaFeeAmount']||0) },
       headers: {
         "x-access-token": localStorage.getItem("x-access-token"),
       },
@@ -118,6 +120,8 @@ const Willingness = ({ history }) => {
             "Please re-login and download a copy of your application. If not redirected!",
         });
         alert("Process completed. Please re-login to continue.");
+        localStorage.setItem("cstep", "6");
+        // window.location.reload();
         localStorage.setItem("x-access-token", "");
         history.push("/login");
       })
@@ -147,10 +151,13 @@ const Willingness = ({ history }) => {
             Please fill the details carefully.
             <br />
             <br />
+            <strong>
+              Institute fees payment by DD is applicable only to those candidate who opts for in-person/physical reporting at the institute ( TC-II, Chnadput, Haroli, Una , H.P.)
+            </strong>
           `}
         />
       </div>
-        
+
       <Divider />
       {will === "ACCEPT" ? (
         <Row justify="center">
@@ -159,7 +166,7 @@ const Willingness = ({ history }) => {
               <Form.Item
                 className="form__item"
                 name="josaaFeeAmount"
-                label="JoSSA 2020 Amount(Rs.)"
+                label="JoSAA 2020 Amount(Rs.)"
                 rules={[
                   {
                     required: true,
@@ -167,7 +174,10 @@ const Willingness = ({ history }) => {
                   },
                 ]}
               >
-                <InputNumber size="large" min={1} />
+                <Radio.Group>
+                  <Radio value={35000}>Rs. 35000</Radio>
+                  <Radio value={15000}>Rs. 15000</Radio>
+                </Radio.Group>
               </Form.Item>
 
               <Form.Item
@@ -191,10 +201,11 @@ const Willingness = ({ history }) => {
                 </Space>
               </Form.Item>
 
+              {/* partial fee start */}
               <Form.Item
                 className="form__item"
-                name="instituteFeeAmount"
-                label="IIIT Una Institute Fee(Rs.)"
+                name="institutePartialFeeAmount"
+                label="IIIT Una Partial Institute Fee paid to JoSAA (Rs.)"
                 rules={[
                   {
                     required: true,
@@ -202,13 +213,70 @@ const Willingness = ({ history }) => {
                   },
                 ]}
               >
-                <InputNumber size="large" min={1} />
+                <Radio.Group>
+                  <Radio value={40000}>Rs. 40000</Radio>
+                  <Radio value={20000}>Rs. 20000</Radio>
+                </Radio.Group>
+              </Form.Item>
+
+              <Form.Item
+                className="form__item"
+                name="institutePartialFeeDate"
+                label="Partial Institute Fee Payment Date"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter date",
+                  },
+                ]}
+              >
+                <Space direction="vertical">
+                  <DatePicker
+                    onChange={(date, dateStr) =>
+                      handleFieldValue("institutePartialFeeDate", dateStr)
+                    }
+                    format="DD/MM/YYYY"
+                  />
+                </Space>
+              </Form.Item>
+
+              <Form.Item
+                className="form__item"
+                name="institutePartialFeeReceiptNo"
+                label="Partial Institute Fee Payment Receipt No."
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter amount",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+
+              {/* partial fee end */}
+
+              <Form.Item
+                className="form__item"
+                name="instituteFeeAmount"
+                label="IIIT Una remaining Institute Fee(Rs.)"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter the amount!",
+                  },
+                ]}
+              >
+                <Radio.Group>
+                  <Radio value={34900}>Rs. 34900</Radio>
+                  <Radio value={74900}>Rs. 74900</Radio>
+                </Radio.Group>
               </Form.Item>
 
               <Form.Item
                 className="form__item"
                 name="instituteFeeDate"
-                label="Institute Fee Payment Date"
+                label="Remaining Institute Fee Payment Date"
                 rules={[
                   {
                     required: true,
@@ -229,7 +297,7 @@ const Willingness = ({ history }) => {
               <Form.Item
                 className="form__item"
                 name="instituteFeeReceiptNo"
-                label="Institute Fee Payment Receipt No."
+                label="Remaining Institute Fee Payment Receipt No."
                 rules={[
                   {
                     required: true,
@@ -240,21 +308,20 @@ const Willingness = ({ history }) => {
                 <Input />
               </Form.Item>
 
-              <Form.Item
-                className="form__item"
-                name="totalFee"
-                label="Total(JoSAA+Institute)"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please enter amount",
-                  },
-                ]}
-              >
-                <InputNumber size="large" min={1} />
+          
+
+              <Form.Item shouldUpdate label="Total fees">
+                {() => {
+                  const d = form.getFieldsValue();
+                  let t = (d['instituteFeeAmount']||0) + (d['institutePartialFeeAmount']||0) + (d['josaaFeeAmount']||0);
+                  
+                  return (
+                   <InputNumber value={t} disabled/>
+                  );
+                }}
               </Form.Item>
 
-              <Form.Item
+              {/* <Form.Item
                 className="form__item"
                 name="hostelFeeAmount"
                 label="Hostel Fee(Rs.)"
@@ -303,10 +370,10 @@ const Willingness = ({ history }) => {
               >
                 <Input />
               </Form.Item>
-
+ */}
               <DocumentUpload
-                fileName="hostel-fee-recipt"
-                title="Hostel FEE Recipt"
+                fileName="partial-fee-recipt"
+                title="Partial institute FEE Recipt"
                 afterUpload={() => setR1(true)}
               />
               <DocumentUpload
@@ -338,20 +405,22 @@ const Willingness = ({ history }) => {
           </Row>
       </Row>
       </>): null} */}
-      {will !=="ACCEPT" ? (<Col>
-        <Row justify="center">
-          <DocumentUpload
-            fileName="will-acknowledgement"
-            title={`${will} Acknowledgement` }
-            afterUpload={() => setAck(true)}
-          />
-        </Row>
-        <Row justify="center">
-          <Button type="primary" size="large" onClick={hanldeFloat}>
-            {will}
-          </Button>
-        </Row>
-      </Col>) : null}
+      {will !== "ACCEPT" ? (
+        <Col>
+          <Row justify="center">
+            <DocumentUpload
+              fileName="will-acknowledgement"
+              title={`${will} Acknowledgement`}
+              afterUpload={() => setAck(true)}
+            />
+          </Row>
+          <Row justify="center">
+            <Button type="primary" size="large" onClick={hanldeFloat}>
+              {will}
+            </Button>
+          </Row>
+        </Col>
+      ) : null}
       <Divider />
     </>
   );

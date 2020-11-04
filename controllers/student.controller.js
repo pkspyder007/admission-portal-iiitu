@@ -236,6 +236,7 @@ exports.loginStudent = async (req, res) => {
 
 exports.form3DataInput = async (req, res) => {
     try {
+        console.log(req.userId);
         let std = await Student.findOne({ jeeRegNo: req.userId });
         if (!std) {
             res.status(400).json({ message: "Current user's jee not found in the database." });

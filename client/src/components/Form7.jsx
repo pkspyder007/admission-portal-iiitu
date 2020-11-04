@@ -295,6 +295,7 @@ const Form7 = () => {
           step4: false,
           step5: true,
          }));
+         localStorage.setItem("cstep", "5");
          alert("Step completed")
          window.location.reload();
       })

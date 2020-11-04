@@ -82,6 +82,7 @@ const UploadDocList = () => {
             step5: false,
           })
         );
+        localStorage.setItem("cstep", "4");
         alert("Step completed")
         window.location.reload();
       })

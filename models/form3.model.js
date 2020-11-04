@@ -210,8 +210,21 @@ const Form3Schema = new Schema({
         type: String,
         // required: "Institute fee Recipt no. cannot be empty."
     },
+    institutePartialFeeAmount: {
+        type: Number,
+        // required: "Institute fee amount cannot be empty."
+    },
+    institutePartialFeeDate: {
+        type: String,
+        // required: "Institute fee Date cannot be empty."
+    },
+    institutePartialFeeReceiptNo: {
+        type: String,
+        // required: "Institute fee Recipt no. cannot be empty."
+    },
     totalFee: {
         type: Number,
+        default: 109900
         // required: "Total fee amount cannot be empty."
     },
     hostelFeeAmount: {

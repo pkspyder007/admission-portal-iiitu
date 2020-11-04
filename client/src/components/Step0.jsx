@@ -78,6 +78,7 @@ const Step0 = ({ history }) => {
         //   message: "Please Complete Your Application!!",
         // });
         localStorage.setItem("hideWill", true);
+        localStorage.setItem("cstep", "1");
         alert("Response recorded. \n Please Complete Your Application!!");
         window.location.reload();
         // localStorage.setItem("x-access-token", "");
@@ -102,32 +103,16 @@ const Step0 = ({ history }) => {
       <div className="field__container">
         <HeaderInfo
           title="FINAL SEAT LOCKING"
-          note={`
-            <strong>
-              Note:
-            </strong>
-            Please select the option carefully.
-            <br />
-            <br />
-            <strong>ACCEPT : </strong>
-            I accept the seat alloted at IIIT UNA and don't want to participate in CSAB special rounds.
-            <br />
-            <strong>WITHDRAW : </strong>
-            I want to withdraw the seat alloted at IIIT UNA and don't want to participate in CSAB special rounds.
-            <br />
-            <strong>PARTICIPATE : </strong>
-            I want to participate in CSAB special rounds.
-          `}
+         
         />
       </div>
       <Row justify="center">
         <Col>
           <Radio.Group onChange={onChange} value={will}>
-            <Radio value="ACCEPT">ACCEPT</Radio>
-            <Radio value="WITHDRAW">WITHDRAW</Radio>
-            <Radio value="PARTICIPATE">PARTICIPATE</Radio>
+            <Radio value="ACCEPT">I have paid partial admission fee in JoSAA</Radio>
           </Radio.Group>
         </Col>
+        
       </Row>
       <Divider />
       {will==="ACCEPT" ? (<Row justify="center">
@@ -135,20 +120,7 @@ const Step0 = ({ history }) => {
             {will}
           </Button>
         </Row>): null}
-      {will !=="ACCEPT" ? (<Col>
-        <Row justify="center">
-          <DocumentUpload
-            fileName="will-acknowledgement"
-            title={`${will} Acknowledgement` }
-            afterUpload={() => setAck(true)}
-          />
-        </Row>
-        <Row justify="center">
-          <Button type="primary" size="large" onClick={hanldeFloat}>
-            {will}
-          </Button>
-        </Row>
-      </Col>) : null}
+     
       <Divider />
     </>
   );

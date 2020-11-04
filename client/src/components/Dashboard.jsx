@@ -20,6 +20,11 @@ const Dashboard = (props) => {
   };
   const std = JSON.parse(localStorage.getItem('std'));
   const hideWill = std.will !== "FREEZE-DEFAULT";
+  let cstep = localStorage.getItem("cstep");
+  if(!cstep) {
+    localStorage.setItem("cstep", "0");
+    cstep = 0;
+  }
   if(!std) {
     props.history.push("/login");
     return
@@ -27,7 +32,7 @@ const Dashboard = (props) => {
   const { completed, step1} = std;
   return (
     <div id="dashboard">
-      <Tabs defaultActiveKey={hideWill ? "6": "0"} tabPosition="left">
+      <Tabs defaultActiveKey={cstep} tabPosition="left">
         <TabPane tab={`Willingness`} key={0} disabled={hideWill}>
           <Step0 />
         </TabPane>

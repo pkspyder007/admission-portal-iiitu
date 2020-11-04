@@ -47,7 +47,7 @@ const DocumentUpload = (props) => {
         <Row justify="space-between" gutter="24">
          <Col><p>{props.title}</p></Col>
          <Col>
-            <Upload beforeUpload={beforeUpload} onChange={onFileChange} {...uploadProps} accept=".jpg,.jpeg,.png,.pdf">
+            <Upload beforeUpload={beforeUpload} onChange={onFileChange} {...uploadProps} accept=".pdf">
                 <Button icon={<UploadOutlined />}>Click to Upload</Button>
             </Upload>
             </Col>   

@@ -84,6 +84,7 @@ const RegistrationForm = () => {
         step4: false,
         step5: false,
        }));
+       localStorage.setItem("cstep", "2");
        alert("Step Completed.")
        window.location.reload();
     }).catch(err => {
@@ -249,15 +250,16 @@ const RegistrationForm = () => {
         >
           {/* <Input /> */}
           <Select onChange={(cat) => handleFieldValue("mainCategory", cat)} style={{ width: 200 }}>
-            <Option value="OP">OP</Option>
-            <Option value="OPPwD">OPPwD</Option>
-            <Option value="EWSSC">EWSSC</Option>
-            <Option value="SCPwD">SCPwD</Option>
+          <Option value="OPEN">OPEN</Option>
+            <Option value="OPEN-PwD">OPEN-PwD</Option>
+            <Option value="SC">SC</Option>
+            <Option value="SC-PwD">SC-PwD</Option>
             <Option value="ST">ST</Option>
-            <Option value="STPwD">STPwD</Option>
-            <Option value="OBC">OBC</Option>
-            <Option value="OBCPwD">OBCPwD</Option>
+            <Option value="ST-PwD">ST-PwD</Option>
             <Option value="OBC-NCL">OBC-NCL</Option>
+            <Option value="OBC-NCL-PwD">OBC-NCL-PwD</Option>
+            <Option value="GEN-EWS">GEN-EWS</Option>
+            <Option value="GEN-EWS-PwD">GEN-EWS-PwD</Option>
           </Select>
         </Form.Item>
 
@@ -476,15 +478,16 @@ const RegistrationForm = () => {
         >
           {/* <Input /> */}
           <Select onChange={val => handleFieldValue("admittedCategory", val)}  style={{ width: 200 }}>
-            <Option value="OP">OP</Option>
-            <Option value="OPPwD">OPPwD</Option>
-            <Option value="EWSSC">EWSSC</Option>
-            <Option value="SCPwD">SCPwD</Option>
+            <Option value="OPEN">OPEN</Option>
+            <Option value="OPEN-PwD">OPEN-PwD</Option>
+            <Option value="SC">SC</Option>
+            <Option value="SC-PwD">SC-PwD</Option>
             <Option value="ST">ST</Option>
-            <Option value="STPwD">STPwD</Option>
-            <Option value="OBC">OBC</Option>
-            <Option value="OBCPwD">OBCPwD</Option>
+            <Option value="ST-PwD">ST-PwD</Option>
             <Option value="OBC-NCL">OBC-NCL</Option>
+            <Option value="OBC-NCL-PwD">OBC-NCL-PwD</Option>
+            <Option value="GEN-EWS">GEN-EWS</Option>
+            <Option value="GEN-EWS-PwD">GEN-EWS-PwD</Option>
           </Select>
         </Form.Item>
 

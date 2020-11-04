@@ -68,63 +68,63 @@ function Form1() {
       sno: "9",
       fileName: 'form-4-undertaking',
       title: "Form No:04 Undertaking Moral and Disciplinary",
-      res: "NO",
-      required: false
+      res: "YES",
+      required: true
     },
     {
       sno: "10",
       fileName: 'form-5-anti-ragging',
       title: "Form No:05 Anti Ragging Affidavits(Students and Parents)",
-      res: "NO",
-      required: false
+      res: "YES",
+      required: true
     },
     {
       sno: "11",
       fileName: "form-7",
       title: "Form No:07 Course Registration Form",
-      res: "NO",
-      required: false
+      res: "YES",
+      required: true
     },
     {
       sno: "12",
       fileName: "form-8-medical",
       title: "Form No:08 Medical Fitness Certificate(Original)",
-      res: "NO",
-      required: false
+      res: "YES",
+      required: true
     },
     {
       sno: "13",
       fileName: "form-9-study-gap",
       title: "Form No:09 Study Gap Affidavit",
-      res: "NO",
+      res: "NA",
       required: false
     },
     {
       sno: "14",
       fileName: 'form-10-category',
       title: "Form No:10 Valid Category Certificate(OBC/EWS/SC/ST) on JoSAA format [OBC-NCL Certificate must be issued on or after April 1,2020](Self Attested) (NOTE:The caste of candidate must be in state-wise central list) ",
-      res: "NO",
+      res: "NA",
       required: false
     },
     {
       sno: "15",
       fileName: "form-11-obl-ncl-undertaking",
       title: "Form No:11 Undertaking in Required Format(for OBC-NCL Candidates Only) (Original)",
-      res: "NO",
+      res: "NA",
       required: false
     },
     {
       sno: "16",
       fileName: "form-11-obl-undertaking",
       title: "Form No:12 Undertaking-OBC",
-      res: "NO",
+      res: "NA",
       required: false
     },
     {
       sno: "17",
       fileName: "form-13-disability",
       title: "Form No:13 Disability Certificate(if any)",
-      res: "NO",
+      res: "NA",
       required: false
     },
     {
@@ -138,6 +138,13 @@ function Form1() {
       sno: "19",
       fileName: "signature",
       title: "Candidate's Signature",
+      res: "YES",
+      required: true
+    },
+    {
+      sno: "20",
+      fileName: "form14",
+      title: "Form - 14: Declaration form",
       res: "YES",
       required: true
     },
@@ -169,6 +176,7 @@ function Form1() {
           step4: false,
           step5: false,
          }));
+         localStorage.setItem("cstep", "3");
          alert("Step completed")
          window.location.reload();
     }).catch(err => {
@@ -201,7 +209,7 @@ function Form1() {
             checked={isChecked}
             onChange={(e) => setIsChecked(e.target.checked)}
           />
-          I have reviewed the documents submitted.
+          I have reviewed and selected all the documents applicable to be and will submit in next step.
         </span>
         <Button
           type="primary"

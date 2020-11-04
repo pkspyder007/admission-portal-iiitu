@@ -116,10 +116,6 @@ const StudentInfo = () => {
             <Info title="Branch" value={std.branch} />
           </Row>
           <Row justify="space-between" gutter={[48, 24]}>
-            <Info title="Hosteller" value={"YES"} />
-            <Info title="Hostel Name" value={std.hostelName} />
-          </Row>
-          <Row justify="space-between" gutter={[48, 24]}>
             <Info title="Father's Name" value={std.fatherName} />
             <Info title="Father's Mobile" value={std.fatherMobile} />
             <Info title="Father's Email" value={std.fatherEmail} />
