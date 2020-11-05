@@ -105,6 +105,8 @@ const UploadDocList = () => {
                         <strong>NOTE:</strong> Each candidate is required to produce one set of documents/certificates alongwith other credentials given below.
                         <strong> A candidate will not be admitted if the original documents/certificates are not produced for verification.</strong> Formats of various certificates/affidavits
                         alongwith the instructions are available on the <strong>Institute website/Downloads section and candidates are advised to use the same.</strong>
+                        <br /> <br />
+                        <strong>Please upload all documents in PDF format only.</strong>
                         `}
         />
       </div>

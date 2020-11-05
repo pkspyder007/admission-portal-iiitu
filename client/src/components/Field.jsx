@@ -19,7 +19,6 @@ function Field({ children }) {
         <li>Details of Documents/Certificates</li>
         <div style={{ display: "flex", justifyContent: "space-evenly" }}>
           <li>Yes</li>
-          <li>No</li>
           <li>NA</li>
         </div>
       </ul>
@@ -39,9 +38,6 @@ export const DocRow = ({ sno, title, required, onChangeHandler }) => {
         <Radio value="YES">Yes</Radio>
         </li>
         <li>
-        <Radio value="NO">No</Radio>
-        </li>
-        <li>
         <Radio value="NA">NA</Radio>
         </li>
         </Radio.Group>
@@ -50,9 +46,6 @@ export const DocRow = ({ sno, title, required, onChangeHandler }) => {
         <Radio.Group onChange={(e) => onChangeHandler(sno, e.target.value)}>
         <li>
         <Radio value="YES">Yes</Radio>
-        </li>
-        <li>
-        <Radio value="NO">No</Radio>
         </li>
         <li>
         <Radio value="NA">NA</Radio>

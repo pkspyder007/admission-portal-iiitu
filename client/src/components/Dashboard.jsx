@@ -10,6 +10,7 @@ import Willingness from "./Willingness";
 import Profile from "./Profile";
 import StudentInfo from "./StudentInfo";
 import Step0 from "./Step0";
+import UpdatePassword from "./UpdatePassword";
 
 const { TabPane } = Tabs;
 
@@ -18,7 +19,10 @@ const Dashboard = (props) => {
     localStorage.setItem("x-access-token", "");
     props.history.push("/login");
   };
-  const std = JSON.parse(localStorage.getItem('std'));
+  let std = JSON.parse(localStorage.getItem('std'));
+  if(!std) {
+    std = {will: "ACCEPT"}
+  }
   const hideWill = std.will !== "FREEZE-DEFAULT";
   let cstep = localStorage.getItem("cstep");
   if(!cstep) {
@@ -30,6 +34,7 @@ const Dashboard = (props) => {
     return
   }
   const { completed, step1} = std;
+  cstep = "7"
   return (
     <div id="dashboard">
       <Tabs defaultActiveKey={cstep} tabPosition="left">
@@ -56,7 +61,10 @@ const Dashboard = (props) => {
         <TabPane tab={`Profile`} key={6}>
             <Profile />
         </TabPane>
-        <TabPane tab={`Downloads`} key={7}>
+        <TabPane tab={`Update Password`} key={7}>
+            <UpdatePassword />
+        </TabPane>
+        <TabPane tab={`Downloads`} key={8}>
           <Downloads />
         </TabPane>
         <TabPane
@@ -68,7 +76,7 @@ const Dashboard = (props) => {
               Logout
             </div>
           }
-          key={8}
+          key={9}
         ></TabPane>
       </Tabs>
     </div>

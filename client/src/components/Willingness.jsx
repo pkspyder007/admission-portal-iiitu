@@ -166,7 +166,7 @@ const Willingness = ({ history }) => {
               <Form.Item
                 className="form__item"
                 name="josaaFeeAmount"
-                label="JoSAA 2020 Amount(Rs.)"
+                label="Seat Acceptance fee paid to JoSAA"
                 rules={[
                   {
                     required: true,
@@ -183,7 +183,7 @@ const Willingness = ({ history }) => {
               <Form.Item
                 className="form__item"
                 name="josaaFeeDate"
-                label="JoSAA Payment Date"
+                label="JoSAA Seat Acceptance fee Payment Date"
                 rules={[
                   {
                     required: true,
@@ -205,7 +205,7 @@ const Willingness = ({ history }) => {
               <Form.Item
                 className="form__item"
                 name="institutePartialFeeAmount"
-                label="IIIT Una Partial Institute Fee paid to JoSAA (Rs.)"
+                label="Partial Institute Fee paid to JoSAA (Rs.)"
                 rules={[
                   {
                     required: true,
@@ -259,7 +259,7 @@ const Willingness = ({ history }) => {
               <Form.Item
                 className="form__item"
                 name="instituteFeeAmount"
-                label="IIIT Una remaining Institute Fee(Rs.)"
+                label="IIIT Una remaining Institute Fee applicable. ( OPEN/OBC - Rs. 34900/- SC/ST/PwD - Rs. 74900/- )"
                 rules={[
                   {
                     required: true,
@@ -276,7 +276,7 @@ const Willingness = ({ history }) => {
               <Form.Item
                 className="form__item"
                 name="instituteFeeDate"
-                label="Remaining Institute Fee Payment Date"
+                label="IIIT UNA Remaining Institute Fee Payment Date"
                 rules={[
                   {
                     required: true,
@@ -310,7 +310,7 @@ const Willingness = ({ history }) => {
 
           
 
-              <Form.Item shouldUpdate label="Total fees">
+              <Form.Item shouldUpdate label="Total fee paid during admission process.">
                 {() => {
                   const d = form.getFieldsValue();
                   let t = (d['instituteFeeAmount']||0) + (d['institutePartialFeeAmount']||0) + (d['josaaFeeAmount']||0);
@@ -371,20 +371,20 @@ const Willingness = ({ history }) => {
                 <Input />
               </Form.Item>
  */}
+                <DocumentUpload
+                  fileName="josaa-fee-recipt"
+                  title="Recipt- Seat Acceptance fee paid to JoSAA "
+                  afterUpload={() => setR3(true)}
+                />
               <DocumentUpload
                 fileName="partial-fee-recipt"
-                title="Partial institute FEE Recipt"
+                title="PRecipt- Partial Institute fee paid to JoSAA"
                 afterUpload={() => setR1(true)}
               />
               <DocumentUpload
                 fileName="institute-fee-recipt"
-                title="Institute FEE Recipt"
+                title="Recipt- IIIT UNA remaining fee payment"
                 afterUpload={() => setR2(true)}
-              />
-              <DocumentUpload
-                fileName="josaa-fee-recipt"
-                title="Josaa FEE Recipt"
-                afterUpload={() => setR3(true)}
               />
               <Form.Item className="form__item" {...tailFormItemLayout}>
                 <Button type="primary" htmlType="submit">

@@ -380,11 +380,30 @@ exports.freeze = async (req, res) => {
         try {
             let form3Data = await Form3.findOneAndUpdate({ regNo: newStd.regNo }, { ...req.body });
             let mailComplete = `
-            <p> Dear ${newStd.name} , </p>
-            <p>You have completed your registration process for insitute counselling.</p>
-            <p>Take a print of your Admit card from profile section of admission portal </p>
+            <p> Dear Candidate, </p>
+            <p>- Thanks for submitting the documents.</p>
+            <p>- The institute admission committee will review all the documents submitted.</p>
+            <p>- Discrepancy found in any, will be mailed to you on your registerd email ID within 24 hrs of your submission.</p>
+            <p>- You are supposed to remove the discrepancy in the given time.</p>
+            <p>- Failing to meet the deadline may result in seat cancellation</p>
+            <p>- Hence you should check your registered email ID regularly during the admission period.</p>
+            <p>- It is advised to check insitute website "Admission section" for any updates on admission process.</p>
+            <p>- On successful completion of the admission process student will recieve admission letter.</p>
+            <p>- No letter means no seat confirmation</p>
+            <p>- The following officials can be contacted for any doubts: </p>
+            <p>
+                1) Dr. Priyabrat - 9284614355 <br/>
+                2) Dr. Ashna Jacob - 9617427727 <br/>
+                3) Dr. Chirag - 9651676600 <br/>
+                4) Dr. G.S. Grewal - 7814747373 <br/>
+            </p>
+            <p>
+                with Regards, <br />
+                Admission Team <br />
+                IIIT, Una (H.P.)
+            </p>
             `;
-            sendEmail(newStd.email, 'Admission appliaction process update', mailComplete)
+            sendEmail(newStd.email, 'Admission application process update', mailComplete)
             sendEmail("so@iiitu.ac.in", 'Admission appliaction process update', `Student with registration Number: ${newStd.regNo} compeleted the process.`);
             res.status(200).json({
                 ...newStd._doc,
@@ -400,4 +419,32 @@ exports.freeze = async (req, res) => {
     }
 
 
+}
+
+
+exports.UpdatePassword = async (req, res) => {
+    try {
+        const student = await Student.findOne({jeeRegNo: req.userId});
+        if(!student) {
+            res.status(500).json({ message: "Student record not found" });
+            console.error("Student not find");
+            return;
+        }
+        console.log(req.body);
+        if(bcrypt.compareSync(req.body.password, student.password) ){
+            
+            let newPass = bcrypt.hashSync(req.body.newPassword, 10);
+            let updatedStd = await Student.findByIdAndUpdate(student._id, {password: newPass});
+    
+            return res.status(200).json({
+                message: "Password Updated Successfully."
+            });
+        } else {
+                res.status(500).json({ message: "Old password not valid!" });
+                return;
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+        console.error(error.message);
+    }
 }

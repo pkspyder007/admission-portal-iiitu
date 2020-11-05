@@ -68,10 +68,10 @@ const Profile = () => {
       </div>
       )}
       <Divider />
-      {std.completed ? 
+      {/* {std.completed ? 
       (<div>
         <a href="/admit-card">Print Admit card</a>
-      </div>) : ""}
+      </div>) : ""} */}
       
       </>
   )

@@ -67,14 +67,14 @@ function Form1() {
     {
       sno: "9",
       fileName: 'form-4-undertaking',
-      title: "Form No:04 Undertaking Moral and Disciplinary",
+      title: "Form No:04 Undertaking Moral and Disciplinary. (Attach appropiate time extension letter (available at institute website), if the document not avialable at present.)",
       res: "YES",
       required: true
     },
     {
       sno: "10",
       fileName: 'form-5-anti-ragging',
-      title: "Form No:05 Anti Ragging Affidavits(Students and Parents)",
+      title: "Form No:05 Anti Ragging Affidavits(Students and Parents). (Attach appropiate time extension letter (available at institute website), if the document not avialable at present.)",
       res: "YES",
       required: true
     },
@@ -88,21 +88,21 @@ function Form1() {
     {
       sno: "12",
       fileName: "form-8-medical",
-      title: "Form No:08 Medical Fitness Certificate(Original)",
+      title: "Form No:08 Medical Fitness Certificate(Original). (Attach appropiate time extension letter (available at institute website), if the document not avialable at present.)",
       res: "YES",
       required: true
     },
     {
       sno: "13",
       fileName: "form-9-study-gap",
-      title: "Form No:09 Study Gap Affidavit",
+      title: "Form No:09 Study Gap Affidavit. (Attach appropiate time extension letter (available at institute website), if the document not avialable at present.)",
       res: "NA",
       required: false
     },
     {
       sno: "14",
       fileName: 'form-10-category',
-      title: "Form No:10 Valid Category Certificate(OBC/EWS/SC/ST) on JoSAA format [OBC-NCL Certificate must be issued on or after April 1,2020](Self Attested) (NOTE:The caste of candidate must be in state-wise central list) ",
+      title: "Form No:10 Valid Category Certificate(OBC/EWS/SC/ST) on JoSAA format [OBC-NCL Certificate must be issued on or after April 1,2020](Self Attested) (NOTE:The caste of candidate must be in state-wise central list).  ",
       res: "NA",
       required: false
     },
@@ -209,7 +209,7 @@ function Form1() {
             checked={isChecked}
             onChange={(e) => setIsChecked(e.target.checked)}
           />
-          I have reviewed and selected all the documents applicable to be and will submit in next step.
+          I have reviewed and selected all the documents applicable to me and will submit the same in next step.
         </span>
         <Button
           type="primary"
