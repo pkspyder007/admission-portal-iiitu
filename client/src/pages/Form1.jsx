@@ -145,6 +145,13 @@ function Form1() {
       sno: "20",
       fileName: "form14",
       title: "Form - 14: Declaration form",
+      res: "NA",
+      required: false
+    },
+    {
+      sno: "21",
+      fileName: "form15",
+      title: "Form - 15",
       res: "YES",
       required: true
     },
