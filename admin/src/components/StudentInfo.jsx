@@ -1,10 +1,8 @@
 import React, { useState, useEffect, createRef } from "react";
 import { Divider, Input, Row, Col, message, Button } from "antd";
-import { useScreenshot, createFileName } from "use-react-screenshot";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 
-const { Search } = Input;
 
 export const Info = ({ title, value }) => {
   return (
@@ -17,16 +15,6 @@ export const Info = ({ title, value }) => {
 
 const StudentInfo = (props) => {
   const [std, setStd] = useState({});
-
-  const ref = createRef(null);
-  const [image, takeScreenShot] = useScreenshot();
-
-  const download = (image, { name = "img", extension = "png" } = {}) => {
-    const a = document.createElement("a");
-    a.href = image;
-    a.download = createFileName(extension, name);
-    a.click();
-  };
 
   // const getImage = () => takeScreenShot(ref.current);
 
@@ -73,7 +61,7 @@ const StudentInfo = (props) => {
       {/* Header */}
       {std._id && (
         <>
-        <div id="GFG" style={{ padding: 24 }} ref={ref}>
+        <div id="GFG" style={{ padding: 24 }} >
           <Row style={{ borderBottom: "none" }} justify="center" gutter={[56, 24]}>
             <Col>
             <img src="https://upload.wikimedia.org/wikipedia/en/c/cf/Iiit-una-logo.png" height="135px" alt="IIIT UNA"/>
@@ -198,9 +186,14 @@ const StudentInfo = (props) => {
             <Info title="Recipt No." value={std.hotelFeeReceiptNo} />
           </Row>
         </div>
-      <Button type="primary" className="hop" onClick={getImage}>Print</Button> <span> - </span>
+      <Button type="primary" className="hop" onClick={getImage}>Print</Button> 
+      <span> - </span>
       <Link to={`/adminDashboard/docs/${std.regNo}`}>
         <Button type="primary" className="hop">View Docs</Button>
+      </Link>
+      <span> - </span>
+      <Link to={`/student/admit-card/${std.regNo}`}>
+        <Button type="primary" className="hop">Admit Card</Button>
       </Link>
       </>
       )}

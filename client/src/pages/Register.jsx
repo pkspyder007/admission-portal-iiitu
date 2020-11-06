@@ -108,7 +108,6 @@ const Register = ({ history }) => {
       </div>
       <Row justify="center">
         <Form
-          {...layout}
           form={form}
           name="std-reg"
           onFinish={onFinish}
@@ -143,7 +142,7 @@ const Register = ({ history }) => {
           </Form.Item>
           <Form.Item
             name={"soe"}
-            label="State Of Eligibility JEE MAIN"
+            label="State Of Eligibility"
             rules={[{ required: true }]}
           >
             {/* <Input placeholder="List can be found on insitute website" /> */}

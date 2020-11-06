@@ -112,3 +112,14 @@ exports.getAllStudents = async (req, res) => {
     return res.status(500).json({message: error.message})
   }
 }
+
+
+exports.getStd = async (req, res) => {
+  try {
+      const std = await Student.findOne({regNo: req.params.id});
+      return res.json(std);
+  } catch (error) {
+      console.error(error.message);
+      return res.status(500).json({message: error.message})
+  }
+}

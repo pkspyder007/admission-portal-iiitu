@@ -57,7 +57,7 @@
 
   #GFG {
     padding: 12px;
-    margin-top: -150px;
+    /* margin-top: -150px; */
     max-width: 100%;
   }
 }

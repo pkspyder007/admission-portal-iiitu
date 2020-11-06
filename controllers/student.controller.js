@@ -132,7 +132,7 @@ exports.createStudent = async (std) => {
         const newStudent = await Student.create(std);
         let mail = `
             <p> Dear ${std.name} , </p>
-            <p>please complete your counselling process by going to our admission portal <a href="http://117.252.73.157/login">here</a> and follow the procedure.</p>
+            <p>Please complete your admission process by visiting our admission portal <a href="http://117.252.73.157/login">here</a> and follow the procedure.</p>
             <p>Your login credentails are : </p>
             <p>ID: ${std.jeeRegNo} </p>
             <p>OTP: ${password} </p> <br />
@@ -165,58 +165,7 @@ exports.loginStudent = async (req, res) => {
                 return;
             }
             if (result) {
-                // Generate and Upadate Registration Number;
-                // if (student.isFirstLogin) {
-                //     try {
-                //         let regNo = '2K20';
-                //         let prevRegNums = getRegNums();
-                //         if (student.branchAlloted == 'CSE') {
-                //             if (prevRegNums.CSE < 10) {
-                //                 regNo = `${regNo}CSE00${prevRegNums.CSE}`
-                //             } else if (prevRegNums.CSE < 100) {
-                //                 egNo = `${regNo}CSE0${prevRegNums.CSE}`
-                //             } else {
-                //                 regNo = `${regNo}${prevRegNums.CSE}`
-                //             }
-                //         }
-                //         if (student.branchAlloted == 'IT') {
-                //             if (prevRegNums.IT < 10) {
-                //                 regNo = `${regNo}IT00${prevRegNums.IT}`
-                //             } else if (prevRegNums.CSE < 100) {
-                //                 egNo = `${regNo}IT0${prevRegNums.CSE}`
-                //             } else {
-                //                 regNo = `${regNo}${prevRegNums.IT}`
-                //             }
-                //         }
-                //         if (student.branchAlloted == 'ECE') {
-                //             if (prevRegNums.ECE < 10) {
-                //                 regNo = `${regNo}ECE00${prevRegNums.ECE}`
-                //             } else if (prevRegNums.CSE < 100) {
-                //                 egNo = `${regNo}ECE0${prevRegNums.CSE}`
-                //             } else {
-                //                 regNo = `${regNo}${prevRegNums.ECE}`
-                //             }
-                //         }
-                //         student.isFirstLogin = false;
-                //         student.regNo = regNo;
-                //         console.log(regNo);
-                //         student.save();
-                //         updateRegNums();
-
-
-                //         let token = jwt.sign({ id: student.jeeRegNo }, process.env.SECRET_KEY, {
-                //             // expiresIn: 86400,
-                //         });
-                //         res.status(200).json({ message: 'Login Successful.', auth: true, token: token, data: { ...student._doc, password: '' } });
-                //         return;
-                //     } catch (error) {
-                //         console.error(error);
-                //         res.status(500).json({ message: "Something went wrong." });
-                //         return;
-                //     }
-                // }
-
-                let token = jwt.sign({ id: student.jeeRegNo }, process.env.SECRET_KEY, {
+                              let token = jwt.sign({ id: student.jeeRegNo }, process.env.SECRET_KEY, {
                     expiresIn: 86400,
                 });
                 student.password = "";
@@ -392,19 +341,19 @@ exports.freeze = async (req, res) => {
             <p>- No letter means no seat confirmation</p>
             <p>- The following officials can be contacted for any doubts: </p>
             <p>
-                1) Dr. Priyabrat - 9284614355 <br/>
-                2) Dr. Ashna Jacob - 9617427727 <br/>
-                3) Dr. Chirag - 9651676600 <br/>
-                4) Dr. G.S. Grewal - 7814747373 <br/>
+                1) Dr. Priyabrat - +91 9284614355 <br/>
+                2) Dr. Ashna Jacob - +91 9617427727 <br/>
+                3) Dr. Chirag -  +91 9651676600 <br/>
+                4) Dr. G.S. Grewal - +91 7814747373 <br/>
             </p>
             <p>
-                with Regards, <br />
+                With Regards, <br /> <br />
                 Admission Team <br />
-                IIIT, Una (H.P.)
+                IIIT Una (H.P.)
             </p>
             `;
             sendEmail(newStd.email, 'Admission application process update', mailComplete)
-            sendEmail("so@iiitu.ac.in", 'Admission appliaction process update', `Student with registration Number: ${newStd.regNo} compeleted the process.`);
+            sendEmail("admission-cell@iiitu.ac.in", 'Admission application process update', `Student with registration Number: ${newStd.regNo} compeleted the process.`);
             res.status(200).json({
                 ...newStd._doc,
                 password: ''

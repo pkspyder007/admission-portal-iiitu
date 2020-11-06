@@ -377,10 +377,10 @@ const Form7 = () => {
           <Checkbox onChange={(e) => setIsChecked(!isChecked)} />
         </Col>
         <Col >
-        <strong>I have read the information and accept.</strong>
+        <strong> I am registering for the course listed in S. No. 1-6.</strong>
         </Col>
         <Col >
-          <Button disabled={!isChecked} size="large" type="primary" onClick={handleSubmit}>Submit</Button>
+          <Button disabled={!isChecked} size="large" type="primary" onClick={handleSubmit}>Register</Button>
         </Col>
       </Row>)}
     </div>

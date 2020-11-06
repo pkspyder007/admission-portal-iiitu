@@ -89,17 +89,17 @@ const Willingness = ({ history }) => {
 
   const handleFreeze = (vals) => {
     if (!r1) {
-      alert("Please Upload Partial insitute fee recipt...");
+      alert("Please Upload Partial insitute fee receipt...");
       return;
     }
 
     if (!r2) {
-      alert("Please Upload Insitute fee recipt...");
+      alert("Please Upload Insitute fee receipt...");
       return;
     }
 
     if (!r3) {
-      alert("Please Upload JoSaa recipt...");
+      alert("Please Upload JoSaa receipt...");
       return;
     }
 
@@ -117,9 +117,9 @@ const Willingness = ({ history }) => {
         notification["success"]({
           message: "Your Application is completed!!",
           description:
-            "Please re-login and download a copy of your application. If not redirected!",
+            "The registration is successfully completed! The confirmation email has been sent to your registered email",
         });
-        alert("Process completed. Please re-login to continue.");
+        alert("The registration is successfully completed! The confirmation email has been sent to your registered email");
         localStorage.setItem("cstep", "6");
         // window.location.reload();
         localStorage.setItem("x-access-token", "");
@@ -175,8 +175,8 @@ const Willingness = ({ history }) => {
                 ]}
               >
                 <Radio.Group>
-                  <Radio value={35000}>Rs. 35000</Radio>
-                  <Radio value={15000}>Rs. 15000</Radio>
+                  <Radio value={35000}> 35000</Radio>
+                  <Radio value={15000}> 15000</Radio>
                 </Radio.Group>
               </Form.Item>
 
@@ -201,6 +201,12 @@ const Willingness = ({ history }) => {
                 </Space>
               </Form.Item>
 
+              <DocumentUpload
+                  fileName="josaa-fee-Receipt"
+                  title="Receipt- Seat Acceptance fee paid to JoSAA "
+                  afterUpload={() => setR3(true)}
+                />
+
               {/* partial fee start */}
               <Form.Item
                 className="form__item"
@@ -214,8 +220,8 @@ const Willingness = ({ history }) => {
                 ]}
               >
                 <Radio.Group>
-                  <Radio value={40000}>Rs. 40000</Radio>
-                  <Radio value={20000}>Rs. 20000</Radio>
+                  <Radio value={40000}> 40000</Radio>
+                  <Radio value={20000}> 20000</Radio>
                 </Radio.Group>
               </Form.Item>
 
@@ -253,6 +259,12 @@ const Willingness = ({ history }) => {
               >
                 <Input />
               </Form.Item>
+
+              <DocumentUpload
+                fileName="partial-fee-Receipt"
+                title="Receipt- Partial Institute fee paid to JoSAA"
+                afterUpload={() => setR1(true)}
+              />
 
               {/* partial fee end */}
 
@@ -307,6 +319,13 @@ const Willingness = ({ history }) => {
               >
                 <Input />
               </Form.Item>
+
+               
+              <DocumentUpload
+                fileName="institute-fee-Receipt"
+                title="Receipt- IIIT UNA remaining fee payment"
+                afterUpload={() => setR2(true)}
+              />
 
           
 
@@ -371,21 +390,8 @@ const Willingness = ({ history }) => {
                 <Input />
               </Form.Item>
  */}
-                <DocumentUpload
-                  fileName="josaa-fee-recipt"
-                  title="Recipt- Seat Acceptance fee paid to JoSAA "
-                  afterUpload={() => setR3(true)}
-                />
-              <DocumentUpload
-                fileName="partial-fee-recipt"
-                title="PRecipt- Partial Institute fee paid to JoSAA"
-                afterUpload={() => setR1(true)}
-              />
-              <DocumentUpload
-                fileName="institute-fee-recipt"
-                title="Recipt- IIIT UNA remaining fee payment"
-                afterUpload={() => setR2(true)}
-              />
+                
+            
               <Form.Item className="form__item" {...tailFormItemLayout}>
                 <Button type="primary" htmlType="submit">
                   ACCEPT
@@ -398,7 +404,7 @@ const Willingness = ({ history }) => {
       {/* {will !=="ACCEPT" ? (<>
       <Row justify="center">
           <Row>
-            <DocumentUpload fileName="hostel-fee-recipt" title="Hostel FEE Recipt" afterUpload={() => setR1(true)} />
+            <DocumentUpload fileName="hostel-fee-Receipt" title="Hostel FEE Receipt" afterUpload={() => setR1(true)} />
           </Row>
           <Row>
           <Button type="primary" size="large" onClick={hanldeFloat}>{will}</Button>
