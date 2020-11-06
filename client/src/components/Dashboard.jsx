@@ -64,7 +64,7 @@ const Dashboard = (props) => {
         <TabPane tab={`Update Password`} key={7}>
             <UpdatePassword />
         </TabPane>
-        <TabPane tab={`Downloads`} key={8}>
+        <TabPane tab={`Forms /More Info`} key={8}>
           <Downloads />
         </TabPane>
         <TabPane

@@ -1,9 +1,13 @@
 import React from 'react'
+import { useEffect } from 'react';
 import '../css/Downloads.scss';
 import '../css/Field.scss'
 import HeaderInfo from './HeaderInfo';
 
 const Downloads = () => {
+    useEffect(()=> {
+      window.open("http://www.iiitu.ac.in/admissions.html#gsc.tab=0")
+    });
     return (
         <>
       <div className="header__info">
@@ -14,7 +18,7 @@ const Downloads = () => {
       </div>
         <div className="downloads__container">
         <h2>All required Documents and their format can be found on our institutes website.</h2>
-        <a href="http://iiitu.ac.in" target="__blank">IIIT UNA website link</a>
+        <a href="http://www.iiitu.ac.in/admissions.html#gsc.tab=0" target="__blank">IIIT UNA website link</a>
         </div>
         </>
     )
