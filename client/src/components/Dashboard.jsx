@@ -34,7 +34,6 @@ const Dashboard = (props) => {
     return
   }
   const { completed, step1} = std;
-  cstep = "7"
   return (
     <div id="dashboard">
       <Tabs defaultActiveKey={cstep} tabPosition="left">
