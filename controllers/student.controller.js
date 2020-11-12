@@ -79,7 +79,7 @@ exports.register = async (req, res) => {
       let password = Math.random().toString(36).substring(7);
       tempStd.password = bcrypt.hashSync(password, 10);
 
-      let totalStd = await Student.find({});
+      //let totalStd = await Student.find({});
 
       let regNo = "2K20";
 

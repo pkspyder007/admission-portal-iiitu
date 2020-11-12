@@ -7,7 +7,7 @@ import Axios from "axios";
 const CSEList = [
   {
     sno: 1,
-    code: 'MAC101',
+    code: 'MAC111',
     title: 'Engineering Mathematics',
     l:3,
     t:1,
@@ -73,7 +73,7 @@ const CSEList = [
 const ITList = [
   {
     sno: 1,
-    code: 'MAC121',
+    code: 'MAC131',
     title: 'Engineering Mathematics',
     l:3,
     t:1,
@@ -82,7 +82,7 @@ const ITList = [
   },
   {
     sno: 2,
-    code: 'PHC121',
+    code: 'PHC131',
     title: 'Engineering Physics',
     l:3,
     t:0,
@@ -109,7 +109,7 @@ const ITList = [
   },
   {
     sno: 5,
-    code: 'ENC125',
+    code: 'ENC135',
     title: 'Communication Skills',
     l:3,
     t:0,
@@ -139,7 +139,7 @@ const ITList = [
 const ECEList = [
   {
     sno: 1,
-    code: 'MAC131',
+    code: 'MAC121',
     title: 'Engineering Mathematics',
     l:3,
     t:1,
@@ -148,7 +148,7 @@ const ECEList = [
   },
   {
     sno: 2,
-    code: 'PHC131',
+    code: 'PHC121',
     title: 'Electricity, Magnetism, and Quantum Mechanics',
     l:3,
     t:0,
@@ -175,7 +175,7 @@ const ECEList = [
   },
   {
     sno: 5,
-    code: 'ENC135',
+    code: 'ENC125',
     title: 'Communication Skills',
     l:3,
     t:0,
