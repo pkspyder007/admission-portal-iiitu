@@ -575,7 +575,7 @@ const RegistrationForm = () => {
         >
         <Select onChange={(val) => handleFieldValue("areaOfSchool", val)} style={{ width: 200 }}>
             <Option value="URBAN">URBAN</Option>
-            <Option value="PRIAVTE">PRIAVTE</Option>
+            <Option value="RURAL">RURAL</Option>
           </Select>
         </Form.Item>
 
@@ -634,8 +634,8 @@ const RegistrationForm = () => {
         >
         <Select disabled onChange={val => handleFieldValue("branch", val)}>
          <Option value="CSE">Computer Science and Engineering</Option>
-         <Option value="IT">Electronics and Communication Engineering</Option>
-         <Option value="ECE">Information Technology</Option>
+         <Option value="IT">Information Technology</Option>
+         <Option value="ECE">Electronics and Communication Engineering</Option>
         </Select>
         </Form.Item>
 

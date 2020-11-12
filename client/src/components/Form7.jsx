@@ -345,7 +345,7 @@ const Form7 = () => {
           <h3>School : </h3>
         </Col>
         <Col>
-        <h3>{std.branchAlloted !== 'ECE' ? 'School of Computing' : 'School of ELectronics'}</h3>
+        <h3>{std.branchAlloted !== 'ECE' ? 'School of Computing' : 'School of Electronics'}</h3>
         </Col>
       </Row>
       <hr />
