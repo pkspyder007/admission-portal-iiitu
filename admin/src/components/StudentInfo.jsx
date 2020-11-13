@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createRef } from "react";
-import { Divider, Input, Row, Col, message, Button } from "antd";
+import { Divider, Row, Col, message, Button } from "antd";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -168,6 +168,11 @@ const StudentInfo = (props) => {
           <Row justify="space-between" gutter={[48, 24]}>
             <Info title="JoSAA-2020 Amount" value={`₹ ${std.josaaFeeAmount ?? "Not Provided Yet"}`} />
             <Info title="Date" value={std.josaaFeeDate} />
+          </Row>
+          <Row justify="space-between" gutter={[48, 24]}>
+            <Info title="Partial Fee Amount" value={`₹ ${std.institutePartialFeeAmount ?? "Not Provided Yet"}`} />
+            <Info title="Date" value={std.institutePartialFeeDate} />
+            <Info title="Receipt No." value={std.institutePartialFeeReceiptNo} />
           </Row>
           <Row justify="space-between" gutter={[48, 24]}>
             <Info

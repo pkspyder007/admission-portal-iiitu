@@ -155,6 +155,13 @@ function Form1() {
       res: "YES",
       required: true
     },
+    {
+      sno: "22",
+      fileName: "form1",
+      title: "Form - 1",
+      res: "YES",
+      required: true
+    },
   ]);
 
   const changeHandler = (sno, val) => {

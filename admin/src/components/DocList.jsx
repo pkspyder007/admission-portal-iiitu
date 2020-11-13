@@ -7,6 +7,26 @@ import { DownloadOutlined } from '@ant-design/icons';
 const DocList = ({match}) => {
   const [docs, setDocs] = useState([{sno: '',title: '', res: ''}]);
   const [jeeRegNo, setJeeRegNo] = useState("");
+  const [receipts, setReceipts] = useState([
+    {
+      sno: "I",
+      title : "Josaa fee receipt",
+      res: "YES",
+      fileName: "josaa-fee-Receipt"
+    },
+    {
+      sno: "II",
+      title : "Partial fee receipt",
+      res: "YES",
+      fileName: "partial-fee-Receipt"
+    },
+    {
+      sno: "I",
+      title : "Institute fee receipt",
+      res: "YES",
+      fileName: "institute-fee-Receipt"
+    },
+  ]);
   const columns = [
     {
       title: 'S. No.',
@@ -64,6 +84,10 @@ const DocList = ({match}) => {
   return (
     <div style={{ maxWidth: "1200px", margin: "auto"}}>
        <Table dataSource={docs} columns={columns} pagination={false} rowKey="sno" />
+       <div className="hop">
+
+       <Table dataSource={receipts} columns={columns} pagination={false} rowKey="sno" />
+       </div>
     </div>
   )
 }

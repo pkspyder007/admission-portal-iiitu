@@ -99,14 +99,14 @@ exports.getDocs = (req, res) => {
   fs.readdirSync(testFolder).forEach(file => {
     if (file.split(".")[0] == `${req.params.jeeRegNo}-${req.params.name}`) {
       res.sendFile(`${testFolder}/${file}`);
-      return;
+      return
     }
   });
 }
 
 exports.getAllStudents = async (req, res) => {
   try {
-    let stds = await Student.find({});
+    let stds = await Student.find({completed: true});
     return res.json(stds);
   } catch (error) {
     return res.status(500).json({message: error.message})
