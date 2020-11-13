@@ -84,7 +84,7 @@ exports.register = async (req, res) => {
       let regNo = "2K20";
 
       let totalStd = await Student.find({ branchAlloted: b.branchAlloted });
-      let prevRegNums = totalStd.length;
+      let prevRegNums = totalStd.length + 1;
       if (tempStd.branchAlloted == "CSE") {
         if (prevRegNums < 10) {
           regNo = `${regNo}CSE00${prevRegNums}`;
