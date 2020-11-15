@@ -77,7 +77,6 @@ const Dashboard = (props) => {
           key={9}
         ></TabPane>
       </Tabs>
-      <CyberNauts />
     </div>
   );
 };

@@ -99,7 +99,6 @@ const Login = (props) => {
           Not registered ?
               <Link to="/register"> Register Here</Link>
           </Row>
-          <CyberNauts />
     </div>
   );
 };
