@@ -67,7 +67,10 @@ exports.getForm3 = async (req, res) => {
       return
     }
     res.json({
-      ...form3Data._doc
+      ...form3Data._doc,
+      partialFeeStatus: std.partialFeeStatus,
+      isCSAB: std.isCSAB,
+      isFreezing: std.isFreezing,
     });
     return;
   } catch (error) {

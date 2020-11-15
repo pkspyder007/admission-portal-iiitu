@@ -372,10 +372,8 @@ exports.accept = async (req, res) => {
   try {
     let newStd = await Student.findOneAndUpdate(
       { jeeRegNo: req.userId },
-      { will: "ACCEPT" }
+      { ...req.body, cstep: 1 }
     );
-    newStd.cstep = 1;
-    newStd.save();
     return res.json({ message: "Response recorded." });
   } catch (error) {
     return res.status(400).json({ message: "Something went wrong." });

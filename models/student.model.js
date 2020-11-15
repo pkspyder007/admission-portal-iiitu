@@ -94,6 +94,18 @@ const StudentSchema = new Schema({
   cstep:{
     type: Number,
     default: 0
+  },
+  isFreezing: {
+    type: String,
+    default: "Default - YES"
+  },
+  partialFeeStatus: {
+    type: String,
+    default: "Default - NO"
+  },
+  isCSAB: {
+    type: String,
+    default: "Default - NO"
   }
 
 });

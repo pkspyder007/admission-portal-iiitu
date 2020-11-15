@@ -140,7 +140,7 @@ const ECEList = [
   {
     sno: 1,
     code: 'MAC121',
-    title: 'Engineering Mathematics',
+    title: 'Mathematics - I',
     l:3,
     t:1,
     p:0,

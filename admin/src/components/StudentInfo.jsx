@@ -30,6 +30,7 @@ const StudentInfo = (props) => {
       headers: { "x-access-token": localStorage.getItem("x-access-token") },
     })
       .then((res) => {
+        console.log(res.data);
         setStd(res.data);
       })
       .catch((err) => {
@@ -76,6 +77,11 @@ const StudentInfo = (props) => {
           {/* Date and Reg No */}
           <Row justify="space-between" gutter={[48, 24]}>
             <Info title="Date" value={std.date} />
+          </Row>
+          <Row justify="space-between" gutter={[48, 24]}>
+            <Info title="Freezing" value={std.isFreezing} />
+            <Info title="Partial fee submition to JoSAA" value={std.partialFeeStatus} />
+            <Info title="CSAB Participation" value={std.isCSAB} />
           </Row>
           {/* Name */}
           <Row justify="space-between" gutter={[48, 24]}>
