@@ -63,8 +63,9 @@ exports.register = async (req, res) => {
 
       let regNo = "2K20";
 
-      let totalStd = await Student.find({ branchAlloted: b.branchAlloted });
-      let prevRegNums = totalStd.length + 1;
+      let totalStd = await Student.find({ });
+      let totalBranchStd = await Student.find({ branchAlloted: b.branchAlloted });
+      let prevRegNums = totalBranchStd.length + 1;
       if (tempStd.branchAlloted == "CSE") {
         if (prevRegNums < 10) {
           regNo = `${regNo}CSE00${prevRegNums}`;
@@ -92,6 +93,8 @@ exports.register = async (req, res) => {
           regNo = `${regNo}${prevRegNums}`;
         }
       }
+
+    //   console.log(totalStd.length);
       // tempStd.isFirstLogin = false;
       tempStd.regNo = regNo;
       tempStd.sNo = totalStd.length + 1;
