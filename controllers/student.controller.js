@@ -27,27 +27,7 @@ exports.register = async (req, res) => {
     }
 
     try {
-      if (std["DOB"] != req.body.dob) {
-        return res.status(400).json({
-          message: "Date of Birth do not match.",
-        });
-      }
-      if (
-        std["State of Eligibility"].trim().toLowerCase() !=
-        req.body.soe.trim().toLowerCase()
-      ) {
-        return res.status(400).json({
-          message:
-            "State of Eligibilty do not match. Please check for spaces or copy paste from website",
-        });
-      }
-
-      if (std["Rank"] != req.body.rank) {
-        return res.status(400).json({
-          message: "Data validation failed!",
-        });
-      }
-
+      
       let b = std["Program"];
       let tempStd = {
         name: std["Name"],
