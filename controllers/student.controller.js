@@ -219,6 +219,7 @@ exports.form3DataInput = async (req, res) => {
 
     std.step1 = false;
     std.step2 = true;
+    std.cstep = 2;
     std.save();
 
     if (!newForm3) {
@@ -281,6 +282,7 @@ exports.form1DataInput = async (req, res) => {
 
     std.step2 = false;
     std.step3 = true;
+    std.cstep = 3;
     std.save();
 
     if (!newForm1) {
@@ -372,6 +374,8 @@ exports.accept = async (req, res) => {
       { jeeRegNo: req.userId },
       { will: "ACCEPT" }
     );
+    newStd.cstep = 1;
+    newStd.save();
     return res.json({ message: "Response recorded." });
   } catch (error) {
     return res.status(400).json({ message: "Something went wrong." });
@@ -385,6 +389,7 @@ exports.freeze = async (req, res) => {
       {
         will: req.body.will,
         step5: false,
+        cstep: 6,
         doc: Date().toString("dd-MM-yyyy"),
         completed: true,
       }

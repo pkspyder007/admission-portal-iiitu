@@ -77,8 +77,17 @@ const Step0 = ({ history }) => {
         // notification["success"]({
         //   message: "Please Complete Your Application!!",
         // });
+        let std = JSON.parse(localStorage.getItem('std'))
+        localStorage.setItem('std', JSON.stringify({...std,
+          step1: true,
+          step2: false,
+          step3: false,
+          step4: false,
+          step5: false,
+          will: "ACCEPT",
+          cstep: 1
+         }));
         localStorage.setItem("hideWill", true);
-        localStorage.setItem("cstep", "1");
         alert("Response recorded. \n Please Complete Your Application!!");
         window.location.reload();
         // localStorage.setItem("x-access-token", "");

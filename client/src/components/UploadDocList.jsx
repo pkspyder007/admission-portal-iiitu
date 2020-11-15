@@ -64,6 +64,7 @@ const UploadDocList = () => {
         step3: true,
         step4: false,
         step5: false,
+        cstep: 4
       },
     })
       .then((res) => {
@@ -80,6 +81,7 @@ const UploadDocList = () => {
             step3: false,
             step4: true,
             step5: false,
+            cstep: 4
           })
         );
         localStorage.setItem("cstep", "4");

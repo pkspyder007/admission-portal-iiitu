@@ -24,11 +24,9 @@ const Dashboard = (props) => {
     std = {will: "ACCEPT"}
   }
   const hideWill = std.will !== "FREEZE-DEFAULT";
-  let cstep = localStorage.getItem("cstep");
-  if(!cstep) {
-    localStorage.setItem("cstep", "0");
-    cstep = 0;
-  }
+  // let cstep = localStorage.getItem("cstep");
+  let cstep = `${std.cstep}`;
+  console.log(cstep);
   if(!std) {
     props.history.push("/login");
     return

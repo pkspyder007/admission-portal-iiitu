@@ -281,6 +281,7 @@ const Form7 = () => {
         step3: false,
         step4: false,
         step5: true,
+        cstep: 5
       },
     })
       .then((res) => {
@@ -294,6 +295,7 @@ const Form7 = () => {
           step3: false,
           step4: false,
           step5: true,
+          cstep: 5
          }));
          localStorage.setItem("cstep", "5");
          alert("Step completed")

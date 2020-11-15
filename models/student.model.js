@@ -90,6 +90,10 @@ const StudentSchema = new Schema({
   doc: {
     type: String,
     default: 'Same as in Form 3'
+  },
+  cstep:{
+    type: Number,
+    default: 0
   }
 
 });

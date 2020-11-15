@@ -83,6 +83,7 @@ const RegistrationForm = () => {
         step3: false,
         step4: false,
         step5: false,
+        cstep: 2
        }));
        localStorage.setItem("cstep", "2");
        alert("Step Completed.")

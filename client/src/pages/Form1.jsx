@@ -189,6 +189,7 @@ function Form1() {
           step3: true,
           step4: false,
           step5: false,
+          cstep: 3
          }));
          localStorage.setItem("cstep", "3");
          alert("Step completed")
