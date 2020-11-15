@@ -33,7 +33,7 @@ function Form1() {
       sno: "4",
       fileName: "form-4",
       title:
-        "Form No: 04  (Attach appropiate time extension letter (available at institute website), if the document not avialable at present.)",
+        "Form No: 04  (Attach time extension letter (available at institute website), if the document not avialable at present.)",
       res: "YES",
       required: true,
     },
@@ -41,7 +41,7 @@ function Form1() {
       sno: "5",
       fileName: "form-5",
       title:
-        "Form No:05 . (Attach appropiate time extension letter (available at institute website), if the document not avialable at present.)",
+        "Form No:05 . (Attach time extension letter (available at institute website), if the document not avialable at present.)",
       res: "YES",
       required: true,
     },
@@ -57,7 +57,7 @@ function Form1() {
       sno: "7",
       fileName: "form-8",
       title:
-        "Form No:08 (Attach appropiate time extension letter (available at institute website), if the document not avialable at present.)",
+        "Form No:08 (Attach time extension letter (available at institute website), if the document not avialable at present.)",
       res: "YES",
       required: true,
     },
@@ -65,7 +65,7 @@ function Form1() {
       sno: "8",
       fileName: "form-9",
       title:
-        "Form No: 09  (Attach appropiate time extension letter (available at institute website), if the document not avialable at present.)",
+        "Form No: 09  (Attach time extension letter (available at institute website), if the document not avialable at present.)",
       res: "NA",
       required: false,
     },
