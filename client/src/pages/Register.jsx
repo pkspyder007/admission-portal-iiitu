@@ -3,6 +3,7 @@ import { Form, Input, Button, Row, Col, Select } from "antd";
 import HeaderInfo from "../components/HeaderInfo";
 import Axios from "axios";
 import { Link } from "react-router-dom";
+import CyberNauts from "../components/CyberNauts";
 // import { useForm } from "antd/lib/form/Form";
 
 const { Option } = Select;
@@ -178,6 +179,7 @@ const Register = ({ history }) => {
       <Row justify="center">
         Already registered ?<Link to="/login"> Login Here</Link>
       </Row>
+      <CyberNauts />
     </>
   );
 };

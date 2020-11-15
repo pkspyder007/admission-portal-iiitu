@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import { Link } from "react-router-dom"
 import { Form, Input, Button, message, notification, Row } from 'antd';
 import Axios from 'axios';
+import CyberNauts from '../components/CyberNauts';
 
 const Login = (props) => {
 
@@ -18,7 +19,7 @@ const Login = (props) => {
       } else {
         notification["error"]({
           message: "Please Login to continue",
-          description: "You have been logged out due to session timeout."
+          description: "You have been logged out. Please Login again"
         })
       }
     }).catch(err => {
@@ -98,6 +99,7 @@ const Login = (props) => {
           Not registered ?
               <Link to="/register"> Register Here</Link>
           </Row>
+          <CyberNauts />
     </div>
   );
 };
