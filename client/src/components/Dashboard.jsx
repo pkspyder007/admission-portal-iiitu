@@ -11,6 +11,7 @@ import Profile from "./Profile";
 import StudentInfo from "./StudentInfo";
 import Step0 from "./Step0";
 import UpdatePassword from "./UpdatePassword";
+import CyberNauts from "./CyberNauts";
 
 const { TabPane } = Tabs;
 
@@ -76,6 +77,7 @@ const Dashboard = (props) => {
           key={9}
         ></TabPane>
       </Tabs>
+      <CyberNauts />
     </div>
   );
 };
