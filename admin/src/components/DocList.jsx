@@ -95,13 +95,6 @@ const DocList = ({ match }) => {
   }, [jeeRegNo]);
   return (
     <div style={{ maxWidth: "1200px", margin: "auto" }}>
-      <Table
-        dataSource={docs}
-        columns={columns}
-        pagination={false}
-        rowKey="sno"
-      />
-      <Divider />
       <Row justify="center">
         <Table
           dataSource={receipts}
@@ -110,6 +103,13 @@ const DocList = ({ match }) => {
           rowKey="title"
         />
       </Row>
+      <Divider />
+      <Table
+        dataSource={docs}
+        columns={columns}
+        pagination={false}
+        rowKey="sno"
+      />
     </div>
   );
 };

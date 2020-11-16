@@ -126,7 +126,7 @@ const StudentInfo = (props) => {
           </Row>
           <Row justify="space-between" gutter={[48, 24]}>
             <Info title="JEE (MAIN) AIR-CATEGORY" value={"22"} />
-            <Info title="Admitted Category" value={std.jeeMainAirCat} />
+            <Info title="Admitted Category" value={std.admittedCategory} />
           </Row>
           <Row justify="space-between" gutter={[48, 24]}>
             <Info title="Country from 10+ 2 passed" value={std.countryFrom12} />
