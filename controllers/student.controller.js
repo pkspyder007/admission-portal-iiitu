@@ -65,13 +65,13 @@ exports.register = async (req, res) => {
 
       let totalStd = await Student.find({ });
       let totalBranchStd = await Student.find({ branchAlloted: tempStd.branchAlloted });
-      console.log(totalBranchStd);
+      console.log(totalBranchStd.length);
       let prevRegNums = totalBranchStd.length + 1;
       if (tempStd.branchAlloted == "CSE") {
         if (prevRegNums < 10) {
           regNo = `${regNo}CSE00${prevRegNums}`;
         } else if (prevRegNums >= 10) {
-          egNo = `${regNo}CSE0${prevRegNums}`;
+          regNo = `${regNo}CSE0${prevRegNums}`;
         } else {
           regNo = `${regNo}${prevRegNums}`;
         }
@@ -80,7 +80,7 @@ exports.register = async (req, res) => {
         if (prevRegNums < 10) {
           regNo = `${regNo}IT00${prevRegNums}`;
         } else if (prevRegNums >= 10) {
-          egNo = `${regNo}IT0${prevRegNums}`;
+          regNo = `${regNo}IT0${prevRegNums}`;
         } else {
           regNo = `${regNo}${prevRegNums}`;
         }
@@ -89,11 +89,13 @@ exports.register = async (req, res) => {
         if (prevRegNums < 10) {
           regNo = `${regNo}ECE00${prevRegNums}`;
         } else if (prevRegNums >= 10) {
-          egNo = `${regNo}ECE0${prevRegNums}`;
+          regNo = `${regNo}ECE0${prevRegNums}`;
         } else {
           regNo = `${regNo}${prevRegNums}`;
         }
       }
+
+      console.log(regNo);
 
       // tempStd.isFirstLogin = false;
       tempStd.regNo = regNo;
