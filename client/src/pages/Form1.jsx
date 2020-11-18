@@ -17,14 +17,14 @@ function Form1() {
     },
     {
       sno: "2",
-      fileName: "form1",
+      fileName: "form2",
       title: "Form - 2",
       res: "YES",
       required: true,
     },
     {
       sno: "3",
-      fileName: "form1",
+      fileName: "form3",
       title: "Form - 3",
       res: "YES",
       required: true,
