@@ -70,7 +70,7 @@ exports.register = async (req, res) => {
       if (tempStd.branchAlloted == "CSE") {
         if (prevRegNums < 10) {
           regNo = `${regNo}CSE00${prevRegNums}`;
-        } else if (prevRegNums < 100) {
+        } else if (prevRegNums >= 10) {
           egNo = `${regNo}CSE0${prevRegNums}`;
         } else {
           regNo = `${regNo}${prevRegNums}`;
@@ -79,7 +79,7 @@ exports.register = async (req, res) => {
       if (tempStd.branchAlloted == "IT") {
         if (prevRegNums < 10) {
           regNo = `${regNo}IT00${prevRegNums}`;
-        } else if (prevRegNums < 100) {
+        } else if (prevRegNums >= 10) {
           egNo = `${regNo}IT0${prevRegNums}`;
         } else {
           regNo = `${regNo}${prevRegNums}`;
@@ -88,7 +88,7 @@ exports.register = async (req, res) => {
       if (tempStd.branchAlloted == "ECE") {
         if (prevRegNums < 10) {
           regNo = `${regNo}ECE00${prevRegNums}`;
-        } else if (prevRegNums < 100) {
+        } else if (prevRegNums >= 10) {
           egNo = `${regNo}ECE0${prevRegNums}`;
         } else {
           regNo = `${regNo}${prevRegNums}`;
