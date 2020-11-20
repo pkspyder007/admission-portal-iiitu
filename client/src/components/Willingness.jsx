@@ -12,6 +12,7 @@ import {
   DatePicker,
   Form,
   InputNumber,
+  Typography,
 } from "antd";
 import HeaderInfo from "./HeaderInfo";
 import Axios from "axios";
@@ -103,6 +104,9 @@ const Willingness = ({ history }) => {
       return;
     }
 
+    
+
+   if((window.confirm("Are you sure to do the final submission. \n This will mark your application Completed.")))  {
     message.info("Please wait...");
 
     Axios({
@@ -132,6 +136,9 @@ const Willingness = ({ history }) => {
           description: err.response.data.message,
         });
       });
+   } else {
+     return;
+   }
   };
 
   const onChange = (e) => {
@@ -391,6 +398,7 @@ const Willingness = ({ history }) => {
               </Form.Item>
  */}
                 
+          <Typography.Text type="danger">*** By submitting this for Your application will be marked as complete so please make sure you have completed all the previous steps before final submission. ***</Typography.Text>
             
               <Form.Item className="form__item" {...tailFormItemLayout}>
                 <Button type="primary" htmlType="submit">
@@ -427,6 +435,7 @@ const Willingness = ({ history }) => {
           </Row>
         </Col>
       ) : null}
+  
       <Divider />
     </>
   );
