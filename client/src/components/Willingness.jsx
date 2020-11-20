@@ -398,11 +398,11 @@ const Willingness = ({ history }) => {
               </Form.Item>
  */}
                 
-          <Typography.Text type="danger">*** By submitting this for Your application will be marked as complete so please make sure you have completed all the previous steps before final submission. ***</Typography.Text>
+          <Typography.Text type="danger">*** Before pressing final submission button ( given below), please make sure that you have completed all the previous steps. ***</Typography.Text>
             
               <Form.Item className="form__item" {...tailFormItemLayout}>
                 <Button type="primary" htmlType="submit">
-                  ACCEPT
+                  FINAL SUBMISSION
                 </Button>
               </Form.Item>
             </Form>
