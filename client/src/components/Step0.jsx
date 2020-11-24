@@ -86,7 +86,7 @@ const Step0 = ({ history }) => {
             <Radio value="NO">NO</Radio>
           </Radio.Group>
         </Form.Item>
-        <Form.Item
+        {/* <Form.Item
           name="partialFeeStatus"
           label="I have paid the Partial Institute Fee to JoSAA"
           rules={[
@@ -115,7 +115,7 @@ const Step0 = ({ history }) => {
             <Radio value="YES">YES</Radio>
             <Radio value="NO">NO</Radio>
           </Radio.Group>
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item
         wrapperCol={{
           span: 12,

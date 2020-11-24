@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const Form1 = require("../models/form1.model");
 const jwt = require("jsonwebtoken");
 
-const stdData = require("../data/stddata.json");
+const stdData = require("../data/csab.json");
 
 exports.register = async (req, res) => {
   try {

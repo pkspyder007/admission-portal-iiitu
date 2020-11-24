@@ -101,11 +101,11 @@ const StudentSchema = new Schema({
   },
   partialFeeStatus: {
     type: String,
-    default: "Default - NO"
+    default: "Default - CSAB"
   },
   isCSAB: {
     type: String,
-    default: "Default - NO"
+    default: "Default - CSAB"
   }
 
 });
