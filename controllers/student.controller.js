@@ -390,7 +390,6 @@ exports.freeze = async (req, res) => {
     let newStd = await Student.findOneAndUpdate(
       { jeeRegNo: req.userId },
       {
-        will: req.body.will,
         step5: false,
         cstep: 6,
         doc: Date().toString("dd-MM-yyyy"),

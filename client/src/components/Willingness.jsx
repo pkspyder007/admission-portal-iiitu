@@ -112,7 +112,7 @@ const Willingness = ({ history }) => {
     Axios({
       method: "post",
       url: "/api/student/freeze",
-      data: { ...vals,totalFee: (vals['instituteFeeAmount']||0) + (vals['institutePartialFeeAmount']||0) + (vals['josaaFeeAmount']||0) },
+      data: { ...vals,totalFee: (+vals['instituteFeeAmount']||0) + (+vals['institutePartialFeeAmount']||0) + (+vals['josaaFeeAmount']||0) },
       headers: {
         "x-access-token": localStorage.getItem("x-access-token"),
       },
@@ -181,10 +181,7 @@ const Willingness = ({ history }) => {
                   },
                 ]}
               >
-                <Radio.Group>
-                  <Radio value={35000}> 35000</Radio>
-                  <Radio value={15000}> 15000</Radio>
-                </Radio.Group>
+                <Input type="number" min="0" />
               </Form.Item>
 
               <Form.Item
@@ -226,10 +223,7 @@ const Willingness = ({ history }) => {
                   },
                 ]}
               >
-                <Radio.Group>
-                  <Radio value={40000}> 40000</Radio>
-                  <Radio value={20000}> 20000</Radio>
-                </Radio.Group>
+               <Input type="number" min="0" />
               </Form.Item>
 
               <Form.Item
@@ -278,7 +272,7 @@ const Willingness = ({ history }) => {
               <Form.Item
                 className="form__item"
                 name="instituteFeeAmount"
-                label="IIIT Una remaining Institute Fee applicable. ( OPEN/OBC - Rs. 34900/- SC/ST/PwD - Rs. 74900/- )"
+                label="IIIT Una remaining Institute Fee applicable."
                 rules={[
                   {
                     required: true,
@@ -286,10 +280,7 @@ const Willingness = ({ history }) => {
                   },
                 ]}
               >
-                <Radio.Group>
-                  <Radio value={34900}>Rs. 34900</Radio>
-                  <Radio value={74900}>Rs. 74900</Radio>
-                </Radio.Group>
+                <Input type="number" min="0" />
               </Form.Item>
 
               <Form.Item
@@ -339,7 +330,7 @@ const Willingness = ({ history }) => {
               <Form.Item shouldUpdate label="Total fee paid during admission process.">
                 {() => {
                   const d = form.getFieldsValue();
-                  let t = (d['instituteFeeAmount']||0) + (d['institutePartialFeeAmount']||0) + (d['josaaFeeAmount']||0);
+                  let t = (+d['instituteFeeAmount']||0) + (+d['institutePartialFeeAmount']||0) + (+d['josaaFeeAmount']||0);
                   
                   return (
                    <InputNumber value={t} disabled/>
