@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const Form1 = require("../models/form1.model");
 const jwt = require("jsonwebtoken");
 
-const stdData = require("../data/csab.json");
+const stdData = require("../data/csab2.json");
 
 const blockedStd = [
   "200310019061",
