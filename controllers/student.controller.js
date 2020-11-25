@@ -69,29 +69,29 @@ exports.register = async (req, res) => {
       let prevRegNums = totalBranchStd.length + 1;
       if (tempStd.branchAlloted == "CSE") {
         if (prevRegNums < 10) {
-          regNo = `${regNo}CSE00${prevRegNums}`;
+          regNo = `${regNo}CSE100${prevRegNums}`;
         } else if (prevRegNums >= 10) {
-          regNo = `${regNo}CSE0${prevRegNums}`;
+          regNo = `${regNo}CSE10${prevRegNums}`;
         } else {
-          regNo = `${regNo}${prevRegNums}`;
+          regNo = `${regNo}CSE1${prevRegNums}`;
         }
       }
       if (tempStd.branchAlloted == "IT") {
         if (prevRegNums < 10) {
-          regNo = `${regNo}IT00${prevRegNums}`;
+          regNo = `${regNo}IT100${prevRegNums}`;
         } else if (prevRegNums >= 10) {
-          regNo = `${regNo}IT0${prevRegNums}`;
+          regNo = `${regNo}IT10${prevRegNums}`;
         } else {
-          regNo = `${regNo}${prevRegNums}`;
+          regNo = `${regNo}IT1${prevRegNums}`;
         }
       }
       if (tempStd.branchAlloted == "ECE") {
         if (prevRegNums < 10) {
-          regNo = `${regNo}ECE00${prevRegNums}`;
+          regNo = `${regNo}ECE100${prevRegNums}`;
         } else if (prevRegNums >= 10) {
-          regNo = `${regNo}ECE0${prevRegNums}`;
+          regNo = `${regNo}ECE10${prevRegNums}`;
         } else {
-          regNo = `${regNo}${prevRegNums}`;
+          regNo = `${regNo}ECE1${prevRegNums}`;
         }
       }
 

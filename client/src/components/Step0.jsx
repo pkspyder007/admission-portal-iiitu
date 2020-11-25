@@ -73,7 +73,7 @@ const Step0 = ({ history }) => {
      <Form name="validate_other" onFinish={handleFreeze} scrollToFirstError>
         <Form.Item
           name="isFreezing"
-          label="Are you freezing the seat alloted at IIIT Una ?"
+          label="I have completed all the steps in JoSAA/CSAB admission process (payment of seat acceptance fee, etc.)"
           rules={[
             {
               required: true,
