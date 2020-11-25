@@ -7,8 +7,34 @@ const jwt = require("jsonwebtoken");
 
 const stdData = require("../data/csab.json");
 
+const blockedStd = [
+  "200310019061",
+  "200310423322",
+  "200310070753",
+  "200310626910",
+  "200310222936",
+  "200310191376",
+  "200310586600",
+  "200310197949",
+  "200310308783",
+  "200310765476",
+  "200310020026",
+  "200310088477",
+  "200310787597",
+  "200310075508",
+  "200320172802",
+  "200310064386",
+];
+
 exports.register = async (req, res) => {
   try {
+    if(blockedStd.includes(req.body.jeeRegNo)) {
+      res.status(401).json({
+        message:
+          "You have already registered in previous round please contact institute for further instructions",
+      });
+      return;
+    }
     let std = null;
     stdData.forEach((student) => {
       if (student["JEE(Main) App No"] == req.body.jeeRegNo) {
@@ -17,17 +43,14 @@ exports.register = async (req, res) => {
     });
 
     if (!std) {
-      res
-        .status(401)
-        .json({
-          message:
-            "Student record not found please check the JEE MAIN application number.",
-        });
+      res.status(401).json({
+        message:
+          "Student record not found please check the JEE MAIN application number.",
+      });
       return;
     }
 
     try {
-      
       let b = std["Program"];
       let tempStd = {
         name: std["Name"],
@@ -63,8 +86,10 @@ exports.register = async (req, res) => {
 
       let regNo = "2K20";
 
-      let totalStd = await Student.find({ });
-      let totalBranchStd = await Student.find({ branchAlloted: tempStd.branchAlloted });
+      let totalStd = await Student.find({});
+      let totalBranchStd = await Student.find({
+        branchAlloted: tempStd.branchAlloted,
+      });
       console.log(totalBranchStd.length);
       let prevRegNums = totalBranchStd.length + 1;
       if (tempStd.branchAlloted == "CSE") {
@@ -101,7 +126,7 @@ exports.register = async (req, res) => {
       tempStd.regNo = regNo;
       tempStd.sNo = totalStd.length + 1;
 
-    //   updateRegNums(tempStd.branchAlloted);
+      //   updateRegNums(tempStd.branchAlloted);
       const newStudent = await Student.create(tempStd);
       if (!newStudent)
         return res
@@ -188,14 +213,12 @@ exports.loginStudent = async (req, res) => {
           expiresIn: 86400,
         });
         student.password = "";
-        res
-          .status(200)
-          .json({
-            message: "Login Successful.",
-            auth: true,
-            token: token,
-            data: student,
-          });
+        res.status(200).json({
+          message: "Login Successful.",
+          auth: true,
+          token: token,
+          data: student,
+        });
         return;
       } else {
         res.status(400).json({ message: "Invalid Credentials." });
@@ -247,11 +270,9 @@ exports.getForm3 = async (req, res) => {
   try {
     let std = await Form3.findOne({ regNo: req.params.regNo });
     if (!std) {
-      res
-        .status(400)
-        .json({
-          message: "Current user's jee number not found in the database.",
-        });
+      res.status(400).json({
+        message: "Current user's jee number not found in the database.",
+      });
       return;
     }
 
@@ -291,11 +312,9 @@ exports.form1DataInput = async (req, res) => {
     std.save();
 
     if (!newForm1) {
-      res
-        .status(500)
-        .json({
-          message: "Current user's jee reg, no. not found in the database.",
-        });
+      res.status(500).json({
+        message: "Current user's jee reg, no. not found in the database.",
+      });
       return;
     }
 
