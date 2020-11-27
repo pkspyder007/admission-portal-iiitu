@@ -92,7 +92,7 @@ exports.register = async (req, res) => {
       });
       console.log(totalBranchStd.length);
       let prevRegNums = totalBranchStd.length + 1;
-      if(prevRegNums == 39 ) {
+      if(prevRegNums == 39 && tempStd.branchAlloted == "CSE" ) {
         prevRegNums = 38
       }
       if (tempStd.branchAlloted == "CSE") {
