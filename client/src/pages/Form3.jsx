@@ -414,7 +414,7 @@ const RegistrationForm = () => {
         <Form.Item
           className="form__item"
           name="jeeMainRoll"
-          label="JEE(Main) Roll No"
+          label="JEE(Main) Reg No"
           rules={[
             {
               required: true,
