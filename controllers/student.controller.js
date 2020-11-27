@@ -406,66 +406,79 @@ exports.accept = async (req, res) => {
 
 exports.freeze = async (req, res) => {
   try {
-    let newStd = await Student.findOneAndUpdate(
-      { jeeRegNo: req.userId },
-      {
-        step5: false,
-        cstep: 6,
-        doc: Date().toString("dd-MM-yyyy"),
-        completed: true,
-      }
-    );
+    let std = await Student.findOne({ jeeRegNo: req.userId });
+    console.log(std.step5 == true && std.cstep == "5");
+    if(!(std.step5 == true && std.cstep == "5")) {
+      return res.status(500).json({ message: "Please complete previous steps" });
+    }
+
     try {
-      let form3Data = await Form3.findOneAndUpdate(
-        { regNo: newStd.regNo },
-        { ...req.body }
+      let newStd = await Student.findOneAndUpdate(
+        { jeeRegNo: req.userId },
+        {
+          step5: false,
+          cstep: 6,
+          doc: Date().toString("dd-MM-yyyy"),
+          completed: true,
+        }
       );
-      let mailComplete = `
-            <p> Dear Candidate, </p>
-            <p>- Thanks for submitting the documents.</p>
-            <p>- The institute admission committee will review all the documents submitted.</p>
-            <p>- Discrepancy found in any, will be mailed to you on your registerd email ID within 24 hrs of your submission.</p>
-            <p>- You are supposed to remove the discrepancy in the given time.</p>
-            <p>- Failing to meet the deadline may result in seat cancellation</p>
-            <p>- Hence you should check your registered email ID regularly during the admission period.</p>
-            <p>- It is advised to check insitute website "Admission section" for any updates on admission process.</p>
-            <p>- On successful completion of the admission process student will recieve admission letter.</p>
-            <p>- No letter means no seat confirmation</p>
-            <p>- The following officials can be contacted for any doubts: </p>
-            <p>
-                1) Dr. Priyabrat - +91 9284614355 <br/>
-                2) Dr. Ashna Jacob - +91 9617427727 <br/>
-                3) Dr. Chirag -  +91 9651676600 <br/>
-                4) Dr. G.S. Grewal - +91 7814747373 <br/>
-            </p>
-            <p>
-                With Regards, <br /> <br />
-                Admission Team <br />
-                IIIT Una (H.P.)
-            </p>
-            `;
-      sendEmail(
-        newStd.email,
-        "Admission application process update",
-        mailComplete
-      );
-      sendEmail(
-        "admission-cell@iiitu.ac.in",
-        "Admission application process update",
-        `Student with registration Number: ${newStd.regNo} compeleted the process.`
-      );
-      res.status(200).json({
-        ...newStd._doc,
-        password: "",
-      });
+      try {
+        let form3Data = await Form3.findOneAndUpdate(
+          { regNo: newStd.regNo },
+          { ...req.body }
+        );
+        let mailComplete = `
+              <p> Dear Candidate, </p>
+              <p>- Thanks for submitting the documents.</p>
+              <p>- The institute admission committee will review all the documents submitted.</p>
+              <p>- Discrepancy found in any, will be mailed to you on your registerd email ID within 24 hrs of your submission.</p>
+              <p>- You are supposed to remove the discrepancy in the given time.</p>
+              <p>- Failing to meet the deadline may result in seat cancellation</p>
+              <p>- Hence you should check your registered email ID regularly during the admission period.</p>
+              <p>- It is advised to check insitute website "Admission section" for any updates on admission process.</p>
+              <p>- On successful completion of the admission process student will recieve admission letter.</p>
+              <p>- No letter means no seat confirmation</p>
+              <p>- The following officials can be contacted for any doubts: </p>
+              <p>
+                  1) Dr. Priyabrat - +91 9284614355 <br/>
+                  2) Dr. Ashna Jacob - +91 9617427727 <br/>
+                  3) Dr. Chirag -  +91 9651676600 <br/>
+                  4) Dr. G.S. Grewal - +91 7814747373 <br/>
+              </p>
+              <p>
+                  With Regards, <br /> <br />
+                  Admission Team <br />
+                  IIIT Una (H.P.)
+              </p>
+              `;
+        sendEmail(
+          newStd.email,
+          "Admission application process update",
+          mailComplete
+        );
+        sendEmail(
+          "admission-cell@iiitu.ac.in",
+          "Admission application process update",
+          `Student with registration Number: ${newStd.regNo} compeleted the process.`
+        );
+        res.status(200).json({
+          ...newStd._doc,
+          password: "",
+        });
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+        console.error(err.message);
+      }
     } catch (error) {
       res.status(500).json({ message: error.message });
-      console.error(err.message);
+      console.error(error.message);
     }
+
   } catch (error) {
     res.status(500).json({ message: error.message });
     console.error(error.message);
   }
+  
 };
 
 exports.UpdatePassword = async (req, res) => {
