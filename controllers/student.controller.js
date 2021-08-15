@@ -36,6 +36,7 @@ exports.register = async (req, res) => {
       return;
     }
     let std = null;
+    console.log(stdData[0]["JEE(Main) App No"] ,req.body.jeeRegNo);
     stdData.forEach((student) => {
       if (student["JEE(Main) App No"] == req.body.jeeRegNo) {
         std = student;
@@ -411,9 +412,9 @@ exports.freeze = async (req, res) => {
   try {
     let std = await Student.findOne({ jeeRegNo: req.userId });
     console.log(std.step5 == true && std.cstep == "5");
-    if(!(std.step5 == true && std.cstep == "5")) {
-      return res.status(500).json({ message: "Please complete previous steps" });
-    }
+    // if(!(std.step == true && std.cstep == "5")) {
+      // return res.status(500).json({ message: "Please complete previous steps" });
+    // }
 
     try {
       let newStd = await Student.findOneAndUpdate(
